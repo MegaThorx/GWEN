@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.2)
 
 project(gwen)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/gwen/include/")
 
 set(GWEN_SOURCES 
