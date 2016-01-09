@@ -5,16 +5,16 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Skin.h"
-#include "Gwen/Controls/DockBase.h"
-#include "Gwen/Controls/DockedTabControl.h"
-#include "Gwen/Controls/Highlight.h"
-#include "Gwen/DragAndDrop.h"
-#include "Gwen/Controls/Resizer.h"
+#include "gwen/Gwen.h"
+#include "gwen/Skin.h"
+#include "gwen/Controls/DockBase.h"
+#include "gwen/Controls/DockedTabControl.h"
+#include "gwen/Controls/Highlight.h"
+#include "gwen/DragAndDrop.h"
+#include "gwen/Controls/Resizer.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 
 GWEN_CONTROL_CONSTRUCTOR( DockBase )
@@ -62,8 +62,8 @@ void DockBase::SetupChildDock( int iPos )
 
 void DockBase::Render( Skin::Base* /*skin*/ )
 {
-	//Gwen::Render->SetDrawColor( Colors::Black );
-	//Gwen::Render->DrawLinedRect( GetRenderBounds() );
+	//gwen::Render->SetDrawColor( Colors::Black );
+	//gwen::Render->DrawLinedRect( GetRenderBounds() );
 }
 
 DockBase** DockBase::GetChildDockPtr( int iPos )
@@ -104,7 +104,7 @@ int DockBase::GetDroppedTabDirection( int x, int y )
 	float left = ( float ) x / ( float ) w;
 	float right = ( float )( w - x ) / ( float ) w;
 	float bottom = ( float )( h - y ) / ( float ) h;
-	float minimum = Gwen::Min( Gwen::Min( Gwen::Min( top, left ), right ), bottom );
+	float minimum = gwen::Min( gwen::Min( gwen::Min( top, left ), right ), bottom );
 	m_bDropFar = ( minimum < 0.2f );
 
 	if ( minimum > 0.3 ) { return Pos::Fill; }
@@ -120,7 +120,7 @@ int DockBase::GetDroppedTabDirection( int x, int y )
 	return Pos::Fill;
 }
 
-bool DockBase::DragAndDrop_CanAcceptPackage( Gwen::DragAndDrop::Package* pPackage )
+bool DockBase::DragAndDrop_CanAcceptPackage( gwen::DragAndDrop::Package* pPackage )
 {
 	// A TAB button dropped
 	if ( pPackage->name == "TabButtonMove" )
@@ -133,9 +133,9 @@ bool DockBase::DragAndDrop_CanAcceptPackage( Gwen::DragAndDrop::Package* pPackag
 	return false;
 }
 
-bool DockBase::DragAndDrop_HandleDrop( Gwen::DragAndDrop::Package* pPackage, int x, int y )
+bool DockBase::DragAndDrop_HandleDrop( gwen::DragAndDrop::Package* pPackage, int x, int y )
 {
-	Gwen::Point pPos = CanvasPosToLocal( Gwen::Point( x, y ) );
+	gwen::Point pPos = CanvasPosToLocal( gwen::Point( x, y ) );
 	int dir = GetDroppedTabDirection( pPos.x, pPos.y );
 	DockedTabControl* pAddTo = m_DockedTabControl;
 
@@ -189,7 +189,7 @@ bool DockBase::IsEmpty()
 	return true;
 }
 
-void DockBase::OnTabRemoved( Gwen::Controls::Base* /*pControl*/ )
+void DockBase::OnTabRemoved( gwen::Controls::Base* /*pControl*/ )
 {
 	DoRedundancyCheck();
 	DoConsolidateCheck();
@@ -246,26 +246,26 @@ void DockBase::OnRedundantChildDock( DockBase* pDockBase )
 	DoConsolidateCheck();
 }
 
-void DockBase::DragAndDrop_HoverEnter( Gwen::DragAndDrop::Package* /*pPackage*/, int /*x*/, int /*y*/ )
+void DockBase::DragAndDrop_HoverEnter( gwen::DragAndDrop::Package* /*pPackage*/, int /*x*/, int /*y*/ )
 {
 	m_bDrawHover = true;
 }
 
-void DockBase::DragAndDrop_HoverLeave( Gwen::DragAndDrop::Package* /*pPackage*/ )
+void DockBase::DragAndDrop_HoverLeave( gwen::DragAndDrop::Package* /*pPackage*/ )
 {
 	m_bDrawHover = false;
 }
 
-void DockBase::DragAndDrop_Hover( Gwen::DragAndDrop::Package* /*pPackage*/, int x, int y )
+void DockBase::DragAndDrop_Hover( gwen::DragAndDrop::Package* /*pPackage*/, int x, int y )
 {
-	Gwen::Point pPos = CanvasPosToLocal( Gwen::Point( x, y ) );
+	gwen::Point pPos = CanvasPosToLocal( gwen::Point( x, y ) );
 	int dir = GetDroppedTabDirection( pPos.x, pPos.y );
 
 	if ( dir == Pos::Fill )
 	{
 		if ( !m_DockedTabControl )
 		{
-			m_HoverRect = Gwen::Rect( 0, 0, 0, 0 );
+			m_HoverRect = gwen::Rect( 0, 0, 0, 0 );
 			return;
 		}
 
@@ -335,14 +335,14 @@ void DockBase::RenderOver( Skin::Base* skin )
 {
 	if ( !m_bDrawHover ) { return; }
 
-	Gwen::Renderer::Base* render = skin->GetRender();
-	render->SetDrawColor( Gwen::Color( 255, 100, 255, 20 ) );
+	gwen::Renderer::Base* render = skin->GetRender();
+	render->SetDrawColor( gwen::Color( 255, 100, 255, 20 ) );
 	render->DrawFilledRect( GetRenderBounds() );
 
 	if ( m_HoverRect.w == 0 ) { return; }
 
-	render->SetDrawColor( Gwen::Color( 255, 100, 255, 100 ) );
+	render->SetDrawColor( gwen::Color( 255, 100, 255, 100 ) );
 	render->DrawFilledRect( m_HoverRect );
-	render->SetDrawColor( Gwen::Color( 255, 100, 255, 200 ) );
+	render->SetDrawColor( gwen::Color( 255, 100, 255, 200 ) );
 	render->DrawLinedRect( m_HoverRect );
 }

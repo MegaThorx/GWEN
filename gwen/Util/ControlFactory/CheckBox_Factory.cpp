@@ -1,26 +1,26 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		class CheckBox_Factory : public Gwen::ControlFactory::Base
+		class CheckBox_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
-				GWEN_CONTROL_FACTORY_CONSTRUCTOR( CheckBox_Factory, Gwen::ControlFactory::Base )
+				GWEN_CONTROL_FACTORY_CONSTRUCTOR( CheckBox_Factory, gwen::ControlFactory::Base )
 				{
 				}
 
-				virtual Gwen::String Name() { return "CheckBox"; }
-				virtual Gwen::String BaseName() { return "Base"; }
+				virtual gwen::String Name() { return "CheckBox"; }
+				virtual gwen::String BaseName() { return "Base"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::CheckBox* pControl = new Gwen::Controls::CheckBox( parent );
+					gwen::Controls::CheckBox* pControl = new gwen::Controls::CheckBox( parent );
 					return pControl;
 				}
 		};
@@ -48,21 +48,21 @@ namespace Gwen
 			};
 		}
 
-		class CheckBoxWithLabel_Factory : public Gwen::ControlFactory::Base
+		class CheckBoxWithLabel_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
-				GWEN_CONTROL_FACTORY_CONSTRUCTOR( CheckBoxWithLabel_Factory, Gwen::ControlFactory::Base )
+				GWEN_CONTROL_FACTORY_CONSTRUCTOR( CheckBoxWithLabel_Factory, gwen::ControlFactory::Base )
 				{
 					AddProperty( new Properties::CheckboxText() );
 				}
 
-				virtual Gwen::String Name()     { return "CheckBoxWithLabel"; }
-				virtual Gwen::String BaseName() { return "Base"; }
+				virtual gwen::String Name()     { return "CheckBoxWithLabel"; }
+				virtual gwen::String BaseName() { return "Base"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::CheckBoxWithLabel* pControl = new Gwen::Controls::CheckBoxWithLabel( parent );
+					gwen::Controls::CheckBoxWithLabel* pControl = new gwen::Controls::CheckBoxWithLabel( parent );
 					return pControl;
 				}
 		};

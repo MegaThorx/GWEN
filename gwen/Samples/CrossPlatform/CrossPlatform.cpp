@@ -1,18 +1,18 @@
-#include "Gwen/Gwen.h"
-#include "Gwen/Skins/Simple.h"
-#include "Gwen/Skins/TexturedBase.h"
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Renderers/OpenGL.h"
-#include "Gwen/Controls/WindowCanvas.h"
+#include "gwen/Gwen.h"
+#include "gwen/Skins/Simple.h"
+#include "gwen/Skins/TexturedBase.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Renderers/OpenGL.h"
+#include "gwen/Controls/WindowCanvas.h"
 
 //
 // These are the renderers that work with WindowCanvas
 // (you need to include the relevant libs to use them)
 //
-#include "Gwen/Renderers/OpenGL_DebugFont.h"
-//#include "Gwen/Renderers/GDIPlus.h"
-//#include "Gwen/Renderers/Direct2D.h"
-//#include "Gwen/Renderers/DirectX9.h"
+#include "gwen/Renderers/OpenGL_DebugFont.h"
+//#include "gwen/Renderers/GDIPlus.h"
+//#include "gwen/Renderers/Direct2D.h"
+//#include "gwen/Renderers/DirectX9.h"
 
 
 //
@@ -27,18 +27,18 @@ int main()
 	//
 	// Create the skin and renderer
 	//
-	//Gwen::Renderer::GDIPlusBuffered		renderer;
-	//Gwen::Renderer::Direct2D				renderer;
-	//Gwen::Renderer::DirectX9				renderer;
-	Gwen::Renderer::OpenGL_DebugFont		renderer;
-	Gwen::Skin::TexturedBase			skin( &renderer );
+	//gwen::Renderer::GDIPlusBuffered		renderer;
+	//gwen::Renderer::Direct2D				renderer;
+	//gwen::Renderer::DirectX9				renderer;
+	gwen::Renderer::OpenGL_DebugFont		renderer;
+	gwen::Skin::TexturedBase			skin( &renderer );
 	//
 	// The window canvas is a cross between a window and a canvas
 	// It's cool because it takes care of creating an OS specific
 	// window - so we don't have to bother with all that crap.
 	//
 	//
-	Gwen::Controls::WindowCanvas window_canvas( -1, -1, 700, 500, &skin, "Gwen's Cross Platform Example" );
+	gwen::Controls::WindowCanvas window_canvas( -1, -1, 700, 500, &skin, "gwen's Cross Platform Example" );
 	//
 	// Now it's safe to set up the skin
 	//

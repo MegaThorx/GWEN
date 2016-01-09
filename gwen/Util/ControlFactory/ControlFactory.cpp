@@ -1,13 +1,13 @@
 
-#include "Gwen/Util/ControlFactory.h"
+#include "gwen/Util/ControlFactory.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		const Gwen::UnicodeString PropertyBool::True	= L"true";
-		const Gwen::UnicodeString PropertyBool::False	= L"false";
+		const gwen::UnicodeString PropertyBool::True	= L"true";
+		const gwen::UnicodeString PropertyBool::False	= L"false";
 
 		void InitializeControls()
 		{
@@ -52,7 +52,7 @@ namespace Gwen
 			return list;
 		}
 
-		ControlFactory::Base* Find( const Gwen::String & name )
+		ControlFactory::Base* Find( const gwen::String & name )
 		{
 			for ( ControlFactory::List::iterator it = ControlFactory::GetList().begin(); it != ControlFactory::GetList().end(); ++it )
 			{
@@ -88,7 +88,7 @@ namespace Gwen
 			return NULL;
 		}
 
-		Property* Base::GetProperty( const Gwen::String & name )
+		Property* Base::GetProperty( const gwen::String & name )
 		{
 			for ( ControlFactory::Property::List::const_iterator it = Properties().begin(), itEnd = Properties().end();
 					it != itEnd; ++it )
@@ -105,7 +105,7 @@ namespace Gwen
 			return pBase->GetProperty( name );
 		}
 
-		void Base::SetControlValue( Gwen::Controls::Base* ctrl, const Gwen::String & name, const Gwen::UnicodeString & str )
+		void Base::SetControlValue( gwen::Controls::Base* ctrl, const gwen::String & name, const gwen::UnicodeString & str )
 		{
 			Property* pProp = GetProperty( name );
 
@@ -121,12 +121,12 @@ namespace Gwen
 			pProp->SetValue( ctrl, str );
 		}
 
-		void Base::AddChild( Gwen::Controls::Base* ctrl, Gwen::Controls::Base* child, const Gwen::Point & pos )
+		void Base::AddChild( gwen::Controls::Base* ctrl, gwen::Controls::Base* child, const gwen::Point & pos )
 		{
 			child->SetParent( ctrl );
 		}
 
-		void Base::AddChild( Gwen::Controls::Base* ctrl, Gwen::Controls::Base* child, int iPage )
+		void Base::AddChild( gwen::Controls::Base* ctrl, gwen::Controls::Base* child, int iPage )
 		{
 			child->SetParent( ctrl );
 		}
@@ -150,12 +150,12 @@ namespace Gwen
 			return pControl;
 		}
 
-		void Base::SetParentPage( Gwen::Controls::Base* ctrl, int i )
+		void Base::SetParentPage( gwen::Controls::Base* ctrl, int i )
 		{
 			ctrl->UserData.Set<int> ( "ParentPage", i );
 		}
 
-		int Base::GetParentPage( Gwen::Controls::Base* ctrl )
+		int Base::GetParentPage( gwen::Controls::Base* ctrl )
 		{
 			if ( !ctrl->UserData.Exists( "ParentPage" ) ) { return 0; }
 

@@ -1,7 +1,7 @@
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Controls/CheckBox.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Controls/CheckBox.h"
 
-using namespace Gwen;
+using namespace gwen;
 
 class Checkbox : public GUnit
 {
@@ -9,19 +9,19 @@ class Checkbox : public GUnit
 
 		GWEN_CONTROL_INLINE( Checkbox, GUnit )
 		{
-			Gwen::Controls::CheckBox* check = new Gwen::Controls::CheckBox( this );
+			gwen::Controls::CheckBox* check = new gwen::Controls::CheckBox( this );
 			check->SetPos( 10, 10 );
 			check->onChecked.Add( this, &Checkbox::OnChecked );
 			check->onUnChecked.Add( this, &Checkbox::OnUnchecked );
 			check->onCheckChanged.Add( this, &Checkbox::OnCheckChanged );
-			Gwen::Controls::CheckBoxWithLabel* labeled = new Gwen::Controls::CheckBoxWithLabel( this );
+			gwen::Controls::CheckBoxWithLabel* labeled = new gwen::Controls::CheckBoxWithLabel( this );
 			labeled->SetPos( 10, 30 );
 			labeled->Label()->SetText( "Labeled CheckBox" );
 			labeled->Checkbox()->onChecked.Add( this, &Checkbox::OnChecked );
 			labeled->Checkbox()->onUnChecked.Add( this, &Checkbox::OnUnchecked );
 			labeled->Checkbox()->onCheckChanged.Add( this, &Checkbox::OnCheckChanged );
 			{
-				Gwen::Controls::CheckBox* check = new Gwen::Controls::CheckBox( this );
+				gwen::Controls::CheckBox* check = new gwen::Controls::CheckBox( this );
 				check->SetPos( 10, 54 );
 				check->SetDisabled( true );
 			}

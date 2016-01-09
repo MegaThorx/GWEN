@@ -1,11 +1,11 @@
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Skins/Simple.h"
-#include "Gwen/Skins/TexturedBase.h"
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Input/Allegro.h"
-#include "Gwen/Renderers/Allegro.h"
+#include "gwen/Gwen.h"
+#include "gwen/Skins/Simple.h"
+#include "gwen/Skins/TexturedBase.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Input/Allegro.h"
+#include "gwen/Renderers/Allegro.h"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
@@ -38,11 +38,11 @@ int main( int argc, char** argv )
 	//
 	// Create a GWEN OpenGL Renderer
 	//
-	Gwen::Renderer::Allegro* pRenderer = new Gwen::Renderer::Allegro();
+	gwen::Renderer::Allegro* pRenderer = new gwen::Renderer::Allegro();
 	//
 	// Create a GWEN skin
 	//
-	Gwen::Skin::TexturedBase skin( pRenderer );
+	gwen::Skin::TexturedBase skin( pRenderer );
 	skin.SetRender( pRenderer );
 	skin.Init( "DefaultSkin.png" );
 	// The fonts work differently in Allegro - it can't use
@@ -51,10 +51,10 @@ int main( int argc, char** argv )
 	//
 	// Create a Canvas (it's root, on which all other GWEN panels are created)
 	//
-	Gwen::Controls::Canvas* pCanvas = new Gwen::Controls::Canvas( &skin );
+	gwen::Controls::Canvas* pCanvas = new gwen::Controls::Canvas( &skin );
 	pCanvas->SetSize( 1024, 768 );
 	pCanvas->SetDrawBackground( true );
-	pCanvas->SetBackgroundColor( Gwen::Color( 150, 170, 170, 255 ) );
+	pCanvas->SetBackgroundColor( gwen::Color( 150, 170, 170, 255 ) );
 	//
 	// Create our unittest control (which is a Window with controls in it)
 	//
@@ -64,8 +64,8 @@ int main( int argc, char** argv )
 	// Create a Windows Control helper
 	// (Processes Windows MSG's and fires input at GWEN)
 	//
-	Gwen::Input::Allegro GwenInput;
-	GwenInput.Initialize( pCanvas );
+	gwen::Input::Allegro gwenInput;
+	gwenInput.Initialize( pCanvas );
 	ALLEGRO_EVENT ev;
 	bool bQuit = false;
 
@@ -76,7 +76,7 @@ int main( int argc, char** argv )
 			if ( ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE )
 			{ bQuit = true; }
 
-			GwenInput.ProcessMessage( ev );
+			gwenInput.ProcessMessage( ev );
 		}
 
 		pCanvas->RenderCanvas();

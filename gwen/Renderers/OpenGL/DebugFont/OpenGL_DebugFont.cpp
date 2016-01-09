@@ -1,8 +1,8 @@
 
-#include "Gwen/Renderers/OpenGL_DebugFont.h"
-#include "Gwen/Utility.h"
-#include "Gwen/Font.h"
-#include "Gwen/Texture.h"
+#include "gwen/Renderers/OpenGL_DebugFont.h"
+#include "gwen/Utility.h"
+#include "gwen/Font.h"
+#include "gwen/Texture.h"
 
 #include <math.h>
 #include "GL/glew.h"
@@ -10,7 +10,7 @@
 #include "FontData.h"
 
 
-namespace Gwen
+namespace gwen
 {
 	namespace Renderer
 	{
@@ -37,7 +37,7 @@ namespace Gwen
 		{
 			if ( m_pFontTexture ) { return; }
 
-			m_pFontTexture = new Gwen::Texture();
+			m_pFontTexture = new gwen::Texture();
 			// Create a little texture pointer..
 			GLuint* pglTexture = new GLuint;
 			// Sort out our GWEN texture
@@ -53,10 +53,10 @@ namespace Gwen
 
 			for ( int i = 0; i < 256 * 256; i++ )
 			{
-				texdata[i * 4] = sGwenFontData[i];
-				texdata[i * 4 + 1] = sGwenFontData[i];
-				texdata[i * 4 + 2] = sGwenFontData[i];
-				texdata[i * 4 + 3] = sGwenFontData[i];
+				texdata[i * 4] = sgwenFontData[i];
+				texdata[i * 4 + 1] = sgwenFontData[i];
+				texdata[i * 4 + 2] = sgwenFontData[i];
+				texdata[i * 4 + 3] = sgwenFontData[i];
 			}
 
 			glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, m_pFontTexture->width, m_pFontTexture->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, ( const GLvoid* ) texdata );
@@ -78,21 +78,21 @@ namespace Gwen
 			m_pFontTexture = NULL;
 		}
 
-		void OpenGL_DebugFont::RenderText( Gwen::Font* pFont, Gwen::Point pos, const Gwen::UnicodeString & text )
+		void OpenGL_DebugFont::RenderText( gwen::Font* pFont, gwen::Point pos, const gwen::UnicodeString & text )
 		{
 			float fSize = pFont->size * Scale();
 
 			if ( !text.length() )
 			{ return; }
 
-			Gwen::String converted_string = Gwen::Utility::UnicodeToString( text );
+			gwen::String converted_string = gwen::Utility::UnicodeToString( text );
 			float yOffset = 0.0f;
 
 			for ( int i = 0; i < text.length(); i++ )
 			{
 				char ch = converted_string[i];
-				float curSpacing = sGwenDebugFontSpacing[ch] * m_fLetterSpacing * fSize * m_fFontScale[0];
-				Gwen::Rect r( pos.x + yOffset, pos.y - fSize * 0.5, ( fSize * m_fFontScale[0] ), fSize * m_fFontScale[1] );
+				float curSpacing = sgwenDebugFontSpacing[ch] * m_fLetterSpacing * fSize * m_fFontScale[0];
+				gwen::Rect r( pos.x + yOffset, pos.y - fSize * 0.5, ( fSize * m_fFontScale[0] ), fSize * m_fFontScale[1] );
 
 				if ( m_pFontTexture )
 				{
@@ -119,17 +119,17 @@ namespace Gwen
 			}
 		}
 
-		Gwen::Point OpenGL_DebugFont::MeasureText( Gwen::Font* pFont, const Gwen::UnicodeString & text )
+		gwen::Point OpenGL_DebugFont::MeasureText( gwen::Font* pFont, const gwen::UnicodeString & text )
 		{
-			Gwen::Point p;
+			gwen::Point p;
 			float fSize = pFont->size * Scale();
-			Gwen::String converted_string = Gwen::Utility::UnicodeToString( text );
+			gwen::String converted_string = gwen::Utility::UnicodeToString( text );
 			float spacing = 0.0f;
 
 			for ( int i = 0; i < text.length(); i++ )
 			{
 				char ch = converted_string[i];
-				spacing += sGwenDebugFontSpacing[ch];
+				spacing += sgwenDebugFontSpacing[ch];
 			}
 
 			p.x = spacing * m_fLetterSpacing * fSize * m_fFontScale[0];

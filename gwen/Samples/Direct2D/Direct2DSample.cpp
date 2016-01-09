@@ -6,12 +6,12 @@
 #include <dwrite.h>
 #include <wincodec.h>
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Skins/Simple.h"
-#include "Gwen/Skins/TexturedBase.h"
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Input/Windows.h"
-#include "Gwen/Renderers/Direct2D.h"
+#include "gwen/Gwen.h"
+#include "gwen/Skins/Simple.h"
+#include "gwen/Skins/TexturedBase.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Input/Windows.h"
+#include "gwen/Renderers/Direct2D.h"
 
 #pragma comment(lib, "d2d1.lib")
 #pragma comment(lib, "dwrite.lib")
@@ -23,7 +23,7 @@ IDWriteFactory*			g_pDWriteFactory = NULL;
 IWICImagingFactory*		g_pWICFactory = NULL;
 ID2D1HwndRenderTarget*	g_pRT = NULL; // this is device-specific
 
-Gwen::Renderer::Direct2D* g_pRenderer = NULL;
+gwen::Renderer::Direct2D* g_pRenderer = NULL;
 
 //
 // Windows bullshit to create a Window to render to.
@@ -76,7 +76,7 @@ int main( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nC
 	//
 	// Create a GWEN Direct2D renderer
 	//
-	g_pRenderer = new Gwen::Renderer::Direct2D( g_pRT, g_pDWriteFactory, g_pWICFactory );
+	g_pRenderer = new gwen::Renderer::Direct2D( g_pRT, g_pDWriteFactory, g_pWICFactory );
 	runSample();
 	delete g_pRenderer;
 	g_pRenderer = NULL;
@@ -133,15 +133,15 @@ void runSample()
 	//
 	// Create a GWEN skin
 	//
-	Gwen::Skin::TexturedBase skin( g_pRenderer );
+	gwen::Skin::TexturedBase skin( g_pRenderer );
 	skin.Init( "DefaultSkin.png" );
 	//
 	// Create a Canvas (it's root, on which all other GWEN panels are created)
 	//
-	Gwen::Controls::Canvas* pCanvas = new Gwen::Controls::Canvas( &skin );
+	gwen::Controls::Canvas* pCanvas = new gwen::Controls::Canvas( &skin );
 	pCanvas->SetSize( FrameBounds.right, FrameBounds.bottom );
 	pCanvas->SetDrawBackground( true );
-	pCanvas->SetBackgroundColor( Gwen::Color( 150, 170, 170, 255 ) );
+	pCanvas->SetBackgroundColor( gwen::Color( 150, 170, 170, 255 ) );
 	//
 	// Create our unittest control (which is a Window with controls in it)
 	//
@@ -151,8 +151,8 @@ void runSample()
 	// Create a Windows Control helper
 	// (Processes Windows MSG's and fires input at GWEN)
 	//
-	Gwen::Input::Windows GwenInput;
-	GwenInput.Initialize( pCanvas );
+	gwen::Input::Windows gwenInput;
+	gwenInput.Initialize( pCanvas );
 	//
 	// Begin the main game loop
 	//
@@ -168,7 +168,7 @@ void runSample()
 		if ( PeekMessage( &msg, NULL, 0, 0, PM_REMOVE ) )
 		{
 			// .. give it to the input handler to process
-			GwenInput.ProcessMessage( msg );
+			gwenInput.ProcessMessage( msg );
 
 			// if it's QUIT then quit..
 			if ( msg.message == WM_QUIT )

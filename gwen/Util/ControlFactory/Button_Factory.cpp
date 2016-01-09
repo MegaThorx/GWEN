@@ -1,26 +1,26 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		class Button_Factory : public Gwen::ControlFactory::Base
+		class Button_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
-				GWEN_CONTROL_FACTORY_CONSTRUCTOR( Button_Factory, Gwen::ControlFactory::Base )
+				GWEN_CONTROL_FACTORY_CONSTRUCTOR( Button_Factory, gwen::ControlFactory::Base )
 				{
 				}
 
-				virtual Gwen::String Name() { return "Button"; }
-				virtual Gwen::String BaseName() { return "Label"; }
+				virtual gwen::String Name() { return "Button"; }
+				virtual gwen::String BaseName() { return "Label"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::Button* pControl = new Gwen::Controls::Button( parent );
+					gwen::Controls::Button* pControl = new gwen::Controls::Button( parent );
 					pControl->SetSize( 100, 20 );
 					pControl->SetText( "New Button" );
 					return pControl;

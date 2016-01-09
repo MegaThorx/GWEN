@@ -5,21 +5,21 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Controls/Canvas.h"
-#include "Gwen/Skin.h"
-#include "Gwen/Controls/Menu.h"
-#include "Gwen/DragAndDrop.h"
-#include "Gwen/ToolTip.h"
+#include "gwen/Gwen.h"
+#include "gwen/Controls/Canvas.h"
+#include "gwen/Skin.h"
+#include "gwen/Controls/Menu.h"
+#include "gwen/DragAndDrop.h"
+#include "gwen/ToolTip.h"
 
 #ifndef GWEN_NO_ANIMATION
-#include "Gwen/Anim.h"
+#include "gwen/Anim.h"
 #endif
 
-using namespace Gwen::Controls;
+using namespace gwen::Controls;
 
 
-Canvas::Canvas( Gwen::Skin::Base* pSkin ) : BaseClass( NULL ), m_bAnyDelete( false )
+Canvas::Canvas( gwen::Skin::Base* pSkin ) : BaseClass( NULL ), m_bAnyDelete( false )
 {
 	SetBounds( 0, 0, 10000, 10000 );
 	SetScale( 1.0f );
@@ -37,11 +37,11 @@ Canvas::~Canvas()
 void Canvas::RenderCanvas()
 {
 	DoThink();
-	Gwen::Renderer::Base* render = m_Skin->GetRender();
+	gwen::Renderer::Base* render = m_Skin->GetRender();
 	render->Begin();
 	RecurseLayout( m_Skin );
 	render->SetClipRegion( GetBounds() );
-	render->SetRenderOffset( Gwen::Point( 0, 0 ) );
+	render->SetRenderOffset( gwen::Point( 0, 0 ) );
 	render->SetScale( Scale() );
 
 	if ( m_bDrawBackground )
@@ -56,12 +56,12 @@ void Canvas::RenderCanvas()
 	render->End();
 }
 
-void Canvas::Render( Gwen::Skin::Base* /*pRender*/ )
+void Canvas::Render( gwen::Skin::Base* /*pRender*/ )
 {
 	m_bNeedsRedraw = false;
 }
 
-void Canvas::OnBoundsChanged( Gwen::Rect oldBounds )
+void Canvas::OnBoundsChanged( gwen::Rect oldBounds )
 {
 	BaseClass::OnBoundsChanged( oldBounds );
 	InvalidateChildren( true );
@@ -75,7 +75,7 @@ void Canvas::DoThink()
 	if ( Hidden() ) { return; }
 
 #ifndef GWEN_NO_ANIMATION
-	Gwen::Anim::Think();
+	gwen::Anim::Think();
 #endif
 	// Reset tabbing
 	{
@@ -90,7 +90,7 @@ void Canvas::DoThink()
 	if ( NextTab == NULL )
 	{ NextTab = FirstTab; }
 
-	Gwen::Input::OnCanvasThink( this );
+	gwen::Input::OnCanvasThink( this );
 }
 
 void Canvas::SetScale( float f )
@@ -106,7 +106,7 @@ void Canvas::SetScale( float f )
 	Redraw();
 }
 
-void Canvas::AddDelayedDelete( Gwen::Controls::Base* pControl )
+void Canvas::AddDelayedDelete( gwen::Controls::Base* pControl )
 {
 	if ( !m_bAnyDelete || m_DeleteSet.find( pControl ) == m_DeleteSet.end() )
 	{
@@ -140,9 +140,9 @@ void Canvas::ProcessDelayedDeletes()
 		m_DeleteList.clear();
 		m_DeleteSet.clear();
 
-		for ( Gwen::Controls::Base::List::iterator it = deleteList.begin(); it != deleteList.end(); ++it )
+		for ( gwen::Controls::Base::List::iterator it = deleteList.begin(); it != deleteList.end(); ++it )
 		{
-			Gwen::Controls::Base* pControl = *it;
+			gwen::Controls::Base* pControl = *it;
 			pControl->PreDelete( GetSkin() );
 			delete pControl;
 			Redraw();
@@ -171,17 +171,17 @@ bool Canvas::InputMouseMoved( int x, int y, int deltaX, int deltaY )
 
 	// Todo: Handle scaling here..
 	//float fScale = 1.0f / Scale();
-	Gwen::Input::OnMouseMoved( this, x, y, deltaX, deltaY );
+	gwen::Input::OnMouseMoved( this, x, y, deltaX, deltaY );
 
-	if ( !Gwen::HoveredControl ) { return false; }
+	if ( !gwen::HoveredControl ) { return false; }
 
-	if ( Gwen::HoveredControl == this ) { return false; }
+	if ( gwen::HoveredControl == this ) { return false; }
 
-	if ( Gwen::HoveredControl->GetCanvas() != this ) { return false; }
+	if ( gwen::HoveredControl->GetCanvas() != this ) { return false; }
 
-	Gwen::HoveredControl->OnMouseMoved( x, y, deltaX, deltaY );
-	Gwen::HoveredControl->UpdateCursor();
-	DragAndDrop::OnMouseMoved( Gwen::HoveredControl, x, y );
+	gwen::HoveredControl->OnMouseMoved( x, y, deltaX, deltaY );
+	gwen::HoveredControl->UpdateCursor();
+	DragAndDrop::OnMouseMoved( gwen::HoveredControl, x, y );
 	return true;
 }
 
@@ -189,38 +189,38 @@ bool Canvas::InputMouseButton( int iButton, bool bDown )
 {
 	if ( Hidden() ) { return false; }
 
-	return Gwen::Input::OnMouseClicked( this, iButton, bDown );
+	return gwen::Input::OnMouseClicked( this, iButton, bDown );
 }
 
 bool Canvas::InputKey( int iKey, bool bDown )
 {
 	if ( Hidden() ) { return false; }
 
-	if ( iKey <= Gwen::Key::Invalid ) { return false; }
+	if ( iKey <= gwen::Key::Invalid ) { return false; }
 
-	if ( iKey >= Gwen::Key::Count ) { return false; }
+	if ( iKey >= gwen::Key::Count ) { return false; }
 
-	return Gwen::Input::OnKeyEvent( this, iKey, bDown );
+	return gwen::Input::OnKeyEvent( this, iKey, bDown );
 }
 
-bool Canvas::InputCharacter( Gwen::UnicodeChar chr )
+bool Canvas::InputCharacter( gwen::UnicodeChar chr )
 {
 	if ( Hidden() ) { return false; }
 
 	if ( !iswprint( chr ) ) { return false; }
 
 	//Handle Accelerators
-	if ( Gwen::Input::HandleAccelerator( this, chr ) )
+	if ( gwen::Input::HandleAccelerator( this, chr ) )
 	{ return true; }
 
 	//Handle characters
-	if ( !Gwen::KeyboardFocus ) { return false; }
+	if ( !gwen::KeyboardFocus ) { return false; }
 
-	if ( Gwen::KeyboardFocus->GetCanvas() != this ) { return false; }
+	if ( gwen::KeyboardFocus->GetCanvas() != this ) { return false; }
 
-	if ( !Gwen::KeyboardFocus->Visible() ) { return false; }
+	if ( !gwen::KeyboardFocus->Visible() ) { return false; }
 
-	if ( Gwen::Input::IsControlDown() ) { return false; }
+	if ( gwen::Input::IsControlDown() ) { return false; }
 
 	return KeyboardFocus->OnChar( chr );
 }
@@ -229,11 +229,11 @@ bool Canvas::InputMouseWheel( int val )
 {
 	if ( Hidden() ) { return false; }
 
-	if ( !Gwen::HoveredControl ) { return false; }
+	if ( !gwen::HoveredControl ) { return false; }
 
-	if ( Gwen::HoveredControl == this ) { return false; }
+	if ( gwen::HoveredControl == this ) { return false; }
 
-	if ( Gwen::HoveredControl->GetCanvas() != this ) { return false; }
+	if ( gwen::HoveredControl->GetCanvas() != this ) { return false; }
 
-	return Gwen::HoveredControl->OnMouseWheeled( val );
+	return gwen::HoveredControl->OnMouseWheeled( val );
 }

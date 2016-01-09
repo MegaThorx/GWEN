@@ -5,15 +5,15 @@
 */
 
 
-#include "Gwen/Controls/ScrollControl.h"
-#include "Gwen/Controls/ScrollBar.h"
-#include "Gwen/Controls/VerticalScrollBar.h"
-#include "Gwen/Controls/HorizontalScrollBar.h"
-#include "Gwen/Utility.h"
+#include "gwen/Controls/ScrollControl.h"
+#include "gwen/Controls/ScrollBar.h"
+#include "gwen/Controls/VerticalScrollBar.h"
+#include "gwen/Controls/HorizontalScrollBar.h"
+#include "gwen/Utility.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
-using namespace Gwen::ControlsInternal;
+using namespace gwen;
+using namespace gwen::Controls;
+using namespace gwen::ControlsInternal;
 
 GWEN_CONTROL_CONSTRUCTOR( ScrollControl )
 {
@@ -59,7 +59,7 @@ void ScrollControl::HBarMoved( Controls::Base* /*control*/ )
 	Invalidate();
 }
 
-void ScrollControl::OnChildBoundsChanged( Gwen::Rect /*oldChildBounds*/, Base* /*pChild*/ )
+void ScrollControl::OnChildBoundsChanged( gwen::Rect /*oldChildBounds*/, Base* /*pChild*/ )
 {
 	UpdateScrollBars();
 	Invalidate();
@@ -91,13 +91,13 @@ void ScrollControl::Render( Skin::Base* skin )
 {
 #if 0
 	// Debug render - this shouldn't render ANYTHING REALLY - it should be up to the parent!
-	Gwen::Rect rect = GetRenderBounds();
-	Gwen::Renderer::Base* render = skin->GetRender();
-	render->SetDrawColor( Gwen::Color( 255, 255, 0, 100 ) );
+	gwen::Rect rect = GetRenderBounds();
+	gwen::Renderer::Base* render = skin->GetRender();
+	render->SetDrawColor( gwen::Color( 255, 255, 0, 100 ) );
 	render->DrawFilledRect( rect );
-	render->SetDrawColor( Gwen::Color( 255, 0, 0, 100 ) );
+	render->SetDrawColor( gwen::Color( 255, 0, 0, 100 ) );
 	render->DrawFilledRect( m_InnerPanel->GetBounds() );
-	render->RenderText( skin->GetDefaultFont(), Gwen::Point( 0, 0 ), Utility::Format( L"Offset: %i %i", m_InnerPanel->X(), m_InnerPanel->Y() ) );
+	render->RenderText( skin->GetDefaultFont(), gwen::Point( 0, 0 ), Utility::Format( L"Offset: %i %i", m_InnerPanel->X(), m_InnerPanel->Y() ) );
 #else //0
 	( void ) skin;
 #endif //0

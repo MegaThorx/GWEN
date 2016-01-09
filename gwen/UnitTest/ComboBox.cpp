@@ -1,7 +1,7 @@
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Controls/ComboBox.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Controls/ComboBox.h"
 
-using namespace Gwen;
+using namespace gwen;
 
 class ComboBox : public GUnit
 {
@@ -10,7 +10,7 @@ class ComboBox : public GUnit
 		GWEN_CONTROL_INLINE( ComboBox, GUnit )
 		{
 			{
-				Gwen::Controls::ComboBox* combo = new Gwen::Controls::ComboBox( this );
+				gwen::Controls::ComboBox* combo = new gwen::Controls::ComboBox( this );
 				combo->SetPos( 50, 50 );
 				combo->SetWidth( 200 );
 				combo->AddItem( L"Option One", "one" );
@@ -22,13 +22,13 @@ class ComboBox : public GUnit
 			}
 			{
 				// Empty..
-				Gwen::Controls::ComboBox* combo = new Gwen::Controls::ComboBox( this );
+				gwen::Controls::ComboBox* combo = new gwen::Controls::ComboBox( this );
 				combo->SetPos( 50, 80 );
 				combo->SetWidth( 200 );
 			}
 			{
 				// Empty..
-				Gwen::Controls::ComboBox* combo = new Gwen::Controls::ComboBox( this );
+				gwen::Controls::ComboBox* combo = new gwen::Controls::ComboBox( this );
 				combo->SetPos( 50, 110 );
 				combo->SetWidth( 200 );
 
@@ -37,9 +37,9 @@ class ComboBox : public GUnit
 			}
 		}
 
-		void OnComboSelect( Gwen::Controls::Base* pControl )
+		void OnComboSelect( gwen::Controls::Base* pControl )
 		{
-			Gwen::Controls::ComboBox* combo = ( Gwen::Controls::ComboBox* ) pControl;
+			gwen::Controls::ComboBox* combo = ( gwen::Controls::ComboBox* ) pControl;
 			UnitPrint( Utility::Format( L"Combo Changed: %ls", combo->GetSelectedItem()->GetText().GetUnicode().c_str() ) );
 		}
 };

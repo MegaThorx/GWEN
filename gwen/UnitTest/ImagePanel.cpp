@@ -1,7 +1,7 @@
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Controls/ImagePanel.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Controls/ImagePanel.h"
 
-using namespace Gwen;
+using namespace gwen;
 
 class ImagePanel : public GUnit
 {

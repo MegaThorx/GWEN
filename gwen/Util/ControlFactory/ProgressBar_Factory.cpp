@@ -1,13 +1,13 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		using namespace Gwen;
+		using namespace gwen;
 
 		namespace Properties
 		{
@@ -33,21 +33,21 @@ namespace Gwen
 
 		}
 
-		class ProgressBar_Factory : public Gwen::ControlFactory::Base
+		class ProgressBar_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
-				GWEN_CONTROL_FACTORY_CONSTRUCTOR( ProgressBar_Factory, Gwen::ControlFactory::Base )
+				GWEN_CONTROL_FACTORY_CONSTRUCTOR( ProgressBar_Factory, gwen::ControlFactory::Base )
 				{
 					AddProperty( new Properties::CycleSpeed() );
 				}
 
-				virtual Gwen::String Name()     { return "ProgressBar"; }
-				virtual Gwen::String BaseName() { return "Base"; }
+				virtual gwen::String Name()     { return "ProgressBar"; }
+				virtual gwen::String BaseName() { return "Base"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::ProgressBar* pControl = new Gwen::Controls::ProgressBar( parent );
+					gwen::Controls::ProgressBar* pControl = new gwen::Controls::ProgressBar( parent );
 					pControl->SetSize( 200, 20 );
 					return pControl;
 				}

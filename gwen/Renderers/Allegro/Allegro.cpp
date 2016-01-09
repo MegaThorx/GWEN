@@ -1,16 +1,16 @@
-#include "Gwen/Gwen.h"
-#include "Gwen/BaseRender.h"
-#include "Gwen/Utility.h"
-#include "Gwen/Font.h"
-#include "Gwen/Texture.h"
-#include "Gwen/Renderers/Allegro.h"
+#include "gwen/Gwen.h"
+#include "gwen/BaseRender.h"
+#include "gwen/Utility.h"
+#include "gwen/Font.h"
+#include "gwen/Texture.h"
+#include "gwen/Renderers/Allegro.h"
 
 //#include <allegro5/allegro_image.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_primitives.h>
 
-namespace Gwen
+namespace gwen
 {
 	namespace Renderer
 	{
@@ -23,12 +23,12 @@ namespace Gwen
 		{
 		}
 
-		void Allegro::SetDrawColor( Gwen::Color color )
+		void Allegro::SetDrawColor( gwen::Color color )
 		{
 			m_Color = al_map_rgba( color.r, color.g, color.b, color.a );
 		}
 
-		void Allegro::LoadFont( Gwen::Font* font )
+		void Allegro::LoadFont( gwen::Font* font )
 		{
 			font->realsize = font->size * Scale();
 			std::string fontName = Utility::UnicodeToString( font->facename );
@@ -42,7 +42,7 @@ namespace Gwen
 			font->data = afont;
 		}
 
-		void Allegro::FreeFont( Gwen::Font* pFont )
+		void Allegro::FreeFont( gwen::Font* pFont )
 		{
 			if ( !pFont->data )
 			{ return; }
@@ -51,14 +51,14 @@ namespace Gwen
 			pFont->data = NULL;
 		}
 
-		void Allegro::RenderText( Gwen::Font* pFont, Gwen::Point pos, const Gwen::UnicodeString & text )
+		void Allegro::RenderText( gwen::Font* pFont, gwen::Point pos, const gwen::UnicodeString & text )
 		{
 			Translate( pos.x, pos.y );
 			ALLEGRO_FONT* afont = ( ALLEGRO_FONT* ) pFont->data;
 			al_draw_text( afont, m_Color, pos.x, pos.y, ALLEGRO_ALIGN_LEFT, Utility::UnicodeToString( text ).c_str() );
 		}
 
-		Gwen::Point Allegro::MeasureText( Gwen::Font* pFont, const Gwen::UnicodeString & text )
+		gwen::Point Allegro::MeasureText( gwen::Font* pFont, const gwen::UnicodeString & text )
 		{
 			ALLEGRO_FONT* afont = ( ALLEGRO_FONT* ) pFont->data;
 
@@ -70,16 +70,16 @@ namespace Gwen
 				afont = ( ALLEGRO_FONT* ) pFont->data;
 			}
 
-			if ( !afont ) { return Gwen::Point( 0, 0 ); }
+			if ( !afont ) { return gwen::Point( 0, 0 ); }
 
 			int bx, by, tw, th;
 			al_get_text_dimensions( afont, Utility::UnicodeToString( text ).c_str(), &bx, &by, &tw, &th );
-			return Gwen::Point( tw, th );
+			return gwen::Point( tw, th );
 		}
 
 		void Allegro::StartClip()
 		{
-			Gwen::Rect rect = ClipRegion();
+			gwen::Rect rect = ClipRegion();
 			al_set_clipping_rectangle( rect.x, rect.y, rect.w, rect.h );
 		}
 
@@ -90,7 +90,7 @@ namespace Gwen
 			al_set_clipping_rectangle( 0, 0, al_get_bitmap_width( targ ), al_get_bitmap_height( targ ) );
 		}
 
-		void Allegro::LoadTexture( Gwen::Texture* pTexture )
+		void Allegro::LoadTexture( gwen::Texture* pTexture )
 		{
 			if ( !pTexture ) { return; }
 
@@ -112,13 +112,13 @@ namespace Gwen
 			}
 		}
 
-		void Allegro::FreeTexture( Gwen::Texture* pTexture )
+		void Allegro::FreeTexture( gwen::Texture* pTexture )
 		{
 			al_destroy_bitmap( ( ALLEGRO_BITMAP* ) pTexture->data );
 			pTexture->data = NULL;
 		}
 
-		void Allegro::DrawTexturedRect( Gwen::Texture* pTexture, Gwen::Rect rect, float u1, float v1, float u2, float v2 )
+		void Allegro::DrawTexturedRect( gwen::Texture* pTexture, gwen::Rect rect, float u1, float v1, float u2, float v2 )
 		{
 			ALLEGRO_BITMAP* bmp = ( ALLEGRO_BITMAP* ) pTexture->data;
 
@@ -133,7 +133,7 @@ namespace Gwen
 								   0 );
 		}
 
-		Gwen::Color Allegro::PixelColour( Gwen::Texture* pTexture, unsigned int x, unsigned int y, const Gwen::Color & col_default )
+		gwen::Color Allegro::PixelColour( gwen::Texture* pTexture, unsigned int x, unsigned int y, const gwen::Color & col_default )
 		{
 			ALLEGRO_BITMAP* bmp = ( ALLEGRO_BITMAP* ) pTexture->data;
 
@@ -141,12 +141,12 @@ namespace Gwen
 			{ return col_default; }
 
 			ALLEGRO_COLOR col = al_get_pixel( bmp, x, y );
-			Gwen::Color gcol;
+			gwen::Color gcol;
 			al_unmap_rgba( col, &gcol.r, &gcol.g, &gcol.b, &gcol.a );
 			return gcol;
 		}
 
-		void Allegro::DrawFilledRect( Gwen::Rect rect )
+		void Allegro::DrawFilledRect( gwen::Rect rect )
 		{
 			Translate( rect );
 			rect.x += 0.5f;	// Draw at pixel centre.
@@ -154,7 +154,7 @@ namespace Gwen
 			al_draw_filled_rectangle( rect.x, rect.y, rect.x + rect.w, rect.y + rect.h, m_Color );
 		}
 
-		void Allegro::DrawLinedRect( Gwen::Rect rect )
+		void Allegro::DrawLinedRect( gwen::Rect rect )
 		{
 			Translate( rect );
 			rect.x += 0.5f;	// Draw at pixel centre.
@@ -168,18 +168,18 @@ namespace Gwen
 			al_put_pixel( x + 0.5f, y + 0.5f, m_Color );
 		}
 
-		bool Allegro::BeginContext( Gwen::WindowProvider* pWindow )
+		bool Allegro::BeginContext( gwen::WindowProvider* pWindow )
 		{
 			al_clear_to_color( al_map_rgba_f( 0.f, 0.f, 0.f, 0.f ) );
 			return true;
 		}
 
-		bool Allegro::EndContext( Gwen::WindowProvider* pWindow )
+		bool Allegro::EndContext( gwen::WindowProvider* pWindow )
 		{
 			return true;
 		}
 
-		bool Allegro::PresentContext( Gwen::WindowProvider* pWindow )
+		bool Allegro::PresentContext( gwen::WindowProvider* pWindow )
 		{
 			al_flip_display();
 			return true;

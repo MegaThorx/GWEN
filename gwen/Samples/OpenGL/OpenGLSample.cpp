@@ -2,16 +2,16 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Skins/Simple.h"
-#include "Gwen/Skins/TexturedBase.h"
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Input/Windows.h"
+#include "gwen/Gwen.h"
+#include "gwen/Skins/Simple.h"
+#include "gwen/Skins/TexturedBase.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Input/Windows.h"
 
 #ifdef USE_DEBUG_FONT
-#include "Gwen/Renderers/OpenGL_DebugFont.h"
+#include "gwen/Renderers/OpenGL_DebugFont.h"
 #else
-#include "Gwen/Renderers/OpenGL.h"
+#include "gwen/Renderers/OpenGL.h"
 #endif
 #include "gl/glew.h"
 
@@ -89,23 +89,23 @@ int main()
 	// Create a GWEN OpenGL Renderer
 	//
 #ifdef USE_DEBUG_FONT
-	Gwen::Renderer::OpenGL* pRenderer = new Gwen::Renderer::OpenGL_DebugFont();
+	gwen::Renderer::OpenGL* pRenderer = new gwen::Renderer::OpenGL_DebugFont();
 #else
-	Gwen::Renderer::OpenGL* pRenderer = new Gwen::Renderer::OpenGL();
+	gwen::Renderer::OpenGL* pRenderer = new gwen::Renderer::OpenGL();
 #endif
 	pRenderer->Init();
 	//
 	// Create a GWEN skin
 	//
-	Gwen::Skin::TexturedBase* pSkin = new Gwen::Skin::TexturedBase( pRenderer );
+	gwen::Skin::TexturedBase* pSkin = new gwen::Skin::TexturedBase( pRenderer );
 	pSkin->Init( "DefaultSkin.png" );
 	//
 	// Create a Canvas (it's root, on which all other GWEN panels are created)
 	//
-	Gwen::Controls::Canvas* pCanvas = new Gwen::Controls::Canvas( pSkin );
+	gwen::Controls::Canvas* pCanvas = new gwen::Controls::Canvas( pSkin );
 	pCanvas->SetSize( 998, 650 - 24 );
 	pCanvas->SetDrawBackground( true );
-	pCanvas->SetBackgroundColor( Gwen::Color( 150, 170, 170, 255 ) );
+	pCanvas->SetBackgroundColor( gwen::Color( 150, 170, 170, 255 ) );
 	//
 	// Create our unittest control (which is a Window with controls in it)
 	//
@@ -115,8 +115,8 @@ int main()
 	// Create a Windows Control helper
 	// (Processes Windows MSG's and fires input at GWEN)
 	//
-	Gwen::Input::Windows GwenInput;
-	GwenInput.Initialize( pCanvas );
+	gwen::Input::Windows gwenInput;
+	gwenInput.Initialize( pCanvas );
 	//
 	// Begin the main game loop
 	//
@@ -132,7 +132,7 @@ int main()
 		if ( PeekMessage( &msg, NULL, 0, 0, PM_REMOVE ) )
 		{
 			// .. give it to the input handler to process
-			GwenInput.ProcessMessage( msg );
+			gwenInput.ProcessMessage( msg );
 
 			// if it's QUIT then quit..
 			if ( msg.message == WM_QUIT )

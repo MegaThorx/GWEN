@@ -4,7 +4,7 @@
 	Version="9.00"
 	Name="GWEN-Renderer-DirectX9"
 	ProjectGUID="{4C06B2E5-68C0-41E5-A041-A7E64285C1E0}"
-	RootNamespace="Gwen"
+	RootNamespace="gwen"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -148,7 +148,7 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\include\Gwen\Renderers\DirectX9.h"
+			RelativePath="..\..\include\gwen\Renderers\DirectX9.h"
 			>
 		</File>
 	</Files>

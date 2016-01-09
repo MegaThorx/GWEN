@@ -4,16 +4,16 @@
 	See license in Gwen.h
 */
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Platform.h"
-#include "Gwen/Controls/Dialogs/FileOpen.h"
+#include "gwen/Gwen.h"
+#include "gwen/Platform.h"
+#include "gwen/Controls/Dialogs/FileOpen.h"
 
-using namespace Gwen;
-using namespace Gwen::Dialogs;
+using namespace gwen;
+using namespace gwen::Dialogs;
 
-void Gwen::Dialogs::FileOpenEx( bool bUseSystem, const String & Name, const String & StartPath, const String & Extension, Gwen::Event::Handler* pHandler, Gwen::Event::Handler::FunctionWithInformation fnCallback )
+void gwen::Dialogs::FileOpenEx( bool bUseSystem, const String & Name, const String & StartPath, const String & Extension, gwen::Event::Handler* pHandler, gwen::Event::Handler::FunctionWithInformation fnCallback )
 {
-	if ( bUseSystem && Gwen::Platform::FileOpen( Name, StartPath, Extension, pHandler, fnCallback ) )
+	if ( bUseSystem && gwen::Platform::FileOpen( Name, StartPath, Extension, pHandler, fnCallback ) )
 	{
 		return;
 	}

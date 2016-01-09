@@ -5,10 +5,10 @@
 */
 
 
-#include "Gwen/Controls/Dragger.h"
+#include "gwen/Controls/Dragger.h"
 
-using namespace Gwen;
-using namespace Gwen::ControlsInternal;
+using namespace gwen;
+using namespace gwen::ControlsInternal;
 
 
 
@@ -27,15 +27,15 @@ void Dragger::OnMouseClickLeft( int x, int y, bool bDown )
 		m_bDepressed = true;
 
 		if ( m_pTarget )
-		{ m_HoldPos = m_pTarget->CanvasPosToLocal( Gwen::Point( x, y ) ); }
+		{ m_HoldPos = m_pTarget->CanvasPosToLocal( gwen::Point( x, y ) ); }
 
-		Gwen::MouseFocus = this;
+		gwen::MouseFocus = this;
 		onDragStart.Call( this );
 	}
 	else
 	{
 		m_bDepressed = false;
-		Gwen::MouseFocus = NULL;
+		gwen::MouseFocus = NULL;
 	}
 }
 
@@ -45,7 +45,7 @@ void Dragger::OnMouseMoved( int x, int y, int deltaX, int deltaY )
 
 	if ( m_bDoMove && m_pTarget )
 	{
-		Gwen::Point p = Gwen::Point( x - m_HoldPos.x, y - m_HoldPos.y );
+		gwen::Point p = gwen::Point( x - m_HoldPos.x, y - m_HoldPos.y );
 
 		// Translate to parent
 		if ( m_pTarget->GetParent() )
@@ -54,8 +54,8 @@ void Dragger::OnMouseMoved( int x, int y, int deltaX, int deltaY )
 		m_pTarget->MoveTo( p.x, p.y );
 	}
 
-	Gwen::Event::Information info;
-	info.Point = Gwen::Point( deltaX, deltaY );
+	gwen::Event::Information info;
+	info.Point = gwen::Point( deltaX, deltaY );
 	onDragged.Call( this, info );
 }
 

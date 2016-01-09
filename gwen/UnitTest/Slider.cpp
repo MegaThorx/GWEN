@@ -1,9 +1,9 @@
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Controls/RadioButtonController.h"
-#include "Gwen/Controls/VerticalSlider.h"
-#include "Gwen/Controls/HorizontalSlider.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Controls/RadioButtonController.h"
+#include "gwen/Controls/VerticalSlider.h"
+#include "gwen/Controls/HorizontalSlider.h"
 
-using namespace Gwen;
+using namespace gwen;
 
 class Slider : public GUnit
 {
@@ -12,7 +12,7 @@ class Slider : public GUnit
 		GWEN_CONTROL_INLINE( Slider, GUnit )
 		{
 			{
-				Gwen::Controls::HorizontalSlider* pSlider = new Gwen::Controls::HorizontalSlider( this );
+				gwen::Controls::HorizontalSlider* pSlider = new gwen::Controls::HorizontalSlider( this );
 				pSlider->SetPos( 10, 10 );
 				pSlider->SetSize( 150, 20 );
 				pSlider->SetRange( 0, 100 );
@@ -20,7 +20,7 @@ class Slider : public GUnit
 				pSlider->onValueChanged.Add( this, &Slider::SliderMoved );
 			}
 			{
-				Gwen::Controls::HorizontalSlider* pSlider = new Gwen::Controls::HorizontalSlider( this );
+				gwen::Controls::HorizontalSlider* pSlider = new gwen::Controls::HorizontalSlider( this );
 				pSlider->SetPos( 10, 40 );
 				pSlider->SetSize( 150, 20 );
 				pSlider->SetRange( 0, 100 );
@@ -30,7 +30,7 @@ class Slider : public GUnit
 				pSlider->onValueChanged.Add( this, &Slider::SliderMoved );
 			}
 			{
-				Gwen::Controls::VerticalSlider* pSlider = new Gwen::Controls::VerticalSlider( this );
+				gwen::Controls::VerticalSlider* pSlider = new gwen::Controls::VerticalSlider( this );
 				pSlider->SetPos( 160, 10 );
 				pSlider->SetSize( 20, 200 );
 				pSlider->SetRange( 0, 100 );
@@ -38,7 +38,7 @@ class Slider : public GUnit
 				pSlider->onValueChanged.Add( this, &Slider::SliderMoved );
 			}
 			{
-				Gwen::Controls::VerticalSlider* pSlider = new Gwen::Controls::VerticalSlider( this );
+				gwen::Controls::VerticalSlider* pSlider = new gwen::Controls::VerticalSlider( this );
 				pSlider->SetPos( 190, 10 );
 				pSlider->SetSize( 20, 200 );
 				pSlider->SetRange( 0, 100 );
@@ -51,7 +51,7 @@ class Slider : public GUnit
 
 		void SliderMoved( Base* pControl )
 		{
-			Gwen::Controls::Slider* pSlider = ( Gwen::Controls::Slider* ) pControl;
+			gwen::Controls::Slider* pSlider = ( gwen::Controls::Slider* ) pControl;
 			UnitPrint( Utility::Format( L"Slider Value: %.2f", ( float ) pSlider->GetFloatValue() ) );
 		}
 

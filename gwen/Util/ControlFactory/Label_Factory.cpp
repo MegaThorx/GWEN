@@ -1,13 +1,13 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		using namespace Gwen;
+		using namespace gwen;
 
 		namespace Properties
 		{
@@ -18,16 +18,16 @@ namespace Gwen
 					UnicodeString GetValue( Controls::Base* ctrl )
 					{
 						UnicodeString str = gwen_cast<Controls::Label> ( ctrl )->GetText().GetUnicode();
-						Gwen::Utility::Replace<UnicodeString> ( str, L"\n", L"\\n" );
-						Gwen::Utility::Replace<UnicodeString> ( str, L"\t", L"\\t" );
+						gwen::Utility::Replace<UnicodeString> ( str, L"\n", L"\\n" );
+						gwen::Utility::Replace<UnicodeString> ( str, L"\t", L"\\t" );
 						return str;
 					}
 
 					void SetValue( Controls::Base* ctrl, const UnicodeString & str )
 					{
 						UnicodeString strOut = str;
-						Gwen::Utility::Replace<UnicodeString> ( strOut, L"\\n", L"\n" );
-						Gwen::Utility::Replace<UnicodeString> ( strOut, L"\\t", L"\t" );
+						gwen::Utility::Replace<UnicodeString> ( strOut, L"\\n", L"\n" );
+						gwen::Utility::Replace<UnicodeString> ( strOut, L"\\t", L"\t" );
 						gwen_cast<Controls::Label> ( ctrl )->SetText( strOut );
 					}
 
@@ -46,7 +46,7 @@ namespace Gwen
 					{
 						if ( str == L"" ) { return; }
 
-						Gwen::Font* pFont = gwen_cast<Controls::Label> ( ctrl )->GetFont();
+						gwen::Font* pFont = gwen_cast<Controls::Label> ( ctrl )->GetFont();
 						gwen_cast<Controls::Label> ( ctrl )->SetFont( str, pFont->size, pFont->bold );
 					}
 
@@ -58,7 +58,7 @@ namespace Gwen
 
 					UnicodeString GetValue( Controls::Base* ctrl )
 					{
-						return Gwen::Utility::Format( L"%i", ( int ) gwen_cast<Controls::Label> ( ctrl )->GetFont()->size );
+						return gwen::Utility::Format( L"%i", ( int ) gwen_cast<Controls::Label> ( ctrl )->GetFont()->size );
 					}
 
 					void SetValue( Controls::Base* ctrl, const UnicodeString & str )
@@ -67,7 +67,7 @@ namespace Gwen
 
 						if ( swscanf( str.c_str(), L"%i", &size ) != 1 ) { return; }
 
-						Gwen::Font* pFont = gwen_cast<Controls::Label> ( ctrl )->GetFont();
+						gwen::Font* pFont = gwen_cast<Controls::Label> ( ctrl )->GetFont();
 
 						if ( size == pFont->size ) { return; }
 
@@ -90,7 +90,7 @@ namespace Gwen
 					void SetValue( Controls::Base* ctrl, const UnicodeString & str )
 					{
 						bool bTrue = ( str == True );
-						Gwen::Font* pFont = gwen_cast<Controls::Label> ( ctrl )->GetFont();
+						gwen::Font* pFont = gwen_cast<Controls::Label> ( ctrl )->GetFont();
 
 						if ( bTrue == pFont->bold ) { return; }
 
@@ -152,7 +152,7 @@ namespace Gwen
 
 					int	OptionNum() { return 3; }
 
-					Gwen::UnicodeString	OptionGet( int i )
+					gwen::UnicodeString	OptionGet( int i )
 					{
 						if ( i == 0 ) { return L"Top"; }
 
@@ -194,7 +194,7 @@ namespace Gwen
 
 					int	OptionNum() { return 3; }
 
-					Gwen::UnicodeString	OptionGet( int i )
+					gwen::UnicodeString	OptionGet( int i )
 					{
 						if ( i == 0 ) { return L"Left"; }
 
@@ -207,7 +207,7 @@ namespace Gwen
 
 		} // namespace Properties
 
-		class Label_Factory : public Gwen::ControlFactory::Base
+		class Label_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
@@ -222,12 +222,12 @@ namespace Gwen
 					AddProperty( new Properties::HorizontalAlign() );
 				}
 
-				virtual Gwen::String Name()     { return "Label"; }
-				virtual Gwen::String BaseName() { return "Base"; }
+				virtual gwen::String Name()     { return "Label"; }
+				virtual gwen::String BaseName() { return "Base"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::Label* pControl = new Gwen::Controls::Label( parent );
+					gwen::Controls::Label* pControl = new gwen::Controls::Label( parent );
 					pControl->SetSize( 100, 20 );
 					pControl->SetText( "New Label" );
 					return pControl;
@@ -236,7 +236,7 @@ namespace Gwen
 
 		GWEN_CONTROL_FACTORY( Label_Factory );
 
-		class LabelClickable_Factory : public Gwen::ControlFactory::Base
+		class LabelClickable_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
@@ -244,12 +244,12 @@ namespace Gwen
 				{
 				}
 
-				virtual Gwen::String Name()     { return "LabelClickable"; }
-				virtual Gwen::String BaseName() { return "Label"; }
+				virtual gwen::String Name()     { return "LabelClickable"; }
+				virtual gwen::String BaseName() { return "Label"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::Label* pControl = new Gwen::Controls::LabelClickable( parent );
+					gwen::Controls::Label* pControl = new gwen::Controls::LabelClickable( parent );
 					pControl->SetSize( 100, 20 );
 					pControl->SetText( "LabelClickable" );
 					return pControl;

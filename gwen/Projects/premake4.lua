@@ -33,13 +33,13 @@ configuration "Debug"
 
 project "GWEN-DLL"
 	defines { "GWEN_COMPILE_DLL" }
-	files { "../src/**.*", "../include/Gwen/**.*" }
+	files { "../src/**.*", "../include/gwen/**.*" }
 	kind "SharedLib"
 	targetname( "gwen" )
 
 project "GWEN-Static"
 	defines { "GWEN_COMPILE_STATIC" }
-	files { "../src/**.*", "../include/Gwen/**.*" }
+	files { "../src/**.*", "../include/gwen/**.*" }
 	flags { "Symbols" }
 	kind "StaticLib"
 	targetname( "gwen_static" )

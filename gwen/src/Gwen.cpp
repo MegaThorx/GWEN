@@ -5,12 +5,12 @@
 */
 
 
-#include "Gwen/Gwen.h"
+#include "gwen/Gwen.h"
 #include <stdio.h>
 #include <stdarg.h>
 
 
-namespace Gwen
+namespace gwen
 {
 	// Globals
 	GWEN_EXPORT Controls::Base* HoveredControl = NULL;
@@ -26,7 +26,7 @@ namespace Gwen
 			va_start( s, str );
 			vsnprintf( strOut, sizeof( strOut ), str, s );
 			va_end( s );
-			GwenUtil_OutputDebugCharString( strOut );
+			gwenUtil_OutputDebugCharString( strOut );
 		}
 #ifdef UNICODE
 		void Msg( const wchar_t* str, ... )
@@ -36,7 +36,7 @@ namespace Gwen
 			va_start( s, str );
 			vswprintf( strOut, sizeof( strOut ), str, s );
 			va_end( s );
-			GwenUtil_OutputDebugWideString( strOut );
+			gwenUtil_OutputDebugWideString( strOut );
 		}
 #endif
 		void AssertCheck( bool b, const char* strMsg )

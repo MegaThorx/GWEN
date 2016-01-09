@@ -5,12 +5,12 @@
 */
 
 
-#include "Gwen/Controls/Slider.h"
-#include "Gwen/Controls/VerticalSlider.h"
+#include "gwen/Controls/Slider.h"
+#include "gwen/Controls/VerticalSlider.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
-using namespace Gwen::ControlsInternal;
+using namespace gwen;
+using namespace gwen::Controls;
+using namespace gwen::ControlsInternal;
 
 
 GWEN_CONTROL_CONSTRUCTOR( VerticalSlider )
@@ -31,7 +31,7 @@ void VerticalSlider::UpdateBarFromValue()
 
 void VerticalSlider::OnMouseClickLeft( int x, int y, bool bDown )
 {
-	m_SliderBar->MoveTo( m_SliderBar->X(), CanvasPosToLocal( Gwen::Point( x, y ) ).y - m_SliderBar->Height() * 0.5 );
+	m_SliderBar->MoveTo( m_SliderBar->X(), CanvasPosToLocal( gwen::Point( x, y ) ).y - m_SliderBar->Height() * 0.5 );
 	m_SliderBar->OnMouseClickLeft( x, y, bDown );
 	OnMoved( m_SliderBar );
 }

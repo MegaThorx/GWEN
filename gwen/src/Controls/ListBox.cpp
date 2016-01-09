@@ -5,12 +5,12 @@
 */
 
 
-#include "Gwen/Controls/ListBox.h"
-#include "Gwen/Controls/ScrollControl.h"
-#include "Gwen/InputHandler.h"
+#include "gwen/Controls/ListBox.h"
+#include "gwen/Controls/ScrollControl.h"
+#include "gwen/InputHandler.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 class ListBoxRow : public Layout::TableRow
 {
@@ -51,9 +51,9 @@ class ListBoxRow : public Layout::TableRow
 
 			// TODO: Get these values from the skin.
 			if ( b )
-			{ SetTextColor( Gwen::Colors::White ); }
+			{ SetTextColor( gwen::Colors::White ); }
 			else
-			{ SetTextColor( Gwen::Colors::Black ); }
+			{ SetTextColor( gwen::Colors::Black ); }
 		}
 
 	private:
@@ -100,7 +100,7 @@ void ListBox::Render( Skin::Base* skin )
 void ListBox::Layout( Skin::Base* skin )
 {
 	BaseClass::Layout( skin );
-	const Gwen::Rect & inner = m_InnerPanel->GetInnerBounds();
+	const gwen::Rect & inner = m_InnerPanel->GetInnerBounds();
 	m_Table->SetPos( inner.x, inner.y );
 	m_Table->SetWidth( inner.w );
 	m_Table->SizeToChildren( false, true );
@@ -121,7 +121,7 @@ void ListBox::UnselectAll()
 
 void ListBox::OnRowSelected( Base* pControl )
 {
-	bool bClear = !Gwen::Input::IsShiftDown();
+	bool bClear = !gwen::Input::IsShiftDown();
 
 	if ( !AllowMultiSelect() ) { bClear = true; }
 
@@ -135,7 +135,7 @@ Layout::TableRow* ListBox::GetSelectedRow()
 	return *m_SelectedRows.begin();
 }
 
-Gwen::String ListBox::GetSelectedRowName()
+gwen::String ListBox::GetSelectedRowName()
 {
 	Layout::TableRow* row = GetSelectedRow();
 
@@ -150,7 +150,7 @@ void ListBox::Clear()
 	m_Table->Clear();
 }
 
-void ListBox::SetSelectedRow( Gwen::Controls::Base* pControl, bool bClearOthers )
+void ListBox::SetSelectedRow( gwen::Controls::Base* pControl, bool bClearOthers )
 {
 	if ( bClearOthers )
 	{ UnselectAll(); }

@@ -1,7 +1,7 @@
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Controls/RadioButtonController.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Controls/RadioButtonController.h"
 
-using namespace Gwen;
+using namespace gwen;
 
 class RadioButton : public GUnit
 {
@@ -9,7 +9,7 @@ class RadioButton : public GUnit
 
 		GWEN_CONTROL_INLINE( RadioButton, GUnit )
 		{
-			Gwen::Controls::RadioButtonController* rc = new Gwen::Controls::RadioButtonController( this );
+			gwen::Controls::RadioButtonController* rc = new gwen::Controls::RadioButtonController( this );
 			rc->AddOption( "Option 1" );
 			rc->AddOption( "Option 2" );
 			rc->AddOption( "Option 3" );
@@ -20,8 +20,8 @@ class RadioButton : public GUnit
 
 		void OnChange( Controls::Base* pControl )
 		{
-			Gwen::Controls::RadioButtonController* rc = ( Gwen::Controls::RadioButtonController* ) pControl;
-			Gwen::Controls::LabeledRadioButton* pSelected = rc->GetSelected();
+			gwen::Controls::RadioButtonController* rc = ( gwen::Controls::RadioButtonController* ) pControl;
+			gwen::Controls::LabeledRadioButton* pSelected = rc->GetSelected();
 			UnitPrint( Utility::Format( L"RadioButton changed (using 'OnChange' event)\n Chosen Item: '%ls'", pSelected->GetLabel()->GetText().GetUnicode().c_str() ) );
 		}
 

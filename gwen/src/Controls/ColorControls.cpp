@@ -5,11 +5,11 @@
 */
 
 
-#include "Gwen/Utility.h"
-#include "Gwen/Controls/ColorControls.h"
+#include "gwen/Utility.h"
+#include "gwen/Controls/ColorControls.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 //Find a place to put these...
 Color HSVToColor( float h, float s, float v )
@@ -91,8 +91,8 @@ Color HSVToColor( float h, float s, float v )
 HSV RGBtoHSV( int r, int g, int b )
 {
 	double min, max, delta, temp;
-	min = Gwen::Min( r, Gwen::Min( g, b ) );
-	max = Gwen::Max( r, Gwen::Max( g, b ) );
+	min = gwen::Min( r, gwen::Min( g, b ) );
+	max = gwen::Max( r, gwen::Max( g, b ) );
 	delta = max - min;
 	HSV hsv;
 	hsv.v = ( int ) max;
@@ -142,29 +142,29 @@ HSV RGBtoHSV( int r, int g, int b )
 
 GWEN_CONTROL_CONSTRUCTOR( ColorLerpBox )
 {
-	SetColor( Gwen::Color( 255, 128, 0, 255 ) );
+	SetColor( gwen::Color( 255, 128, 0, 255 ) );
 	SetSize( 128, 128 );
 	SetMouseInputEnabled( true );
 	m_bDepressed = false;
 }
 
 //Find a place to put this? color member?
-Gwen::Color LerpColor( Gwen::Color & toColor, Gwen::Color & fromColor, float amount )
+gwen::Color LerpColor( gwen::Color & toColor, gwen::Color & fromColor, float amount )
 {
-	Gwen::Color colorDelta = toColor - fromColor;
+	gwen::Color colorDelta = toColor - fromColor;
 	colorDelta.r *= amount;
 	colorDelta.g *= amount;
 	colorDelta.b *= amount;
-	Gwen::Color newColor = fromColor + colorDelta;
+	gwen::Color newColor = fromColor + colorDelta;
 	return newColor;
 }
 
-Gwen::Color ColorLerpBox::GetSelectedColor()
+gwen::Color ColorLerpBox::GetSelectedColor()
 {
 	return GetColorAtPos( cursorPos.x, cursorPos.y );
 }
 
-void ColorLerpBox::SetColor( Gwen::Color color, bool onlyHue )
+void ColorLerpBox::SetColor( gwen::Color color, bool onlyHue )
 {
 	HSV hsv = RGBtoHSV( color.r, color.g, color.b );
 	m_Hue = hsv.h;
@@ -182,7 +182,7 @@ void ColorLerpBox::OnMouseMoved( int x, int y, int /*deltaX*/, int /*deltaY*/ )
 {
 	if ( m_bDepressed )
 	{
-		cursorPos = CanvasPosToLocal( Gwen::Point( x, y ) );
+		cursorPos = CanvasPosToLocal( gwen::Point( x, y ) );
 
 		//Do we have clamp?
 		if ( cursorPos.x < 0 )
@@ -206,22 +206,22 @@ void ColorLerpBox::OnMouseClickLeft( int x, int y, bool bDown )
 	m_bDepressed = bDown;
 
 	if ( bDown )
-	{ Gwen::MouseFocus = this; }
+	{ gwen::MouseFocus = this; }
 	else
-	{ Gwen::MouseFocus = NULL; }
+	{ gwen::MouseFocus = NULL; }
 
 	OnMouseMoved( x, y, 0, 0 );
 }
 
-Gwen::Color ColorLerpBox::GetColorAtPos( int x, int y )
+gwen::Color ColorLerpBox::GetColorAtPos( int x, int y )
 {
 	float xPercent = ( ( float ) x / ( float ) Width() );
 	float yPercent = 1 - ( ( float ) y / ( float ) Height() );
-	Gwen::Color result = HSVToColor( m_Hue, xPercent, yPercent );
+	gwen::Color result = HSVToColor( m_Hue, xPercent, yPercent );
 	result.a = 255;
 	return result;
 }
-void ColorLerpBox::Render( Gwen::Skin::Base* skin )
+void ColorLerpBox::Render( gwen::Skin::Base* skin )
 {
 	//Is there any way to move this into skin? Not for now, no idea how we'll "actually" render these
 	BaseClass::Render( skin );
@@ -235,16 +235,16 @@ void ColorLerpBox::Render( Gwen::Skin::Base* skin )
 		}
 	}
 
-	skin->GetRender()->SetDrawColor( Gwen::Color( 0, 0, 0, 255 ) );
+	skin->GetRender()->SetDrawColor( gwen::Color( 0, 0, 0, 255 ) );
 	skin->GetRender()->DrawLinedRect( GetRenderBounds() );
-	Gwen::Color selected = GetSelectedColor();
+	gwen::Color selected = GetSelectedColor();
 
 	if ( ( selected.r + selected.g + selected.b ) / 3 < 170 )
-	{ skin->GetRender()->SetDrawColor( Gwen::Color( 255, 255, 255, 255 ) ); }
+	{ skin->GetRender()->SetDrawColor( gwen::Color( 255, 255, 255, 255 ) ); }
 	else
-	{ skin->GetRender()->SetDrawColor( Gwen::Color( 0, 0, 0, 255 ) ); }
+	{ skin->GetRender()->SetDrawColor( gwen::Color( 0, 0, 0, 255 ) ); }
 
-	Gwen::Rect testRect = Gwen::Rect( cursorPos.x - 3, cursorPos.y - 3, 6, 6 );
+	gwen::Rect testRect = gwen::Rect( cursorPos.x - 3, cursorPos.y - 3, 6, 6 );
 	skin->GetRender()->DrawShavedCornerRect( testRect );
 }
 
@@ -259,7 +259,7 @@ GWEN_CONTROL_CONSTRUCTOR( ColorSlider )
 	m_bDepressed = false;
 }
 
-void ColorSlider::Render( Gwen::Skin::Base* skin )
+void ColorSlider::Render( gwen::Skin::Base* skin )
 {
 	//Is there any way to move this into skin? Not for now, no idea how we'll "actually" render these
 	int y = 0;
@@ -268,18 +268,18 @@ void ColorSlider::Render( Gwen::Skin::Base* skin )
 	{
 		float yPercent = ( float ) y / ( float ) Height();
 		skin->GetRender()->SetDrawColor( HSVToColor( yPercent * 360, 1, 1 ) );
-		skin->GetRender()->DrawFilledRect( Gwen::Rect( 5, y, Width() - 10, 1 ) );
+		skin->GetRender()->DrawFilledRect( gwen::Rect( 5, y, Width() - 10, 1 ) );
 	}
 
 	int drawHeight = m_iSelectedDist - 3;
 	//Draw our selectors
-	skin->GetRender()->SetDrawColor( Gwen::Color( 0, 0, 0, 255 ) );
-	skin->GetRender()->DrawFilledRect( Gwen::Rect( 0, drawHeight + 2, Width(), 1 ) );
-	skin->GetRender()->DrawFilledRect( Gwen::Rect( 0, drawHeight, 5, 5 ) );
-	skin->GetRender()->DrawFilledRect( Gwen::Rect( Width() - 5, drawHeight, 5, 5 ) );
-	skin->GetRender()->SetDrawColor( Gwen::Color( 255, 255, 255, 255 ) );
-	skin->GetRender()->DrawFilledRect( Gwen::Rect( 1, drawHeight + 1, 3, 3 ) );
-	skin->GetRender()->DrawFilledRect( Gwen::Rect( Width() - 4, drawHeight + 1, 3, 3 ) );
+	skin->GetRender()->SetDrawColor( gwen::Color( 0, 0, 0, 255 ) );
+	skin->GetRender()->DrawFilledRect( gwen::Rect( 0, drawHeight + 2, Width(), 1 ) );
+	skin->GetRender()->DrawFilledRect( gwen::Rect( 0, drawHeight, 5, 5 ) );
+	skin->GetRender()->DrawFilledRect( gwen::Rect( Width() - 5, drawHeight, 5, 5 ) );
+	skin->GetRender()->SetDrawColor( gwen::Color( 255, 255, 255, 255 ) );
+	skin->GetRender()->DrawFilledRect( gwen::Rect( 1, drawHeight + 1, 3, 3 ) );
+	skin->GetRender()->DrawFilledRect( gwen::Rect( Width() - 4, drawHeight + 1, 3, 3 ) );
 }
 
 void ColorSlider::OnMouseClickLeft( int x, int y, bool bDown )
@@ -287,14 +287,14 @@ void ColorSlider::OnMouseClickLeft( int x, int y, bool bDown )
 	m_bDepressed = bDown;
 
 	if ( bDown )
-	{ Gwen::MouseFocus = this; }
+	{ gwen::MouseFocus = this; }
 	else
-	{ Gwen::MouseFocus = NULL; }
+	{ gwen::MouseFocus = NULL; }
 
 	OnMouseMoved( x, y, 0, 0 );
 }
 
-Gwen::Color ColorSlider::GetColorAtHeight( int y )
+gwen::Color ColorSlider::GetColorAtHeight( int y )
 {
 	float yPercent = ( float ) y / ( float ) Height();
 	return HSVToColor( yPercent * 360, 1, 1 );
@@ -303,7 +303,7 @@ void ColorSlider::OnMouseMoved( int x, int y, int /*deltaX*/, int /*deltaY*/ )
 {
 	if ( m_bDepressed )
 	{
-		Gwen::Point cursorPos = CanvasPosToLocal( Gwen::Point( x, y ) );
+		gwen::Point cursorPos = CanvasPosToLocal( gwen::Point( x, y ) );
 
 		if ( cursorPos.y < 0 )
 		{ cursorPos.y = 0; }
@@ -316,14 +316,14 @@ void ColorSlider::OnMouseMoved( int x, int y, int /*deltaX*/, int /*deltaY*/ )
 	}
 }
 
-void ColorSlider::SetColor( Gwen::Color color )
+void ColorSlider::SetColor( gwen::Color color )
 {
 	HSV hsv = RGBtoHSV( color.r, color.g, color.b );
 	m_iSelectedDist = hsv.h / 360 * Height();
 	onSelectionChanged.Call( this );
 }
 
-Gwen::Color ColorSlider::GetSelectedColor()
+gwen::Color ColorSlider::GetSelectedColor()
 {
 	return GetColorAtHeight( m_iSelectedDist );
 }

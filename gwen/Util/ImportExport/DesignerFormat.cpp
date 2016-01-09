@@ -1,24 +1,24 @@
 
-#include "Gwen/Util/ImportExport.h"
+#include "gwen/Util/ImportExport.h"
 #include "Bootil/Bootil.h"
 
 
-class DesignerFormat : public Gwen::ImportExport::Base
+class DesignerFormat : public gwen::ImportExport::Base
 {
 	public:
 
 		DesignerFormat();
 
-		virtual Gwen::String Name() { return "Designer"; }
+		virtual gwen::String Name() { return "Designer"; }
 
 		virtual bool CanImport() { return true; }
-		virtual void Import( Gwen::Controls::Base* pRoot, const Gwen::String & strFilename );
+		virtual void Import( gwen::Controls::Base* pRoot, const gwen::String & strFilename );
 
 		virtual bool CanExport() { return true; }
-		virtual void Export( Gwen::Controls::Base* pRoot, const Gwen::String & strFilename );
+		virtual void Export( gwen::Controls::Base* pRoot, const gwen::String & strFilename );
 
-		void ExportToTree( Gwen::Controls::Base* pRoot, Bootil::Data::Tree & tree );
-		void ImportFromTree( Gwen::Controls::Base* pRoot, Bootil::Data::Tree & tree );
+		void ExportToTree( gwen::Controls::Base* pRoot, Bootil::Data::Tree & tree );
+		void ImportFromTree( gwen::Controls::Base* pRoot, Bootil::Data::Tree & tree );
 
 };
 
@@ -29,7 +29,7 @@ DesignerFormat::DesignerFormat()
 {
 }
 
-void DesignerFormat::Import( Gwen::Controls::Base* pRoot, const Gwen::String & strFilename )
+void DesignerFormat::Import( gwen::Controls::Base* pRoot, const gwen::String & strFilename )
 {
 	Bootil::BString strContents;
 
@@ -44,7 +44,7 @@ void DesignerFormat::Import( Gwen::Controls::Base* pRoot, const Gwen::String & s
 	ImportFromTree( pRoot, tree.GetChild( "Controls" ) );
 }
 
-void DesignerFormat::ImportFromTree( Gwen::Controls::Base* pRoot, Bootil::Data::Tree & tree )
+void DesignerFormat::ImportFromTree( gwen::Controls::Base* pRoot, Bootil::Data::Tree & tree )
 {
 	ControlFactory::Base* pRootFactory = ControlFactory::Find( "Base" );
 
@@ -84,7 +84,7 @@ void DesignerFormat::ImportFromTree( Gwen::Controls::Base* pRoot, Bootil::Data::
 
 			if ( !pFactory ) { continue; }
 
-			Gwen::Controls::Base* pControl = pFactory->CreateInstance( pRoot );
+			gwen::Controls::Base* pControl = pFactory->CreateInstance( pRoot );
 
 			if ( !pControl ) { continue; }
 
@@ -100,7 +100,7 @@ void DesignerFormat::ImportFromTree( Gwen::Controls::Base* pRoot, Bootil::Data::
 	}
 }
 
-void DesignerFormat::Export( Gwen::Controls::Base* pRoot, const Gwen::String & strFilename )
+void DesignerFormat::Export( gwen::Controls::Base* pRoot, const gwen::String & strFilename )
 {
 	Bootil::Data::Tree tree;
 	ExportToTree( pRoot, tree );
@@ -112,7 +112,7 @@ void DesignerFormat::Export( Gwen::Controls::Base* pRoot, const Gwen::String & s
 	}
 }
 
-void DesignerFormat::ExportToTree( Gwen::Controls::Base* pRoot, Bootil::Data::Tree & tree )
+void DesignerFormat::ExportToTree( gwen::Controls::Base* pRoot, Bootil::Data::Tree & tree )
 {
 	Bootil::Data::Tree* me = &tree;
 
@@ -162,7 +162,7 @@ void DesignerFormat::ExportToTree( Gwen::Controls::Base* pRoot, Bootil::Data::Tr
 					continue;
 				}
 
-				props.SetChild( ( *it )->Name(), Gwen::Utility::UnicodeToString( ( *it )->GetValue( pRoot ) ).c_str() );
+				props.SetChild( ( *it )->Name(), gwen::Utility::UnicodeToString( ( *it )->GetValue( pRoot ) ).c_str() );
 			}
 
 			pCF = pCF->GetBaseFactory();

@@ -1,14 +1,14 @@
-#include "Gwen/Gwen.h"
-#include "Gwen/BaseRender.h"
-#include "Gwen/Utility.h"
-#include "Gwen/Font.h"
-#include "Gwen/Texture.h"
-#include "Gwen/Renderers/SFML.h"
+#include "gwen/Gwen.h"
+#include "gwen/BaseRender.h"
+#include "gwen/Utility.h"
+#include "gwen/Font.h"
+#include "gwen/Texture.h"
+#include "gwen/Renderers/SFML.h"
 #include <SFML/Graphics.hpp>
 #include <GL/gl.h>
 #include <cmath>
 
-namespace Gwen
+namespace gwen
 {
 	namespace Renderer
 	{
@@ -31,7 +31,7 @@ namespace Gwen
 		{
 		}
 
-		void SFML::SetDrawColor( Gwen::Color color )
+		void SFML::SetDrawColor( gwen::Color color )
 		{
 			m_Color.r = color.r;
 			m_Color.g = color.g;
@@ -39,13 +39,13 @@ namespace Gwen
 			m_Color.a = color.a;
 		}
 
-		void SFML::DrawFilledRect( Gwen::Rect rect )
+		void SFML::DrawFilledRect( gwen::Rect rect )
 		{
 			Translate( rect );
 			m_Target.Draw( sf::Shape::Rectangle( rect.x, rect.y, rect.x + rect.w, rect.y + rect.h, m_Color ) );
 		}
 
-        void SFML::DrawLinedRect( Gwen::Rect rect )
+        void SFML::DrawLinedRect( gwen::Rect rect )
         {
             Base::DrawLinedRect( rect );
         }
@@ -55,7 +55,7 @@ namespace Gwen
             Base::DrawPixel( x, y );
         }
 
-		void SFML::LoadFont( Gwen::Font* font )
+		void SFML::LoadFont( gwen::Font* font )
 		{
 			font->realsize = font->size * Scale();
 			sf::Font* pFont = new sf::Font();
@@ -72,7 +72,7 @@ namespace Gwen
 			font->data = pFont;
 		}
 
-		void SFML::FreeFont( Gwen::Font* pFont )
+		void SFML::FreeFont( gwen::Font* pFont )
 		{
 			if ( !pFont->data ) { return; }
 
@@ -83,7 +83,7 @@ namespace Gwen
 			pFont->data = NULL;
 		}
 
-		void SFML::RenderText( Gwen::Font* pFont, Gwen::Point pos, const Gwen::UnicodeString & text )
+		void SFML::RenderText( gwen::Font* pFont, gwen::Point pos, const gwen::UnicodeString & text )
 		{
 			Translate( pos.x, pos.y );
 
@@ -111,7 +111,7 @@ namespace Gwen
 			
 		}
 
-		Gwen::Point SFML::MeasureText( Gwen::Font* pFont, const Gwen::UnicodeString & text )
+		gwen::Point SFML::MeasureText( gwen::Font* pFont, const gwen::UnicodeString & text )
 		{
 			// If the font doesn't exist, or the font size should be changed
 			if ( !pFont->data || fabs( pFont->realsize - pFont->size * Scale() ) > 2 )
@@ -133,12 +133,12 @@ namespace Gwen
 			sfStr.SetSize( pFont->realsize );
 			sf::FloatRect sz = sfStr.GetRect();
 			
-			return Gwen::Point( sz.GetWidth(), sz.GetHeight() );			
+			return gwen::Point( sz.GetWidth(), sz.GetHeight() );			
 		}
 
 		void SFML::StartClip()
 		{
-			Gwen::Rect rect = ClipRegion();
+			gwen::Rect rect = ClipRegion();
 			// OpenGL's coords are from the bottom left
 			// so we need to translate them here.
 			{
@@ -156,7 +156,7 @@ namespace Gwen
 			glDisable( GL_SCISSOR_TEST );
 		};
 
-		void SFML::LoadTexture( Gwen::Texture* pTexture )
+		void SFML::LoadTexture( gwen::Texture* pTexture )
 		{
 			if ( !pTexture ) { return; }
 			if ( pTexture->data ) { FreeTexture( pTexture ); }
@@ -177,7 +177,7 @@ namespace Gwen
 			
 		};
 
-		void SFML::FreeTexture( Gwen::Texture* pTexture )
+		void SFML::FreeTexture( gwen::Texture* pTexture )
 		{
 			TextureData* data = static_cast<TextureData*>( pTexture->data );
 
@@ -189,7 +189,7 @@ namespace Gwen
 			pTexture->data = NULL;
 		}
 
-		void SFML::DrawTexturedRect( Gwen::Texture* pTexture, Gwen::Rect rect, float u1, float v1, float u2, float v2 )
+		void SFML::DrawTexturedRect( gwen::Texture* pTexture, gwen::Rect rect, float u1, float v1, float u2, float v2 )
 		{
 			TextureData* data = static_cast<TextureData*>( pTexture->data );
 
@@ -219,7 +219,7 @@ namespace Gwen
 			glBindTexture( GL_TEXTURE_2D, 0 );
 		}
 
-		Gwen::Color SFML::PixelColour( Gwen::Texture* pTexture, unsigned int x, unsigned int y, const Gwen::Color & col_default )
+		gwen::Color SFML::PixelColour( gwen::Texture* pTexture, unsigned int x, unsigned int y, const gwen::Color & col_default )
 		{
             TextureData* data = static_cast<TextureData*>( pTexture->data );
 
@@ -227,10 +227,10 @@ namespace Gwen
 			if ( !tex ) return col_default;
 
 			sf::Color col = tex->GetPixel( x, y );
-			return Gwen::Color( col.r, col.g, col.b, col.a );
+			return gwen::Color( col.r, col.g, col.b, col.a );
 
 			sf::Color col = tex->GetPixel( x, y );
-			return Gwen::Color( col.r, col.g, col.b, col.a );
+			return gwen::Color( col.r, col.g, col.b, col.a );
 		}
 		
 	}

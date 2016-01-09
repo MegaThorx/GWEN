@@ -5,15 +5,15 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Skin.h"
-#include "Gwen/Controls/TabButton.h"
-#include "Gwen/Controls/TabControl.h"
-#include "Gwen/Controls/Highlight.h"
-#include "Gwen/DragAndDrop.h"
+#include "gwen/Gwen.h"
+#include "gwen/Skin.h"
+#include "gwen/Controls/TabButton.h"
+#include "gwen/Controls/TabControl.h"
+#include "gwen/Controls/Highlight.h"
+#include "gwen/DragAndDrop.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 
 GWEN_CONTROL_CONSTRUCTOR( TabButton )
@@ -83,7 +83,7 @@ bool TabButton::OnKeyLeft( bool bDown )
 		{
 			Base* pNextTab = *it;
 			GetTabControl()->OnTabPressed( pNextTab );
-			Gwen::KeyboardFocus = pNextTab;
+			gwen::KeyboardFocus = pNextTab;
 		}
 	}
 
@@ -99,7 +99,7 @@ bool TabButton::OnKeyRight( bool bDown )
 		{
 			Base* pNextTab = *it;
 			GetTabControl()->OnTabPressed( pNextTab );
-			Gwen::KeyboardFocus = pNextTab;
+			gwen::KeyboardFocus = pNextTab;
 		}
 	}
 

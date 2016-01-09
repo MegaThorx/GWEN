@@ -5,14 +5,14 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Utility.h"
-#include "Gwen/Skin.h"
-#include "Gwen/Controls/PageControl.h"
-#include "Gwen/Controls.h"
+#include "gwen/Gwen.h"
+#include "gwen/Utility.h"
+#include "gwen/Skin.h"
+#include "gwen/Controls/PageControl.h"
+#include "gwen/Controls.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 
 GWEN_CONTROL_CONSTRUCTOR( PageControl )

@@ -1,7 +1,7 @@
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Controls/TreeControl.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Controls/TreeControl.h"
 
-using namespace Gwen;
+using namespace gwen;
 
 class TreeControl : public GUnit
 {
@@ -10,9 +10,9 @@ class TreeControl : public GUnit
 		GWEN_CONTROL_INLINE( TreeControl, GUnit )
 		{
 			{
-				Gwen::Controls::TreeControl* ctrl = new Gwen::Controls::TreeControl( this );
+				gwen::Controls::TreeControl* ctrl = new gwen::Controls::TreeControl( this );
 				ctrl->AddNode( L"Node One" );
-				Gwen::Controls::TreeNode* pNode = ctrl->AddNode( L"Node Two" );
+				gwen::Controls::TreeNode* pNode = ctrl->AddNode( L"Node Two" );
 				pNode->AddNode( L"Node Two Inside" );
 				pNode->AddNode( L"Eyes" );
 				pNode->AddNode( L"Brown" )->AddNode( L"Node Two Inside" )->AddNode( L"Eyes" )->AddNode( L"Brown" );
@@ -23,13 +23,13 @@ class TreeControl : public GUnit
 				ctrl->ExpandAll();
 			}
 			{
-				Gwen::Controls::TreeControl* ctrl = new Gwen::Controls::TreeControl( this );
+				gwen::Controls::TreeControl* ctrl = new gwen::Controls::TreeControl( this );
 				ctrl->AllowMultiSelect( true );
 				ctrl->AddNode( L"Node One" );
-				Gwen::Controls::TreeNode* pNode = ctrl->AddNode( L"Node Two" );
+				gwen::Controls::TreeNode* pNode = ctrl->AddNode( L"Node Two" );
 				pNode->AddNode( L"Node Two Inside" );
 				pNode->AddNode( L"Eyes" );
-				Gwen::Controls::TreeNode* pNodeTwo = pNode->AddNode( L"Brown" )->AddNode( L"Node Two Inside" )->AddNode( L"Eyes" );
+				gwen::Controls::TreeNode* pNodeTwo = pNode->AddNode( L"Brown" )->AddNode( L"Node Two Inside" )->AddNode( L"Eyes" );
 				pNodeTwo->AddNode( L"Brown" );
 				pNodeTwo->AddNode( L"Green" );
 				pNodeTwo->AddNode( L"Slime" );

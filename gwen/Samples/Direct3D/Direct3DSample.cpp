@@ -12,12 +12,12 @@
 #include <memory.h>
 #include <tchar.h>
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Skins/Simple.h"
-#include "Gwen/Skins/TexturedBase.h"
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Input/Windows.h"
-#include "Gwen/Renderers/DirectX9.h"
+#include "gwen/Gwen.h"
+#include "gwen/Skins/Simple.h"
+#include "gwen/Skins/TexturedBase.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Input/Windows.h"
+#include "gwen/Renderers/DirectX9.h"
 
 HWND					g_pHWND = NULL;
 LPDIRECT3D9				g_pD3D = NULL;
@@ -92,19 +92,19 @@ int main( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nC
 	//
 	// Create a GWEN DirectX renderer
 	//
-	Gwen::Renderer::DirectX9* pRenderer = new Gwen::Renderer::DirectX9( g_pD3DDevice );
+	gwen::Renderer::DirectX9* pRenderer = new gwen::Renderer::DirectX9( g_pD3DDevice );
 	//
 	// Create a GWEN skin
 	//
-	Gwen::Skin::TexturedBase* pSkin = new Gwen::Skin::TexturedBase( pRenderer );
+	gwen::Skin::TexturedBase* pSkin = new gwen::Skin::TexturedBase( pRenderer );
 	pSkin->Init( "DefaultSkin.png" );
 	//
 	// Create a Canvas (it's root, on which all other GWEN panels are created)
 	//
-	Gwen::Controls::Canvas* pCanvas = new Gwen::Controls::Canvas( pSkin );
+	gwen::Controls::Canvas* pCanvas = new gwen::Controls::Canvas( pSkin );
 	pCanvas->SetSize( FrameBounds.right, FrameBounds.bottom );
 	pCanvas->SetDrawBackground( true );
-	pCanvas->SetBackgroundColor( Gwen::Color( 150, 170, 170, 255 ) );
+	pCanvas->SetBackgroundColor( gwen::Color( 150, 170, 170, 255 ) );
 	//
 	// Create our unittest control (which is a Window with controls in it)
 	//
@@ -114,8 +114,8 @@ int main( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nC
 	// Create a Windows Control helper
 	// (Processes Windows MSG's and fires input at GWEN)
 	//
-	Gwen::Input::Windows GwenInput;
-	GwenInput.Initialize( pCanvas );
+	gwen::Input::Windows gwenInput;
+	gwenInput.Initialize( pCanvas );
 	//
 	// Begin the main game loop
 	//
@@ -131,7 +131,7 @@ int main( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nC
 		if ( PeekMessage( &msg, NULL, 0, 0, PM_REMOVE ) )
 		{
 			// .. give it to the input handler to process
-			GwenInput.ProcessMessage( msg );
+			gwenInput.ProcessMessage( msg );
 
 			// if it's QUIT then quit..
 			if ( msg.message == WM_QUIT )

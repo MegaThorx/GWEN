@@ -1,6 +1,6 @@
-#include "Gwen/Util/ImportExport.h"
+#include "gwen/Util/ImportExport.h"
 
-using namespace Gwen;
+using namespace gwen;
 using namespace ImportExport;
 
 void InitializeFormats()
@@ -23,7 +23,7 @@ ImportExport::Base::List & ImportExport::GetList()
 	return list;
 }
 
-ImportExport::Base* ImportExport::Find( Gwen::String strName )
+ImportExport::Base* ImportExport::Find( gwen::String strName )
 {
 	ImportExport::Base::List::iterator it = GetList().begin();
 	ImportExport::Base::List::iterator itEnd = GetList().end();
@@ -44,20 +44,20 @@ Base::Base()
 }
 
 
-namespace Gwen
+namespace gwen
 {
 	namespace ImportExport
 	{
 		namespace Tools
 		{
 
-			ControlList GetExportableChildren( Gwen::Controls::Base* pRoot )
+			ControlList GetExportableChildren( gwen::Controls::Base* pRoot )
 			{
 				ControlList list;
 
 				for ( int i = 0; i < pRoot->NumChildren(); i++ )
 				{
-					Gwen::Controls::Base* pBaseChild = pRoot->GetChild( i );
+					gwen::Controls::Base* pBaseChild = pRoot->GetChild( i );
 
 					if ( !pBaseChild ) { continue; }
 

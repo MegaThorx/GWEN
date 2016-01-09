@@ -5,25 +5,25 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Skin.h"
-#include "Gwen/Controls/Properties.h"
-#include "Gwen/Utility.h"
+#include "gwen/Gwen.h"
+#include "gwen/Skin.h"
+#include "gwen/Controls/Properties.h"
+#include "gwen/Utility.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 GWEN_CONTROL_CONSTRUCTOR( Properties )
 {
 	m_SplitterBar = new SplitterBar( this );
 	m_SplitterBar->SetPos( 80, 0 );
-	m_SplitterBar->SetCursor( Gwen::CursorType::SizeWE );
+	m_SplitterBar->SetCursor( gwen::CursorType::SizeWE );
 	m_SplitterBar->onDragged.Add( this, &Properties::OnSplitterMoved );
 	m_SplitterBar->SetShouldDrawBackground( false );
 	m_SplitterBar->DoNotIncludeInSize();
 }
 
-void Properties::PostLayout( Gwen::Skin::Base* /*skin*/ )
+void Properties::PostLayout( gwen::Skin::Base* /*skin*/ )
 {
 	if ( SizeToChildren( false, true ) )
 	{
@@ -126,7 +126,7 @@ GWEN_CONTROL_CONSTRUCTOR( PropertyRow )
 	m_Label = pLabel;
 }
 
-void PropertyRow::Render( Gwen::Skin::Base* skin )
+void PropertyRow::Render( gwen::Skin::Base* skin )
 {
 	/* SORRY */
 	if ( IsEditing() != m_bLastEditing )
@@ -145,7 +145,7 @@ void PropertyRow::Render( Gwen::Skin::Base* skin )
 	skin->DrawPropertyRow( this, m_Label->Right(), IsEditing(), IsHovered() | m_Property->IsHovered() );
 }
 
-void PropertyRow::Layout( Gwen::Skin::Base* /*skin*/ )
+void PropertyRow::Layout( gwen::Skin::Base* /*skin*/ )
 {
 	Properties* pParent = gwen_cast<Properties> ( GetParent() );
 
@@ -167,7 +167,7 @@ void PropertyRow::SetProperty( Property::Base* prop )
 	m_Property->onChange.Add( this, &ThisClass::OnPropertyValueChanged );
 }
 
-void PropertyRow::OnPropertyValueChanged( Gwen::Controls::Base* /*control*/ )
+void PropertyRow::OnPropertyValueChanged( gwen::Controls::Base* /*control*/ )
 {
 	Event::Information info;
 	info.String = GetProperty()->GetPropertyValue();

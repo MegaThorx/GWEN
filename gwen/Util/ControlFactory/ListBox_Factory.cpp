@@ -1,26 +1,26 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		class ListBox_Factory : public Gwen::ControlFactory::Base
+		class ListBox_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
-				GWEN_CONTROL_FACTORY_CONSTRUCTOR( ListBox_Factory, Gwen::ControlFactory::Base )
+				GWEN_CONTROL_FACTORY_CONSTRUCTOR( ListBox_Factory, gwen::ControlFactory::Base )
 				{
 				}
 
-				virtual Gwen::String Name()     { return "ListBox"; }
-				virtual Gwen::String BaseName() { return "Base"; }
+				virtual gwen::String Name()     { return "ListBox"; }
+				virtual gwen::String BaseName() { return "Base"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::ListBox* pControl = new Gwen::Controls::ListBox( parent );
+					gwen::Controls::ListBox* pControl = new gwen::Controls::ListBox( parent );
 					pControl->SetSize( 100, 100 );
 					return pControl;
 				}

@@ -5,49 +5,49 @@
 */
 
 
-#include "Gwen/Anim.h"
-#include "Gwen/Utility.h"
+#include "gwen/Anim.h"
+#include "gwen/Utility.h"
 #include <math.h>
 
-using namespace Gwen;
+using namespace gwen;
 
 #ifndef GWEN_NO_ANIMATION
 
-static Gwen::Anim::Animation::List	g_Animations;
-static Gwen::Anim::Animation::ChildList g_AnimationsListed;
+static gwen::Anim::Animation::List	g_Animations;
+static gwen::Anim::Animation::ChildList g_AnimationsListed;
 
-void Gwen::Anim::Add( Gwen::Controls::Base* control, Animation* animation )
+void gwen::Anim::Add( gwen::Controls::Base* control, Animation* animation )
 {
 	animation->m_Control = control;
 	g_Animations[control].push_back( animation );
 }
 
-void Gwen::Anim::Cancel( Gwen::Controls::Base* control )
+void gwen::Anim::Cancel( gwen::Controls::Base* control )
 {
 	/* cannot use std::list iterator with algoryhtmns based on pointers
 	struct AnimDeletePredicate
 	{
-		AnimDeletePredicate( Gwen::Controls::Base* control )
+		AnimDeletePredicate( gwen::Controls::Base* control )
 		{
 			this->control = control;
 		}
 
-		bool operator() ( Gwen::Anim::Animation* anim )
+		bool operator() ( gwen::Anim::Animation* anim )
 		{
 			return anim->m_Control == control;
 		}
 
-		Gwen::Controls::Base* control;
+		gwen::Controls::Base* control;
 	};
 
 	std::remove_if ( g_Animations.begin(), g_Animations.end(), AnimDeletePredicate( control ) );
 	*/
-	Gwen::Anim::Animation::List::iterator iAnimations;
+	gwen::Anim::Animation::List::iterator iAnimations;
 
 	if ( ( iAnimations = g_Animations.find( control ) ) != g_Animations.end() )
 	{
-		Gwen::Anim::Animation::ChildList & ChildAnimationsForControl = iAnimations->second;
-		Gwen::Anim::Animation::ChildList::iterator iAnimationChild = ChildAnimationsForControl.begin();
+		gwen::Anim::Animation::ChildList & ChildAnimationsForControl = iAnimations->second;
+		gwen::Anim::Animation::ChildList::iterator iAnimationChild = ChildAnimationsForControl.begin();
 
 		if ( iAnimationChild != ChildAnimationsForControl.end() )
 		{
@@ -62,14 +62,14 @@ void Gwen::Anim::Cancel( Gwen::Controls::Base* control )
 	}
 }
 
-void Gwen::Anim::Think()
+void gwen::Anim::Think()
 {
-	Gwen::Anim::Animation::List::iterator it = g_Animations.begin();
+	gwen::Anim::Animation::List::iterator it = g_Animations.begin();
 
 	if ( it != g_Animations.end() )
 	{
-		Gwen::Anim::Animation::ChildList::iterator itChild;
-		Gwen::Anim::Animation* anim;
+		gwen::Anim::Animation::ChildList::iterator itChild;
+		gwen::Anim::Animation* anim;
 
 		do
 		{
@@ -97,7 +97,7 @@ void Gwen::Anim::Think()
 	}
 }
 
-Gwen::Anim::TimedAnimation::TimedAnimation( float fLength, float fDelay, float fEase )
+gwen::Anim::TimedAnimation::TimedAnimation( float fLength, float fDelay, float fEase )
 {
 	m_fStart = Platform::GetTimeInSeconds() + fDelay;
 	m_fEnd = m_fStart + fLength;
@@ -115,7 +115,7 @@ float GetEased( float fTime, float fEase )
 	return pow( fTime, fEase );
 }
 
-void Gwen::Anim::TimedAnimation::Think()
+void gwen::Anim::TimedAnimation::Think()
 {
 	if ( m_bFinished ) { return; }
 
@@ -146,7 +146,7 @@ void Gwen::Anim::TimedAnimation::Think()
 	}
 }
 
-bool Gwen::Anim::TimedAnimation::Finished()
+bool gwen::Anim::TimedAnimation::Finished()
 {
 	return m_bFinished;
 }

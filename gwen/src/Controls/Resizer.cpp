@@ -5,10 +5,10 @@
 */
 
 
-#include "Gwen/Controls/Resizer.h"
+#include "gwen/Controls/Resizer.h"
 
-using namespace Gwen;
-using namespace Gwen::ControlsInternal;
+using namespace gwen;
+using namespace gwen::ControlsInternal;
 
 
 GWEN_CONTROL_CONSTRUCTOR( Resizer )
@@ -24,10 +24,10 @@ void Resizer::OnMouseMoved( int x, int y, int /*deltaX*/, int /*deltaY*/ )
 
 	if ( !m_bDepressed ) { return; }
 
-	Gwen::Rect pBounds = m_pTarget->GetBounds();
-	Gwen::Point pntMin = m_pTarget->GetMinimumSize();
-	Gwen::Point pCursorPos = m_pTarget->CanvasPosToLocal( Gwen::Point( x, y ) );
-	Gwen::Point pDelta = m_pTarget->LocalPosToCanvas( m_HoldPos );
+	gwen::Rect pBounds = m_pTarget->GetBounds();
+	gwen::Point pntMin = m_pTarget->GetMinimumSize();
+	gwen::Point pCursorPos = m_pTarget->CanvasPosToLocal( gwen::Point( x, y ) );
+	gwen::Point pDelta = m_pTarget->LocalPosToCanvas( m_HoldPos );
 	pDelta.x -= x;
 	pDelta.y -= y;
 
@@ -101,14 +101,14 @@ void Resizer::SetResizeDir( int dir )
 	m_iResizeDir = dir;
 
 	if ( ( dir & Pos::Left && dir & Pos::Top ) || ( dir & Pos::Right && dir & Pos::Bottom ) )
-	{ return SetCursor( Gwen::CursorType::SizeNWSE ); }
+	{ return SetCursor( gwen::CursorType::SizeNWSE ); }
 
 	if ( ( dir & Pos::Right && dir & Pos::Top ) || ( dir & Pos::Left && dir & Pos::Bottom ) )
-	{ return SetCursor( Gwen::CursorType::SizeNESW ); }
+	{ return SetCursor( gwen::CursorType::SizeNESW ); }
 
 	if ( dir & Pos::Right || dir & Pos::Left )
-	{ return SetCursor( Gwen::CursorType::SizeWE ); }
+	{ return SetCursor( gwen::CursorType::SizeWE ); }
 
 	if ( dir & Pos::Top || dir & Pos::Bottom )
-	{ return SetCursor( Gwen::CursorType::SizeNS ); }
+	{ return SetCursor( gwen::CursorType::SizeNS ); }
 }

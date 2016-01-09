@@ -5,12 +5,12 @@
 */
 
 
-#include "Gwen/Controls/TreeNode.h"
-#include "Gwen/Controls/TreeControl.h"
-#include "Gwen/Utility.h"
+#include "gwen/Controls/TreeNode.h"
+#include "gwen/Controls/TreeControl.h"
+#include "gwen/Utility.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 class OpenToggleButton : public Button
 {

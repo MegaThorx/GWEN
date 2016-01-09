@@ -5,12 +5,12 @@
 */
 
 
-#include "Gwen/Controls/TreeControl.h"
-#include "Gwen/Controls/ScrollControl.h"
-#include "Gwen/Utility.h"
+#include "gwen/Controls/TreeControl.h"
+#include "gwen/Controls/ScrollControl.h"
+#include "gwen/Utility.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 GWEN_CONTROL_CONSTRUCTOR( TreeControl )
 {
@@ -37,7 +37,7 @@ void TreeControl::Render( Skin::Base* skin )
 	{ skin->DrawTreeControl( this ); }
 }
 
-void TreeControl::OnChildBoundsChanged( Gwen::Rect /*oldChildBounds*/, Base* /*pChild*/ )
+void TreeControl::OnChildBoundsChanged( gwen::Rect /*oldChildBounds*/, Base* /*pChild*/ )
 {
 	m_ScrollControl->UpdateScrollBars();
 	Invalidate();
@@ -65,6 +65,6 @@ void TreeControl::OnNodeAdded( TreeNode* pNode )
 
 void TreeControl::OnNodeSelection( Controls::Base* /*control*/ )
 {
-	if ( !m_bAllowMultipleSelection || !Gwen::Input::IsKeyDown( Key::Control ) )
+	if ( !m_bAllowMultipleSelection || !gwen::Input::IsKeyDown( Key::Control ) )
 	{ DeselectAll(); }
 }

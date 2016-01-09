@@ -5,11 +5,11 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/ControlList.h"
+#include "gwen/Gwen.h"
+#include "gwen/ControlList.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 void ControlList::Enable()
 {
@@ -43,7 +43,7 @@ void ControlList::Hide()
 	}
 }
 
-Gwen::TextObject ControlList::GetValue()
+gwen::TextObject ControlList::GetValue()
 {
 	for ( List::const_iterator it = list.begin(); it != list.end(); ++it )
 	{
@@ -53,7 +53,7 @@ Gwen::TextObject ControlList::GetValue()
 	return "";
 }
 
-void ControlList::SetValue( const Gwen::TextObject & value )
+void ControlList::SetValue( const gwen::TextObject & value )
 {
 	for ( List::const_iterator it = list.begin(); it != list.end(); ++it )
 	{
@@ -61,7 +61,7 @@ void ControlList::SetValue( const Gwen::TextObject & value )
 	}
 }
 
-void ControlList::MoveBy( const Gwen::Point & point )
+void ControlList::MoveBy( const gwen::Point & point )
 {
 	for ( List::const_iterator it = list.begin(); it != list.end(); ++it )
 	{
@@ -77,7 +77,7 @@ void ControlList::DoAction()
 	}
 }
 
-void ControlList::SetActionInternal( Gwen::Event::Handler* pObject, void ( Gwen::Event::Handler::*f )( Gwen::Event::Info ), const Gwen::Event::Packet & packet )
+void ControlList::SetActionInternal( gwen::Event::Handler* pObject, void ( gwen::Event::Handler::*f )( gwen::Event::Info ), const gwen::Event::Packet & packet )
 {
 	for ( List::const_iterator it = list.begin(); it != list.end(); ++it )
 	{

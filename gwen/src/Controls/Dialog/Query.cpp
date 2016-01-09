@@ -4,9 +4,9 @@
 	See license in Gwen.h
 */
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Controls/Dialogs/Query.h"
+#include "gwen/Gwen.h"
+#include "gwen/Controls/Dialogs/Query.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 

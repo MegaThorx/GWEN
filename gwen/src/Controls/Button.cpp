@@ -5,13 +5,13 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Skin.h"
-#include "Gwen/Controls/Button.h"
-#include "Gwen/Controls/ImagePanel.h"
+#include "gwen/Gwen.h"
+#include "gwen/Skin.h"
+#include "gwen/Controls/Button.h"
+#include "gwen/Controls/ImagePanel.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 
 GWEN_CONTROL_CONSTRUCTOR( Button )
@@ -22,7 +22,7 @@ GWEN_CONTROL_CONSTRUCTOR( Button )
 	SetSize( 100, 20 );
 	SetMouseInputEnabled( true );
 	SetIsToggle( false );
-	SetAlignment( Gwen::Pos::Center );
+	SetAlignment( gwen::Pos::Center );
 	SetTextPadding( Padding( 3, 0, 3, 0 ) );
 	m_bToggleStatus = false;
 	SetKeyboardInputEnabled( false );
@@ -48,7 +48,7 @@ void Button::OnMouseClickLeft( int /*x*/, int /*y*/, bool bDown )
 	if ( bDown )
 	{
 		SetDepressed( true );
-		Gwen::MouseFocus = this;
+		gwen::MouseFocus = this;
 		onDown.Call( this );
 	}
 	else
@@ -59,7 +59,7 @@ void Button::OnMouseClickLeft( int /*x*/, int /*y*/, bool bDown )
 		}
 
 		SetDepressed( false );
-		Gwen::MouseFocus = NULL;
+		gwen::MouseFocus = NULL;
 		onUp.Call( this );
 	}
 }
@@ -71,7 +71,7 @@ void Button::OnMouseClickRight( int /*x*/, int /*y*/, bool bDown )
 	if ( bDown )
 	{
 		SetDepressed( true );
-		Gwen::MouseFocus = this;
+		gwen::MouseFocus = this;
 		onDown.Call( this );
 	}
 	else
@@ -82,7 +82,7 @@ void Button::OnMouseClickRight( int /*x*/, int /*y*/, bool bDown )
 		}
 
 		SetDepressed( false );
-		Gwen::MouseFocus = NULL;
+		gwen::MouseFocus = NULL;
 		onUp.Call( this );
 	}
 }
@@ -225,7 +225,7 @@ void Button::SetImageAlpha( float f )
 {
 	if ( !m_Image ) { return; }
 
-	m_Image->SetDrawColor( Gwen::Color( 255, 255, 255, 255.0f * f ) );
+	m_Image->SetDrawColor( gwen::Color( 255, 255, 255, 255.0f * f ) );
 }
 
 void Button::SetAction( Event::Handler* pObject, Handler::FunctionWithInformation pFunction, void* data )

@@ -5,12 +5,12 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Controls/MenuItem.h"
-#include "Gwen/Skin.h"
+#include "gwen/Gwen.h"
+#include "gwen/Controls/MenuItem.h"
+#include "gwen/Skin.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 class GWEN_EXPORT RightArrow : public Controls::Base
 {
@@ -133,7 +133,7 @@ void MenuItem::OpenMenu()
 
 	m_Menu->SetHidden( false );
 	m_Menu->BringToFront();
-	Gwen::Point p = LocalPosToCanvas( Gwen::Point( 0, 0 ) );
+	gwen::Point p = LocalPosToCanvas( gwen::Point( 0, 0 ) );
 
 	// Strip menus open downwards
 	if ( m_bOnStrip )

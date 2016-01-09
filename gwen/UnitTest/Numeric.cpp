@@ -1,7 +1,7 @@
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Controls/NumericUpDown.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Controls/NumericUpDown.h"
 
-using namespace Gwen;
+using namespace gwen;
 
 class Numeric : public GUnit
 {

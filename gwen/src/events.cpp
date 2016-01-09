@@ -5,10 +5,10 @@
 */
 
 
-#include "Gwen/Events.h"
+#include "gwen/Events.h"
 
-using namespace Gwen;
-using namespace Gwen::Event;
+using namespace gwen;
+using namespace gwen::Event;
 
 
 Handler::Handler()
@@ -69,14 +69,14 @@ void Caller::CleanLinks()
 
 void Caller::Call( Controls::Base* pThis )
 {
-	static Gwen::Event::Information info;
+	static gwen::Event::Information info;
 	info.Control = pThis;
 	Call( pThis, info );
 }
 
-void Caller::Call( Controls::Base* pThis, Gwen::Event::Info information )
+void Caller::Call( Controls::Base* pThis, gwen::Event::Info information )
 {
-	Gwen::Event::Information info;
+	gwen::Event::Information info;
 	info = information;
 	info.ControlCaller	= pThis;
 	std::list<handler>::iterator iter;

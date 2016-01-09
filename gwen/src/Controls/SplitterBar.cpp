@@ -1,8 +1,8 @@
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Controls/SplitterBar.h"
+#include "gwen/Gwen.h"
+#include "gwen/Controls/SplitterBar.h"
 
-using namespace Gwen;
+using namespace gwen;
 using namespace Controls;
 
 GWEN_CONTROL_CONSTRUCTOR( SplitterBar )

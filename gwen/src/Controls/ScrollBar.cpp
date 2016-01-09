@@ -5,13 +5,13 @@
 */
 
 
-#include "Gwen/Controls/ScrollBar.h"
-#include "Gwen/Controls/ScrollBarButton.h"
-#include "Gwen/Controls/ScrollBarBar.h"
+#include "gwen/Controls/ScrollBar.h"
+#include "gwen/Controls/ScrollBarButton.h"
+#include "gwen/Controls/ScrollBarBar.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
-using namespace Gwen::ControlsInternal;
+using namespace gwen;
+using namespace gwen::Controls;
+using namespace gwen::ControlsInternal;
 
 
 GWEN_CONTROL_CONSTRUCTOR( BaseScrollBar )

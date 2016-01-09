@@ -1,8 +1,8 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
@@ -47,7 +47,7 @@ namespace Gwen
 
 		}
 
-		class Image_Factory : public Gwen::ControlFactory::Base
+		class Image_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
@@ -57,12 +57,12 @@ namespace Gwen
 					AddProperty( new Properties::Stretch() );
 				}
 
-				virtual Gwen::String Name()     { return "ImagePanel"; }
-				virtual Gwen::String BaseName() { return "Base"; }
+				virtual gwen::String Name()     { return "ImagePanel"; }
+				virtual gwen::String BaseName() { return "Base"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::ImagePanel* pControl = new Gwen::Controls::ImagePanel( parent );
+					gwen::Controls::ImagePanel* pControl = new gwen::Controls::ImagePanel( parent );
 					pControl->SetSize( 100, 20 );
 					return pControl;
 				}

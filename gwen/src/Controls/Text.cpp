@@ -5,13 +5,13 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Controls/Text.h"
-#include "Gwen/Skin.h"
-#include "Gwen/Utility.h"
+#include "gwen/Gwen.h"
+#include "gwen/Controls/Text.h"
+#include "gwen/Skin.h"
+#include "gwen/Utility.h"
 
-using namespace Gwen;
-using namespace Gwen::ControlsInternal;
+using namespace gwen;
+using namespace gwen::ControlsInternal;
 
 GWEN_CONTROL_CONSTRUCTOR( Text )
 {
@@ -37,12 +37,12 @@ void Text::Layout( Skin::Base* skin )
 	}
 }
 
-Gwen::Font* Text::GetFont()
+gwen::Font* Text::GetFont()
 {
 	return m_Font;
 }
 
-void Text::SetFont( Gwen::Font* pFont )
+void Text::SetFont( gwen::Font* pFont )
 {
 	if ( m_Font == pFont ) { return; }
 
@@ -82,10 +82,10 @@ void Text::Render( Skin::Base* skin )
 	else
 	{ skin->GetRender()->SetDrawColor( m_ColorOverride ); }
 
-	skin->GetRender()->RenderText( GetFont(), Gwen::Point( GetPadding().left, GetPadding().top ), m_String.GetUnicode() );
+	skin->GetRender()->RenderText( GetFont(), gwen::Point( GetPadding().left, GetPadding().top ), m_String.GetUnicode() );
 }
 
-Gwen::Rect Text::GetCharacterPosition( int iChar )
+gwen::Rect Text::GetCharacterPosition( int iChar )
 {
 	if ( !m_Lines.empty() )
 	{
@@ -103,13 +103,13 @@ Gwen::Rect Text::GetCharacterPosition( int iChar )
 			if ( iChars <= iChar ) { continue; }
 
 			iChars -= pLine->Length();
-			Gwen::Rect rect = pLine->GetCharacterPosition( iChar - iChars );
+			gwen::Rect rect = pLine->GetCharacterPosition( iChar - iChars );
 			rect.x += pLine->X();
 			rect.y += pLine->Y();
 			return rect;
 		}
 		//manage special case of the last character
-		Gwen::Rect rect = pLine->GetCharacterPosition( pLine->Length() );
+		gwen::Rect rect = pLine->GetCharacterPosition( pLine->Length() );
 		rect.x += pLine->X();
 		rect.y += pLine->Y();
 		return rect; 
@@ -117,32 +117,32 @@ Gwen::Rect Text::GetCharacterPosition( int iChar )
 
 	if ( Length() == 0 || iChar == 0 )
 	{
-		Gwen::Point p = GetSkin()->GetRender()->MeasureText( GetFont(), L" " );
-		return Gwen::Rect( 0, 0, 0, p.y );
+		gwen::Point p = GetSkin()->GetRender()->MeasureText( GetFont(), L" " );
+		return gwen::Rect( 0, 0, 0, p.y );
 	}
 
 	UnicodeString sub = m_String.GetUnicode().substr( 0, iChar );
-	Gwen::Point p = GetSkin()->GetRender()->MeasureText( GetFont(), sub );
+	gwen::Point p = GetSkin()->GetRender()->MeasureText( GetFont(), sub );
 	return Rect( p.x, 0, 0, p.y );
 }
 
-Gwen::Rect Text::GetLineBox( int i )
+gwen::Rect Text::GetLineBox( int i )
 {
 	Text* line = GetLine(i);
 	if(line != NULL)
 	{
-		Gwen::Point p = GetSkin()->GetRender()->MeasureText( GetFont(), line->m_String.GetUnicode());
-		return Gwen::Rect(line->X(), line->Y(), Clamp(p.x, 1,p.x), Clamp(p.y, 1,p.y) );
+		gwen::Point p = GetSkin()->GetRender()->MeasureText( GetFont(), line->m_String.GetUnicode());
+		return gwen::Rect(line->X(), line->Y(), Clamp(p.x, 1,p.x), Clamp(p.y, 1,p.y) );
 	}
 	else
 	{
-		Gwen::Point p = GetSkin()->GetRender()->MeasureText( GetFont(), m_String.GetUnicode());
-		return Gwen::Rect(0, 0, Clamp(p.x, 1,p.x), Clamp(p.y, 1,p.y) );
+		gwen::Point p = GetSkin()->GetRender()->MeasureText( GetFont(), m_String.GetUnicode());
+		return gwen::Rect(0, 0, Clamp(p.x, 1,p.x), Clamp(p.y, 1,p.y) );
 	}
 }
  
 
-int Text::GetClosestCharacter( Gwen::Point p )
+int Text::GetClosestCharacter( gwen::Point p )
 {
 	if ( !m_Lines.empty() )
 	{
@@ -164,7 +164,7 @@ int Text::GetClosestCharacter( Gwen::Point p )
 			if ( p.y < pLine->Bottom()) break;
 		}
 		iChars -= pLine->Length();
-		int iLinePos = pLine->GetClosestCharacter( Gwen::Point( p.x - pLine->X(), p.y - pLine->Y() ) );
+		int iLinePos = pLine->GetClosestCharacter( gwen::Point( p.x - pLine->X(), p.y - pLine->Y() ) );
 		return iChars + iLinePos;
 	}
 
@@ -173,7 +173,7 @@ int Text::GetClosestCharacter( Gwen::Point p )
 
 	for ( size_t i = 0; i < m_String.GetUnicode().length() + 1; i++ )
 	{
-		Gwen::Rect cp = GetCharacterPosition( i );
+		gwen::Rect cp = GetCharacterPosition( i );
 		int iDist = abs( cp.x - p.x ) + abs( cp.y - p.y );   // this isn't proper
 
 		if ( iDist > iDistance ) { continue; }
@@ -203,7 +203,7 @@ void Text::RefreshSize()
 		return;
 	}
 
-	Gwen::Point p( 1, GetFont()->size );
+	gwen::Point p( 1, GetFont()->size );
 
 	if ( Length() > 0 )
 	{
@@ -223,9 +223,9 @@ void Text::RefreshSize()
 	Invalidate();
 }
 
-void Text::SplitWords(const Gwen::UnicodeString &s, std::vector<Gwen::UnicodeString> & elems )
+void Text::SplitWords(const gwen::UnicodeString &s, std::vector<gwen::UnicodeString> & elems )
 {
-	Gwen::UnicodeString str;
+	gwen::UnicodeString str;
 
 	int w = GetParent()->Width() - GetParent()->GetPadding().left-GetParent()->GetPadding().right;
 	for ( int i=0; i<(int)s.length(); i++ ) 
@@ -250,7 +250,7 @@ void Text::SplitWords(const Gwen::UnicodeString &s, std::vector<Gwen::UnicodeStr
 		str += s[i];
 
 		//if adding character makes the word bigger than the textbox size
-		Gwen::Point p = GetSkin()->GetRender()->MeasureText( GetFont(), str );
+		gwen::Point p = GetSkin()->GetRender()->MeasureText( GetFont(), str );
 		if ( p.x > w ) 
 		{
 			int addSum = GetPadding().left+GetPadding().right;
@@ -276,7 +276,7 @@ void Text::RefreshSizeWrap()
 	}
 
 	m_Lines.clear();
-	std::vector<Gwen::UnicodeString> words;
+	std::vector<gwen::UnicodeString> words;
 	SplitWords( GetText().GetUnicode(), words );
 	// Adding a bullshit word to the end simplifies the code below
 	// which is anything but simple.
@@ -291,9 +291,9 @@ void Text::RefreshSizeWrap()
 	Point pFontSize = GetSkin()->GetRender()->MeasureText( GetFont(), L" " );
 	int w = GetParent()->Width() - GetParent()->GetPadding().left-GetParent()->GetPadding().right; 
 	int x = 0, y = 0;
-	Gwen::UnicodeString strLine;
+	gwen::UnicodeString strLine;
 
-	for ( std::vector<Gwen::UnicodeString>::iterator it = words.begin(); it != words.end(); ++it )
+	for ( std::vector<gwen::UnicodeString>::iterator it = words.begin(); it != words.end(); ++it )
 	{
 		bool bFinishLine = false;
 		bool bWrapped = false;
@@ -304,7 +304,7 @@ void Text::RefreshSizeWrap()
 		// Does adding this word drive us over the width?
 		{
 			strLine += ( *it );
-			Gwen::Point p = GetSkin()->GetRender()->MeasureText( GetFont(), strLine );
+			gwen::Point p = GetSkin()->GetRender()->MeasureText( GetFont(), strLine );
 
 			if ( p.x > w ) { bFinishLine = true; bWrapped = true; }
 		}
@@ -408,13 +408,13 @@ int Text::GetStartCharFromLine( int i )
 		Text* pLine = *it;
 		++it;
 
-		if ( i == 0 ) { return Gwen::Clamp( iChars, 0, Length() ); }
+		if ( i == 0 ) { return gwen::Clamp( iChars, 0, Length() ); }
 
 		iChars += pLine->Length();
 		i--;
 	}
 
-	return Gwen::Clamp( iChars, 0, Length() );
+	return gwen::Clamp( iChars, 0, Length() );
 }
 
 int Text::GetEndCharFromLine( int i )
@@ -427,7 +427,7 @@ int Text::GetEndCharFromLine( int i )
 		iStart += iLine->Length();
 	}
 
-	return Gwen::Clamp( iStart, 0, Length() );
+	return gwen::Clamp( iStart, 0, Length() );
 }
 
 int Text::GetCharPosOnLine( int i )

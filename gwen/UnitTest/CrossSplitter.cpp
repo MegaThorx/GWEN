@@ -1,9 +1,9 @@
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Controls/CrossSplitter.h"
-#include "Gwen/Controls/StatusBar.h"
-#include "Gwen/Controls/Button.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Controls/CrossSplitter.h"
+#include "gwen/Controls/StatusBar.h"
+#include "gwen/Controls/Button.h"
 
-using namespace Gwen;
+using namespace gwen;
 
 class CrossSplitter : public GUnit
 {
@@ -14,53 +14,53 @@ class CrossSplitter : public GUnit
 			Dock( Pos::Fill );
 			m_bSplittersVisible = false;
 			m_iCurZoom = 0;
-			m_Splitter = new Gwen::Controls::CrossSplitter( this );
+			m_Splitter = new gwen::Controls::CrossSplitter( this );
 			m_Splitter->SetPos( 0, 0 );
 			m_Splitter->Dock( Pos::Fill );
 			{
-				Gwen::Controls::Button* testButton =  new Gwen::Controls::Button( m_Splitter );
+				gwen::Controls::Button* testButton =  new gwen::Controls::Button( m_Splitter );
 				testButton->SetText( "TOPLEFT" );
 				m_Splitter->SetPanel( 0, testButton );
 			}
 			{
-				Gwen::Controls::Button* testButton =  new Gwen::Controls::Button( m_Splitter );
+				gwen::Controls::Button* testButton =  new gwen::Controls::Button( m_Splitter );
 				testButton->SetText( "TOPRIGHT" );
 				m_Splitter->SetPanel( 1, testButton );
 			}
 			{
-				Gwen::Controls::Button* testButton =  new Gwen::Controls::Button( m_Splitter );
+				gwen::Controls::Button* testButton =  new gwen::Controls::Button( m_Splitter );
 				testButton->SetText( "BOTTOMRIGHT" );
 				m_Splitter->SetPanel( 2, testButton );
 			}
 			{
-				Gwen::Controls::Button* testButton =  new Gwen::Controls::Button( m_Splitter );
+				gwen::Controls::Button* testButton =  new gwen::Controls::Button( m_Splitter );
 				testButton->SetText( "BOTTOMLEFT" );
 				m_Splitter->SetPanel( 3, testButton );
 			}
 			//Status bar to hold unit testing buttons
-			Gwen::Controls::StatusBar* pStatus = new Gwen::Controls::StatusBar( this );
+			gwen::Controls::StatusBar* pStatus = new gwen::Controls::StatusBar( this );
 			pStatus->Dock( Pos::Bottom );
 			{
-				Gwen::Controls::Button* pButton = new Gwen::Controls::Button( pStatus );
+				gwen::Controls::Button* pButton = new gwen::Controls::Button( pStatus );
 				pButton->SetText( "Zoom" );
 				pButton->onPress.Add( this, &CrossSplitter::ZoomTest );
 				pStatus->AddControl( pButton, false );
 			}
 			{
-				Gwen::Controls::Button* pButton = new Gwen::Controls::Button( pStatus );
+				gwen::Controls::Button* pButton = new gwen::Controls::Button( pStatus );
 				pButton->SetText( "UnZoom" );
 				pButton->onPress.Add( this, &CrossSplitter::UnZoomTest );
 				pStatus->AddControl( pButton, false );
 			}
 			{
-				Gwen::Controls::Button* pButton = new Gwen::Controls::Button( pStatus );
+				gwen::Controls::Button* pButton = new gwen::Controls::Button( pStatus );
 				pButton->SetText( "CenterPanels" );
 				pButton->onPress.Add( this, &CrossSplitter::CenterPanels );
 				pStatus->AddControl( pButton, true );
 			}
 		}
 
-		void ZoomTest( Gwen::Controls::Base* pFromPanel )
+		void ZoomTest( gwen::Controls::Base* pFromPanel )
 		{
 			m_Splitter->Zoom( m_iCurZoom );
 			m_iCurZoom++;
@@ -69,18 +69,18 @@ class CrossSplitter : public GUnit
 			{ m_iCurZoom = 0; }
 		}
 
-		void UnZoomTest( Gwen::Controls::Base* pFromPanel )
+		void UnZoomTest( gwen::Controls::Base* pFromPanel )
 		{
 			m_Splitter->UnZoom();
 		}
 
-		void CenterPanels( Gwen::Controls::Base* pFromPanel )
+		void CenterPanels( gwen::Controls::Base* pFromPanel )
 		{
 			m_Splitter->CenterPanels();
 			m_Splitter->UnZoom();
 		}
 
-		void Layout( Gwen::Skin::Base* skin ) {}
+		void Layout( gwen::Skin::Base* skin ) {}
 
 		bool m_bSplittersVisible;
 		int	m_iCurZoom;

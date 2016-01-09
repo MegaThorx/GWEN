@@ -1,8 +1,8 @@
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Controls/TabControl.h"
-#include "Gwen/Controls/RadioButtonController.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Controls/TabControl.h"
+#include "gwen/Controls/RadioButtonController.h"
 
-using namespace Gwen;
+using namespace gwen;
 
 class TabControl : public GUnit
 {
@@ -44,9 +44,9 @@ class TabControl : public GUnit
 			}
 		}
 
-		void OnDockChange( Gwen::Controls::Base* pControl )
+		void OnDockChange( gwen::Controls::Base* pControl )
 		{
-			Gwen::Controls::RadioButtonController* rc = ( Gwen::Controls::RadioButtonController* ) pControl;
+			gwen::Controls::RadioButtonController* rc = ( gwen::Controls::RadioButtonController* ) pControl;
 
 			if ( rc->GetSelectedLabel() == L"Top" )		{ m_pDockControlLeft->SetTabStripPosition( Pos::Top ); }
 
@@ -57,7 +57,7 @@ class TabControl : public GUnit
 			if ( rc->GetSelectedLabel() == L"Right" )	{ m_pDockControlLeft->SetTabStripPosition( Pos::Right ); }
 		}
 
-		Gwen::Font	m_Font;
+		gwen::Font	m_Font;
 };
 
 

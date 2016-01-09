@@ -1,26 +1,26 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		class MenuStrip_Factory : public Gwen::ControlFactory::Base
+		class MenuStrip_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
-				GWEN_CONTROL_FACTORY_CONSTRUCTOR( MenuStrip_Factory, Gwen::ControlFactory::Base )
+				GWEN_CONTROL_FACTORY_CONSTRUCTOR( MenuStrip_Factory, gwen::ControlFactory::Base )
 				{
 				}
 
-				virtual Gwen::String Name()     { return "MenuStrip"; }
-				virtual Gwen::String BaseName() { return "Base"; }
+				virtual gwen::String Name()     { return "MenuStrip"; }
+				virtual gwen::String BaseName() { return "Base"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::MenuStrip* pControl = new Gwen::Controls::MenuStrip( parent );
+					gwen::Controls::MenuStrip* pControl = new gwen::Controls::MenuStrip( parent );
 					return pControl;
 				}
 		};

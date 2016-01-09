@@ -1,17 +1,17 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		using namespace Gwen;
+		using namespace gwen;
 
 		namespace Properties
 		{
-			using namespace Gwen;
+			using namespace gwen;
 
 			class FileType: public ControlFactory::Property
 			{
@@ -31,7 +31,7 @@ namespace Gwen
 
 		}
 
-		class FilePicker_Factory : public Gwen::ControlFactory::Base
+		class FilePicker_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
@@ -40,12 +40,12 @@ namespace Gwen
 					AddProperty( new Properties::FileType() );
 				}
 
-				virtual Gwen::String Name()     { return "FilePicker"; }
-				virtual Gwen::String BaseName() { return "Base"; }
+				virtual gwen::String Name()     { return "FilePicker"; }
+				virtual gwen::String BaseName() { return "Base"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::FilePicker* pControl = new Gwen::Controls::FilePicker( parent );
+					gwen::Controls::FilePicker* pControl = new gwen::Controls::FilePicker( parent );
 					pControl->SetSize( 100, 20 );
 					pControl->SetFileType( "EXE file | *.exe" );
 					return pControl;

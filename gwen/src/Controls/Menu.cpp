@@ -5,13 +5,13 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Controls/Menu.h"
-#include "Gwen/Skin.h"
-#include "Gwen/Utility.h"
+#include "gwen/Gwen.h"
+#include "gwen/Controls/Menu.h"
+#include "gwen/Skin.h"
+#include "gwen/Utility.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 
 
@@ -126,7 +126,7 @@ bool Menu::IsMenuOpen()
 	return false;
 }
 
-void Menu::OnHoverItem( Gwen::Controls::Base* pControl )
+void Menu::OnHoverItem( gwen::Controls::Base* pControl )
 {
 	if ( !ShouldHoverOpenMenu() ) { return; }
 
@@ -144,7 +144,7 @@ void Menu::Open( unsigned int iPos )
 {
 	SetHidden( false );
 	BringToFront();
-	Gwen::Point MousePos = Input::GetMousePosition();
+	gwen::Point MousePos = Input::GetMousePosition();
 	SetPos( MousePos.x, MousePos.y );
 }
 
@@ -172,7 +172,7 @@ void Menu::AddDivider()
 	divider->SetMargin( Margin( IconMarginDisabled() ? 0 : 24, 0, 4, 0 ) );
 }
 
-void MenuDivider::Render( Gwen::Skin::Base* skin )
+void MenuDivider::Render( gwen::Skin::Base* skin )
 {
 	skin->DrawMenuDivider( this );
 }

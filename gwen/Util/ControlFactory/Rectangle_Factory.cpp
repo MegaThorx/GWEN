@@ -1,13 +1,13 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		using namespace Gwen;
+		using namespace gwen;
 
 		namespace Properties
 		{
@@ -29,12 +29,12 @@ namespace Gwen
 
 						if ( swscanf( str.c_str(), L"%i %i %i %i", &r, &g, &b, &a ) != 4 ) { return; }
 
-						pRect->SetColor( Gwen::Color( r, g, b, a ) );
+						pRect->SetColor( gwen::Color( r, g, b, a ) );
 					}
 
 					int	NumCount() { return 4; };
 
-					Gwen::String NumName( int i )
+					gwen::String NumName( int i )
 					{
 						if ( i == 0 ) { return "r"; }
 
@@ -61,7 +61,7 @@ namespace Gwen
 					void NumSet( Controls::Base* ctrl, int i, float f )
 					{
 						Controls::Rectangle* pRect = gwen_cast<Controls::Rectangle> ( ctrl );
-						Gwen::Color c = pRect->GetColor();
+						gwen::Color c = pRect->GetColor();
 
 						if ( i == 0 ) { c.r = f; }
 
@@ -79,7 +79,7 @@ namespace Gwen
 		}
 
 
-		class Rectangle_Factory : public Gwen::ControlFactory::Base
+		class Rectangle_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
@@ -88,12 +88,12 @@ namespace Gwen
 					AddProperty( new Properties::Color() );
 				}
 
-				virtual Gwen::String Name() { return "Rectangle"; }
-				virtual Gwen::String BaseName() { return "Base"; }
+				virtual gwen::String Name() { return "Rectangle"; }
+				virtual gwen::String BaseName() { return "Base"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::Rectangle* pControl = new Gwen::Controls::Rectangle( parent );
+					gwen::Controls::Rectangle* pControl = new gwen::Controls::Rectangle( parent );
 					pControl->SetSize( 100, 100 );
 					return pControl;
 				}

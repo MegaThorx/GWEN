@@ -1,9 +1,9 @@
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Controls/CrossSplitter.h"
-#include "Gwen/Controls/Button.h"
+#include "gwen/Gwen.h"
+#include "gwen/Controls/CrossSplitter.h"
+#include "gwen/Controls/Button.h"
 
-using namespace Gwen;
+using namespace gwen;
 using namespace Controls;
 
 GWEN_CONTROL_CONSTRUCTOR( CrossSplitter )
@@ -11,15 +11,15 @@ GWEN_CONTROL_CONSTRUCTOR( CrossSplitter )
 	m_VSplitter = new SplitterBar( this );
 	m_VSplitter->SetPos( 0, 128 );
 	m_VSplitter->onDragged.Add( this, &CrossSplitter::OnVerticalMoved );
-	m_VSplitter->SetCursor( Gwen::CursorType::SizeNS );
+	m_VSplitter->SetCursor( gwen::CursorType::SizeNS );
 	m_HSplitter = new SplitterBar( this );
 	m_HSplitter->SetPos( 128, 0 );
 	m_HSplitter->onDragged.Add( this, &CrossSplitter::OnHorizontalMoved );
-	m_HSplitter->SetCursor( Gwen::CursorType::SizeWE );
+	m_HSplitter->SetCursor( gwen::CursorType::SizeWE );
 	m_CSplitter = new SplitterBar( this );
 	m_CSplitter->SetPos( 128, 128 );
 	m_CSplitter->onDragged.Add( this, &CrossSplitter::OnCenterMoved );
-	m_CSplitter->SetCursor( Gwen::CursorType::SizeAll );
+	m_CSplitter->SetCursor( gwen::CursorType::SizeAll );
 	m_fHVal = 0.5f;
 	m_fVVal = 0.5f;
 	SetPanel( 0, NULL );

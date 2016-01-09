@@ -5,18 +5,18 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Skin.h"
-#include "Gwen/Controls/LabelClickable.h"
+#include "gwen/Gwen.h"
+#include "gwen/Skin.h"
+#include "gwen/Controls/LabelClickable.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 GWEN_CONTROL_CONSTRUCTOR( LabelClickable )
 {
 	SetIsToggle( false );
-	SetCursor( Gwen::CursorType::Finger );
-	SetAlignment( Gwen::Pos::Left | Gwen::Pos::CenterV );
+	SetCursor( gwen::CursorType::Finger );
+	SetAlignment( gwen::Pos::Left | gwen::Pos::CenterV );
 }
 
 void LabelClickable::Render( Skin::Base* /*skin*/ )

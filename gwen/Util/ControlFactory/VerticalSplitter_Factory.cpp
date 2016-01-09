@@ -1,35 +1,35 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		using namespace Gwen;
+		using namespace gwen;
 
-		class VerticalSplitter_Factory : public Gwen::ControlFactory::Base
+		class VerticalSplitter_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
-				GWEN_CONTROL_FACTORY_CONSTRUCTOR( VerticalSplitter_Factory, Gwen::ControlFactory::Base )
+				GWEN_CONTROL_FACTORY_CONSTRUCTOR( VerticalSplitter_Factory, gwen::ControlFactory::Base )
 				{
 				}
 
-				virtual Gwen::String Name() { return "VerticalSplitter"; }
-				virtual Gwen::String BaseName() { return "Base"; }
+				virtual gwen::String Name() { return "VerticalSplitter"; }
+				virtual gwen::String BaseName() { return "Base"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::SplitterVertical* pControl = new Gwen::Controls::SplitterVertical( parent );
+					gwen::Controls::SplitterVertical* pControl = new gwen::Controls::SplitterVertical( parent );
 					pControl->SetSize( 200, 200 );
 					return pControl;
 				}
 
-				void AddChild( Gwen::Controls::Base* ctrl, Gwen::Controls::Base* child, Gwen::Point & pos )
+				void AddChild( gwen::Controls::Base* ctrl, gwen::Controls::Base* child, gwen::Point & pos )
 				{
-					Gwen::Controls::SplitterVertical* pSplitter = gwen_cast<Gwen::Controls::SplitterVertical> ( ctrl );
+					gwen::Controls::SplitterVertical* pSplitter = gwen_cast<gwen::Controls::SplitterVertical> ( ctrl );
 					child->SetParent( pSplitter );
 
 					if ( pos.y < pSplitter->SplitterPos() )
@@ -38,7 +38,7 @@ namespace Gwen
 					{ pSplitter->SetPanels( NULL, child ); }
 				}
 
-				void AddChild( Gwen::Controls::Base* ctrl, Gwen::Controls::Base* child, int iPage )
+				void AddChild( gwen::Controls::Base* ctrl, gwen::Controls::Base* child, int iPage )
 				{
 					child->SetParent( ctrl );
 				}

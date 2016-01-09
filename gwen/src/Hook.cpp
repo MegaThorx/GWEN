@@ -5,26 +5,26 @@
 */
 
 
-#include "Gwen/Hook.h"
+#include "gwen/Hook.h"
 
 #ifdef GWEN_HOOKSYSTEM
 
-using namespace Gwen;
-using namespace Gwen::Hook;
+using namespace gwen;
+using namespace gwen::Hook;
 
 std::list<BaseHook*>	g_HookList;
 
-void Gwen::Hook::AddHook( BaseHook* pHook )
+void gwen::Hook::AddHook( BaseHook* pHook )
 {
 	g_HookList.push_back( pHook );
 }
 
-void Gwen::Hook::RemoveHook( BaseHook* pHook )
+void gwen::Hook::RemoveHook( BaseHook* pHook )
 {
 	g_HookList.remove( pHook );
 }
 
-HookList & Gwen::Hook::GetHookList()
+HookList & gwen::Hook::GetHookList()
 {
 	return g_HookList;
 }

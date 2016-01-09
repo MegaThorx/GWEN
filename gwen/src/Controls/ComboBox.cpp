@@ -5,13 +5,13 @@
 */
 
 
-#include "Gwen/Controls/ComboBox.h"
-#include "Gwen/Controls/Menu.h"
+#include "gwen/Controls/ComboBox.h"
+#include "gwen/Controls/Menu.h"
 
 
-using namespace Gwen;
-using namespace Gwen::Controls;
-using namespace Gwen::ControlsInternal;
+using namespace gwen;
+using namespace gwen::Controls;
+using namespace gwen::ControlsInternal;
 
 class GWEN_EXPORT DownArrow : public Controls::Base
 {
@@ -51,7 +51,7 @@ GWEN_CONTROL_CONSTRUCTOR( ComboBox )
 	pArrow->SetComboBox( this );
 	m_Button = pArrow;
 	m_SelectedItem = NULL;
-	SetAlignment( Gwen::Pos::Left | Gwen::Pos::CenterV );
+	SetAlignment( gwen::Pos::Left | gwen::Pos::CenterV );
 	SetText( L"" );
 	SetMargin( Margin( 3, 0, 0, 0 ) );
 	SetTabable( true );
@@ -144,7 +144,7 @@ void ComboBox::OnItemSelected( Controls::Base* pControl )
 	SelectItem( pItem );
 }
 
-void ComboBox::SelectItemByName( const Gwen::String & name, bool bFireChangeEvents )
+void ComboBox::SelectItemByName( const gwen::String & name, bool bFireChangeEvents )
 {
 	Base::List & children = m_Menu->GetChildren();
 	Base::List::iterator it = children.begin();
@@ -175,7 +175,7 @@ void ComboBox::OnKeyboardFocus()
 	//m_SelectedText->SetTextColor( Color( 255, 255, 255, 255 ) );
 }
 
-Gwen::Controls::Label* ComboBox::GetSelectedItem()
+gwen::Controls::Label* ComboBox::GetSelectedItem()
 {
 	return m_SelectedItem;
 }
@@ -192,8 +192,8 @@ void ComboBox::OpenList()
 	m_Menu->SetParent( GetCanvas() );
 	m_Menu->SetHidden( false );
 	m_Menu->BringToFront();
-	Gwen::Point p = LocalPosToCanvas( Gwen::Point( 0, 0 ) );
-	m_Menu->SetBounds( Gwen::Rect( p.x, p.y + Height(), Width(), m_Menu->Height() ) );
+	gwen::Point p = LocalPosToCanvas( gwen::Point( 0, 0 ) );
+	m_Menu->SetBounds( gwen::Rect( p.x, p.y + Height(), Width(), m_Menu->Height() ) );
 }
 
 void ComboBox::CloseList()
@@ -237,6 +237,6 @@ bool ComboBox::OnKeyDown( bool bDown )
 	return true;
 }
 
-void ComboBox::RenderFocus( Gwen::Skin::Base* /*skin*/ )
+void ComboBox::RenderFocus( gwen::Skin::Base* /*skin*/ )
 {
 }

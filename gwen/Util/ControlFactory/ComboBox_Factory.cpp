@@ -1,26 +1,26 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		class ComboBox_Factory : public Gwen::ControlFactory::Base
+		class ComboBox_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
-				GWEN_CONTROL_FACTORY_CONSTRUCTOR( ComboBox_Factory, Gwen::ControlFactory::Base )
+				GWEN_CONTROL_FACTORY_CONSTRUCTOR( ComboBox_Factory, gwen::ControlFactory::Base )
 				{
 				}
 
-				virtual Gwen::String Name()     { return "ComboBox"; }
-				virtual Gwen::String BaseName() { return "Base"; }
+				virtual gwen::String Name()     { return "ComboBox"; }
+				virtual gwen::String BaseName() { return "Base"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::ComboBox* pControl = new Gwen::Controls::ComboBox( parent );
+					gwen::Controls::ComboBox* pControl = new gwen::Controls::ComboBox( parent );
 					pControl->SetSize( 100, 20 );
 					return pControl;
 				}

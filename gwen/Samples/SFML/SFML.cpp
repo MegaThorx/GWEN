@@ -1,12 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
-#include "Gwen/Renderers/SFML.h"
-#include "Gwen/Input/SFML.h"
+#include "gwen/Renderers/SFML.h"
+#include "gwen/Input/SFML.h"
 
-#include "Gwen/Skins/Simple.h"
-#include "Gwen/Skins/TexturedBase.h"
-#include "Gwen/UnitTest/UnitTest.h"
+#include "gwen/Skins/Simple.h"
+#include "gwen/Skins/TexturedBase.h"
+#include "gwen/UnitTest/UnitTest.h"
 
 ////////////////////////////////////////////////////////////
 /// Entry point of application
@@ -18,13 +18,13 @@ int main()
 {
 	// Create the window of the application
 	sf::RenderWindow App( sf::VideoMode( 1004, 650, 32 ), "GWEN: SFML", sf::Style::Close );
-	Gwen::Renderer::SFML GwenRenderer( App );
+	gwen::Renderer::SFML gwenRenderer( App );
 	//
 	// Create a GWEN skin
 	//
-	//Gwen::Skin::Simple skin;
-	//skin.SetRender( &GwenRenderer );
-	Gwen::Skin::TexturedBase skin( &GwenRenderer );
+	//gwen::Skin::Simple skin;
+	//skin.SetRender( &gwenRenderer );
+	gwen::Skin::TexturedBase skin( &gwenRenderer );
 	skin.Init( "DefaultSkin.png" );
 	// The fonts work differently in SFML - it can't use
 	// system fonts. So force the skin to use a local one.
@@ -32,11 +32,11 @@ int main()
 	//
 	// Create a Canvas (it's root, on which all other GWEN panels are created)
 	//
-	Gwen::Controls::Canvas* pCanvas = new Gwen::Controls::Canvas( &skin );
+	gwen::Controls::Canvas* pCanvas = new gwen::Controls::Canvas( &skin );
 
 	pCanvas->SetSize( App.GetWidth(), App.GetHeight() );
 	pCanvas->SetDrawBackground( true );
-	pCanvas->SetBackgroundColor( Gwen::Color( 150, 170, 170, 255 ) );
+	pCanvas->SetBackgroundColor( gwen::Color( 150, 170, 170, 255 ) );
 	//
 	// Create our unittest control (which is a Window with controls in it)
 	//
@@ -45,8 +45,8 @@ int main()
 	//
 	// Create an input processor
 	//
-	Gwen::Input::SFML GwenInput;
-	GwenInput.Initialize( pCanvas );
+	gwen::Input::SFML gwenInput;
+	gwenInput.Initialize( pCanvas );
 	
 	while ( App.IsOpened() )
 	{
@@ -63,7 +63,7 @@ int main()
 				break;
 			}
 
-			GwenInput.ProcessMessage( Event );
+			gwenInput.ProcessMessage( Event );
 		}
 
 		// Clear the window

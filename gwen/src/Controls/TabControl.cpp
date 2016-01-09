@@ -5,16 +5,16 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Skin.h"
-#include "Gwen/Controls/TabControl.h"
-#include "Gwen/Controls/Highlight.h"
-#include "Gwen/DragAndDrop.h"
-#include "Gwen/Controls/WindowControl.h"
-#include "Gwen/Controls/ScrollBarButton.h"
+#include "gwen/Gwen.h"
+#include "gwen/Skin.h"
+#include "gwen/Controls/TabControl.h"
+#include "gwen/Controls/Highlight.h"
+#include "gwen/DragAndDrop.h"
+#include "gwen/Controls/WindowControl.h"
+#include "gwen/Controls/ScrollBarButton.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 class TabControlInner : public Base
 {
@@ -171,7 +171,7 @@ bool TabControl::DoesAllowDrag()
 
 void TabControl::HandleOverflow()
 {
-	Gwen::Point TabsSize = m_TabStrip->ChildrenSize();
+	gwen::Point TabsSize = m_TabStrip->ChildrenSize();
 	// Only enable the scrollers if the tabs are at the top.
 	// This is a limitation we should explore.
 	// Really TabControl should have derivitives for tabs placed elsewhere where we could specialize
@@ -182,7 +182,7 @@ void TabControl::HandleOverflow()
 
 	if ( !bNeeded ) { return; }
 
-	m_iScrollOffset = Gwen::Clamp( m_iScrollOffset, 0, TabsSize.x - Width() + 32 );
+	m_iScrollOffset = gwen::Clamp( m_iScrollOffset, 0, TabsSize.x - Width() + 32 );
 #if 0
 	//
 	// This isn't frame rate independent.
@@ -190,7 +190,7 @@ void TabControl::HandleOverflow()
 	// Then get a margin animation type and do it properly!
 	// TODO!
 	//
-	m_TabStrip->SetMargin( Margin( Gwen::Approach( m_TabStrip->GetMargin().left, m_iScrollOffset * -1, 2 ), 0, 0, 0 ) );
+	m_TabStrip->SetMargin( Margin( gwen::Approach( m_TabStrip->GetMargin().left, m_iScrollOffset * -1, 2 ), 0, 0, 0 ) );
 	InvalidateParent();
 #else
 	m_TabStrip->SetMargin( Margin( m_iScrollOffset * -1, 0, 0, 0 ) );

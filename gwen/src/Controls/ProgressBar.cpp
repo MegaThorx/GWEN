@@ -5,15 +5,15 @@
 */
 
 
-#include "Gwen/Controls/ScrollControl.h"
-#include "Gwen/Controls/ProgressBar.h"
-#include "Gwen/Anim.h"
-#include "Gwen/Utility.h"
+#include "gwen/Controls/ScrollControl.h"
+#include "gwen/Controls/ProgressBar.h"
+#include "gwen/Anim.h"
+#include "gwen/Utility.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
-class ProgressBarThink : public Gwen::Anim::Animation
+class ProgressBarThink : public gwen::Anim::Animation
 {
 	public:
 
@@ -25,7 +25,7 @@ class ProgressBarThink : public Gwen::Anim::Animation
 		virtual void Think()
 		{
 			float fDiff = Platform::GetTimeInSeconds() - m_fLastFrame;
-			gwen_cast<ProgressBar> ( m_Control )->CycleThink( Gwen::Clamp( fDiff, 0.f, 0.3f ) );
+			gwen_cast<ProgressBar> ( m_Control )->CycleThink( gwen::Clamp( fDiff, 0.f, 0.3f ) );
 			m_fLastFrame = Platform::GetTimeInSeconds();
 		}
 
@@ -37,14 +37,14 @@ class ProgressBarThink : public Gwen::Anim::Animation
 GWEN_CONTROL_CONSTRUCTOR( ProgressBar )
 {
 	SetMouseInputEnabled( true );
-	SetBounds( Gwen::Rect( 0, 0, 128, 32 ) );
+	SetBounds( gwen::Rect( 0, 0, 128, 32 ) );
 	SetTextPadding( Padding( 3, 3, 3, 3 ) );
 	SetHorizontal();
-	SetAlignment( Gwen::Pos::Center );
+	SetAlignment( gwen::Pos::Center );
 	m_fProgress = 0.0f;
 	m_bAutoLabel = true;
 	m_fCycleSpeed = 0.0f;
-	Gwen::Anim::Add( this, new ProgressBarThink() );
+	gwen::Anim::Add( this, new ProgressBarThink() );
 }
 
 void ProgressBar::SetValue( float val )

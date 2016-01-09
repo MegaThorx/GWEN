@@ -1,8 +1,8 @@
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Controls/ColorPicker.h"
-#include "Gwen/Controls/HSVColorPicker.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Controls/ColorPicker.h"
+#include "gwen/Controls/HSVColorPicker.h"
 
-using namespace Gwen;
+using namespace gwen;
 
 class ColorPicker : public GUnit
 {

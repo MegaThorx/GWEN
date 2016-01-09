@@ -1,7 +1,7 @@
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Controls/MenuStrip.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Controls/MenuStrip.h"
 
-using namespace Gwen;
+using namespace gwen;
 
 class MenuStrip : public GUnit
 {
@@ -10,9 +10,9 @@ class MenuStrip : public GUnit
 		GWEN_CONTROL_INLINE( MenuStrip, GUnit )
 		{
 			Dock( Pos::Fill );
-			Gwen::Controls::MenuStrip* menu = new Gwen::Controls::MenuStrip( this );
+			gwen::Controls::MenuStrip* menu = new gwen::Controls::MenuStrip( this );
 			{
-				Gwen::Controls::MenuItem* pRoot = menu->AddItem( L"File" );
+				gwen::Controls::MenuItem* pRoot = menu->AddItem( L"File" );
 				pRoot->GetMenu()->AddItem( L"New", L"test16.png", "Ctrl + N" )->SetAction( this, &ThisClass::MenuItemSelect );
 				pRoot->GetMenu()->AddItem( L"Load", L"test16.png", "Ctrl+L" )->SetAction( this, &ThisClass::MenuItemSelect );
 				pRoot->GetMenu()->AddItem( L"Save", "", "CTRL+S" )->SetAction( this, &ThisClass::MenuItemSelect );
@@ -20,17 +20,17 @@ class MenuStrip : public GUnit
 				pRoot->GetMenu()->AddItem( L"Quit", "", "Ctrl+Q" )->SetAction( this, &ThisClass::MenuItemSelect );
 			}
 			{
-				Gwen::Controls::MenuItem* pRoot = menu->AddItem( L"\u043F\u0438\u0440\u0430\u0442\u0441\u0442\u0432\u043E" );
+				gwen::Controls::MenuItem* pRoot = menu->AddItem( L"\u043F\u0438\u0440\u0430\u0442\u0441\u0442\u0432\u043E" );
 				pRoot->GetMenu()->AddItem( L"\u5355\u5143\u6D4B\u8BD5" )->SetAction( this, &ThisClass::MenuItemSelect );
 				pRoot->GetMenu()->AddItem( L"\u0111\u01A1n v\u1ECB th\u1EED nghi\u1EC7m" )->SetAction( this, &ThisClass::MenuItemSelect );
 			}
 			{
-				Gwen::Controls::MenuItem* pRoot = menu->AddItem( L"Submenu" );
-				Gwen::Controls::MenuItem* pCheckable = pRoot->GetMenu()->AddItem( "Checkable" );
+				gwen::Controls::MenuItem* pRoot = menu->AddItem( L"Submenu" );
+				gwen::Controls::MenuItem* pCheckable = pRoot->GetMenu()->AddItem( "Checkable" );
 				pCheckable->SetCheckable( true );
 				pCheckable->SetChecked( true );
 				{
-					Gwen::Controls::MenuItem* pRootB = pRoot->GetMenu()->AddItem( "Two" );
+					gwen::Controls::MenuItem* pRootB = pRoot->GetMenu()->AddItem( "Two" );
 					pRootB->GetMenu()->AddItem( "Two.One" );
 					pRootB->GetMenu()->AddItem( "Two.Two" );
 					pRootB->GetMenu()->AddItem( "Two.Three" );
@@ -45,26 +45,26 @@ class MenuStrip : public GUnit
 				pRoot->GetMenu()->AddItem( "Four" );
 				pRoot->GetMenu()->AddItem( "Five" );
 				{
-					Gwen::Controls::MenuItem* pRootB = pRoot->GetMenu()->AddItem( "Six" );
+					gwen::Controls::MenuItem* pRootB = pRoot->GetMenu()->AddItem( "Six" );
 					pRootB->GetMenu()->AddItem( "Six.One" );
 					pRootB->GetMenu()->AddItem( "Six.Two" );
 					pRootB->GetMenu()->AddItem( "Six.Three" );
 					pRootB->GetMenu()->AddItem( "Six.Four" );
 					pRootB->GetMenu()->AddItem( "Six.Five", "test16.png" );
 					{
-						Gwen::Controls::MenuItem* pRootC = pRootB->GetMenu()->AddItem( "Six.Six" );
+						gwen::Controls::MenuItem* pRootC = pRootB->GetMenu()->AddItem( "Six.Six" );
 						pRootC->GetMenu()->AddItem( "Sheep" );
 						pRootC->GetMenu()->AddItem( "Goose" );
 						{
-							Gwen::Controls::MenuItem* pRootD = pRootC->GetMenu()->AddItem( "Camel" );
+							gwen::Controls::MenuItem* pRootD = pRootC->GetMenu()->AddItem( "Camel" );
 							pRootD->GetMenu()->AddItem( "Eyes" );
 							pRootD->GetMenu()->AddItem( "Nose" );
 							{
-								Gwen::Controls::MenuItem* pRootE = pRootD->GetMenu()->AddItem( "Hair" );
+								gwen::Controls::MenuItem* pRootE = pRootD->GetMenu()->AddItem( "Hair" );
 								pRootE->GetMenu()->AddItem( "Blonde" );
 								pRootE->GetMenu()->AddItem( "Black" );
 								{
-									Gwen::Controls::MenuItem* pRootF = pRootE->GetMenu()->AddItem( "Red" );
+									gwen::Controls::MenuItem* pRootF = pRootE->GetMenu()->AddItem( "Red" );
 									pRootF->GetMenu()->AddItem( "Light" );
 									pRootF->GetMenu()->AddItem( "Medium" );
 									pRootF->GetMenu()->AddItem( "Dark" );
@@ -86,7 +86,7 @@ class MenuStrip : public GUnit
 
 		void MenuItemSelect( Base* pControl )
 		{
-			Gwen::Controls::MenuItem* pMenuItem = ( Gwen::Controls::MenuItem* ) pControl;
+			gwen::Controls::MenuItem* pMenuItem = ( gwen::Controls::MenuItem* ) pControl;
 			UnitPrint( Utility::Format( L"Menu Selected: %ls", pMenuItem->GetText().GetUnicode().c_str() ) );
 		}
 

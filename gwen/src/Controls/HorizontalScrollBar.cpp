@@ -5,11 +5,11 @@
 */
 
 
-#include "Gwen/Controls/ScrollBar.h"
-#include "Gwen/Controls/HorizontalScrollBar.h"
+#include "gwen/Controls/ScrollBar.h"
+#include "gwen/Controls/HorizontalScrollBar.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 GWEN_CONTROL_CONSTRUCTOR( HorizontalScrollBar )
 {
@@ -81,11 +81,11 @@ void HorizontalScrollBar::OnMouseClickLeft( int x, int y, bool bDown )
 	if ( bDown )
 	{
 		m_bDepressed = true;
-		Gwen::MouseFocus = this;
+		gwen::MouseFocus = this;
 	}
 	else
 	{
-		Gwen::Point clickPos = CanvasPosToLocal( Gwen::Point( x, y ) );
+		gwen::Point clickPos = CanvasPosToLocal( gwen::Point( x, y ) );
 
 		if ( clickPos.x < m_Bar->X() )
 		{ NudgeLeft( this ); }
@@ -93,7 +93,7 @@ void HorizontalScrollBar::OnMouseClickLeft( int x, int y, bool bDown )
 		{ NudgeRight( this ); }
 
 		m_bDepressed = false;
-		Gwen::MouseFocus = NULL;
+		gwen::MouseFocus = NULL;
 	}
 }
 
@@ -104,7 +104,7 @@ float HorizontalScrollBar::CalculateScrolledAmount()
 
 bool HorizontalScrollBar::SetScrolledAmount( float amount, bool forceUpdate )
 {
-	amount = Gwen::Clamp( amount, 0.f, 1.f );
+	amount = gwen::Clamp( amount, 0.f, 1.f );
 
 	if ( !BaseClass::SetScrolledAmount( amount, forceUpdate ) )
 	{ return false; }

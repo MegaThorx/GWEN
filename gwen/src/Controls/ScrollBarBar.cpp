@@ -5,12 +5,12 @@
 */
 
 
-#include "Gwen/Controls/ScrollBar.h"
-#include "Gwen/Controls/ScrollBarBar.h"
+#include "gwen/Controls/ScrollBar.h"
+#include "gwen/Controls/ScrollBarBar.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
-using namespace Gwen::ControlsInternal;
+using namespace gwen;
+using namespace gwen::Controls;
+using namespace gwen::ControlsInternal;
 
 //Actual bar representing height of parent
 

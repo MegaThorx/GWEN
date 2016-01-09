@@ -5,15 +5,15 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Skin.h"
-#include "Gwen/Controls/DockedTabControl.h"
-#include "Gwen/Controls/Highlight.h"
-#include "Gwen/DragAndDrop.h"
-#include "Gwen/Controls/WindowControl.h"
+#include "gwen/Gwen.h"
+#include "gwen/Skin.h"
+#include "gwen/Controls/DockedTabControl.h"
+#include "gwen/Controls/Highlight.h"
+#include "gwen/DragAndDrop.h"
+#include "gwen/Controls/WindowControl.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 GWEN_CONTROL_CONSTRUCTOR( DockedTabControl )
 {
@@ -39,7 +39,7 @@ void DockedTabControl::UpdateTitleBar()
 	m_pTitleBar->UpdateFromTab( GetCurrentButton() );
 }
 
-void DockedTabControl::DragAndDrop_StartDragging( Gwen::DragAndDrop::Package* pPackage, int x, int y )
+void DockedTabControl::DragAndDrop_StartDragging( gwen::DragAndDrop::Package* pPackage, int x, int y )
 {
 	BaseClass::DragAndDrop_StartDragging( pPackage, x, y );
 	SetHidden( true );

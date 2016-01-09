@@ -1,8 +1,8 @@
-#include "Gwen/BaseRender.h"
-#include "Gwen/Gwen.h"
-#include "Gwen/Utility.h"
-#include "Gwen/Font.h"
-#include "Gwen/Texture.h"
+#include "gwen/BaseRender.h"
+#include "gwen/Gwen.h"
+#include "gwen/Utility.h"
+#include "gwen/Font.h"
+#include "gwen/Texture.h"
 
 #include <windows.h>
 #include <gdiplus.h>
@@ -15,7 +15,7 @@ using namespace Gdiplus;
 //
 #define USE_GDIPLUS_DOUBLE_BUFFERING
 
-class GWENRENDER_Windows : public Gwen::Gwen::Renderer::Base
+class GWENRENDER_Windows : public gwen::gwen::Renderer::Base
 {
 	public:
 
@@ -114,14 +114,14 @@ class GWENRENDER_Windows : public Gwen::Gwen::Renderer::Base
 			graphics->DrawLine( &pen, x, y, a, b );
 		}
 
-		virtual void DrawFilledRect( Gwen::Rect rect )
+		virtual void DrawFilledRect( gwen::Rect rect )
 		{
 			Translate( rect );
 			SolidBrush solidBrush( GetGDIColor() );
 			graphics->FillRectangle( &solidBrush, rect.x, rect.y, rect.w, rect.h );
 		}
 
-		virtual void DrawRectRotated( const Gwen::Rect & rect, float fAngle, const Gwen::Point & pntHandle )
+		virtual void DrawRectRotated( const gwen::Rect & rect, float fAngle, const gwen::Point & pntHandle )
 		{
 		}
 		virtual void PushMaterial( const char* material )
@@ -148,7 +148,7 @@ class GWENRENDER_Windows : public Gwen::Gwen::Renderer::Base
 			return NULL;
 		}
 
-		virtual void SetDrawColor( Gwen::Color color )
+		virtual void SetDrawColor( gwen::Color color )
 		{
 			m_Col = Color( color.a, color.r, color.g, color.b );
 		}
@@ -158,18 +158,18 @@ class GWENRENDER_Windows : public Gwen::Gwen::Renderer::Base
 			return m_Col;
 		}
 
-		virtual void LoadFont( Gwen::Font* font )
+		virtual void LoadFont( gwen::Font* font )
 		{
-			Gwen::Debug::Msg( "LOAD FONT %s\n", font->facename.c_str() );
+			gwen::Debug::Msg( "LOAD FONT %s\n", font->facename.c_str() );
 			FontStyle fs = FontStyleRegular;
 			font->realsize = font->size * Scale();
-			Font* pFont = new Font( Gwen::Utility::StringToUnicode( font->facename ).c_str(), font->realsize, fs, UnitPixel, NULL );
+			Font* pFont = new Font( gwen::Utility::StringToUnicode( font->facename ).c_str(), font->realsize, fs, UnitPixel, NULL );
 			font->data = pFont;
 		}
 
-		virtual void FreeFont( Gwen::Font* pFont )
+		virtual void FreeFont( gwen::Font* pFont )
 		{
-			Gwen::Debug::Msg( "FREE FONT %s\n", pFont->facename.c_str() );
+			gwen::Debug::Msg( "FREE FONT %s\n", pFont->facename.c_str() );
 
 			if ( !pFont->data ) { return; }
 
@@ -178,12 +178,12 @@ class GWENRENDER_Windows : public Gwen::Gwen::Renderer::Base
 			pFont->data = NULL;
 		}
 
-		virtual void RenderText( Gwen::Font* pFont, Gwen::Rect rect, const Gwen::UnicodeString & text )
+		virtual void RenderText( gwen::Font* pFont, gwen::Rect rect, const gwen::UnicodeString & text )
 		{
 			/*
-			SetDrawColor( Gwen::Color( 255, 0, 0, 100 ) );
+			SetDrawColor( gwen::Color( 255, 0, 0, 100 ) );
 			DrawFilledRect( rect );
-			SetDrawColor( Gwen::Color( 0, 0, 0, 255 ) );
+			SetDrawColor( gwen::Color( 0, 0, 0, 255 ) );
 			*/
 			Translate( rect );
 
@@ -200,9 +200,9 @@ class GWENRENDER_Windows : public Gwen::Gwen::Renderer::Base
 			graphics->DrawString( text.c_str(), text.length() + 1, pGDIFont, r, &strFormat, &solidBrush );
 		}
 
-		virtual Gwen::Point MeasureText( Gwen::Font* pFont, const Gwen::UnicodeString & text )
+		virtual gwen::Point MeasureText( gwen::Font* pFont, const gwen::UnicodeString & text )
 		{
-			Gwen::Point p( 32, 32 );
+			gwen::Point p( 32, 32 );
 
 			if ( !pFont->data || fabs( pFont->realsize - pFont->size * Scale() ) > 2 )
 			{
@@ -216,12 +216,12 @@ class GWENRENDER_Windows : public Gwen::Gwen::Renderer::Base
 			Graphics g( m_HWND );
 			Font* pGDIFont = ( Font* ) pFont->data;
 			Status s = g.MeasureString( text.c_str(), -1, pGDIFont, &strFormat, &size );
-			return Gwen::Point( size.Width + 1, size.Height + 1 );
+			return gwen::Point( size.Width + 1, size.Height + 1 );
 		}
 
 		void StartClip()
 		{
-			const Gwen::Rect & rect = ClipRegion();
+			const gwen::Rect & rect = ClipRegion();
 			graphics->SetClip( Rect( rect.x * Scale(), rect.y * Scale(), rect.w * Scale(), rect.h * Scale() ), CombineMode::CombineModeReplace );
 			//Pen      pen( Color( 100, 255, 0, 255 ) );
 			//graphics->DrawRectangle( &pen, Rect( rect.x*Scale(), rect.y*Scale(), rect.w*Scale(), rect.h*Scale() ) );
@@ -232,18 +232,18 @@ class GWENRENDER_Windows : public Gwen::Gwen::Renderer::Base
 			graphics->ResetClip();
 		}
 
-		bool ProcessTexture( Gwen::Texture* pTexture )
+		bool ProcessTexture( gwen::Texture* pTexture )
 		{
 			return true;
 		}
 
-		void DrawMissingImage( Gwen::Rect pTargetRect )
+		void DrawMissingImage( gwen::Rect pTargetRect )
 		{
-			SetDrawColor( Gwen::Colors::Red );
+			SetDrawColor( gwen::Colors::Red );
 			DrawFilledRect( pTargetRect );
 		}
 
-		void DrawTexturedRect( Gwen::Texture* pTexture, Gwen::Rect pTargetRect, float u1 = 0.0f, float v1 = 0.0f, float u2 = 1.0f, float v2 = 1.0f )
+		void DrawTexturedRect( gwen::Texture* pTexture, gwen::Rect pTargetRect, float u1 = 0.0f, float v1 = 0.0f, float u2 = 1.0f, float v2 = 1.0f )
 		{
 			Image* pImage = ( Image* ) pTexture->data;
 
@@ -270,18 +270,18 @@ class GWENRENDER_Windows : public Gwen::Gwen::Renderer::Base
 			graphics->DrawImage( pImage, TargetRect, u1, v1, u2, v2, UnitPixel );
 		}
 
-		void LoadTexture( Gwen::Texture* pTexture )
+		void LoadTexture( gwen::Texture* pTexture )
 		{
-			Gwen::Debug::Msg( "LOAD TEXTURE %s\n", pTexture->name.c_str() );
-			Image* pImage = new Image( Gwen::Utility::StringToUnicode( pTexture->name ).c_str() );
+			gwen::Debug::Msg( "LOAD TEXTURE %s\n", pTexture->name.c_str() );
+			Image* pImage = new Image( gwen::Utility::StringToUnicode( pTexture->name ).c_str() );
 			pTexture->data = pImage;
 			pTexture->width = pImage->GetWidth();
 			pTexture->height = pImage->GetHeight();
 		}
 
-		void FreeTexture( Gwen::Texture* pTexture )
+		void FreeTexture( gwen::Texture* pTexture )
 		{
-			Gwen::Debug::Msg( "RELEASED TEXTURE %s\n", pTexture->name.c_str() );
+			gwen::Debug::Msg( "RELEASED TEXTURE %s\n", pTexture->name.c_str() );
 			Image* pImage = ( Image* ) pTexture->data;
 
 			if ( !pImage ) { return; }

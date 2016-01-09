@@ -5,12 +5,12 @@
 */
 
 
-#include "Gwen/Controls/Slider.h"
-#include "Gwen/Controls/HorizontalSlider.h"
+#include "gwen/Controls/Slider.h"
+#include "gwen/Controls/HorizontalSlider.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
-using namespace Gwen::ControlsInternal;
+using namespace gwen;
+using namespace gwen::Controls;
+using namespace gwen::ControlsInternal;
 
 
 GWEN_CONTROL_CONSTRUCTOR( HorizontalSlider )
@@ -30,7 +30,7 @@ void HorizontalSlider::UpdateBarFromValue()
 
 void HorizontalSlider::OnMouseClickLeft( int x, int y, bool bDown )
 {
-	m_SliderBar->MoveTo( CanvasPosToLocal( Gwen::Point( x, y ) ).x - m_SliderBar->Width() * 0.5,  m_SliderBar->Y() );
+	m_SliderBar->MoveTo( CanvasPosToLocal( gwen::Point( x, y ) ).x - m_SliderBar->Width() * 0.5,  m_SliderBar->Y() );
 	m_SliderBar->OnMouseClickLeft( x, y, bDown );
 	OnMoved( m_SliderBar );
 }

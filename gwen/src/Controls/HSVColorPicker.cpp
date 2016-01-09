@@ -5,15 +5,15 @@
 */
 
 
-#include "Gwen/Controls/HSVColorPicker.h"
-#include "Gwen/Controls/ColorControls.h"
-#include "Gwen/Controls/ColorPicker.h"
-#include "Gwen/Controls/TextBox.h"
-#include "Gwen/Controls/Label.h"
-#include "Gwen/Utility.h"
+#include "gwen/Controls/HSVColorPicker.h"
+#include "gwen/Controls/ColorControls.h"
+#include "gwen/Controls/ColorPicker.h"
+#include "gwen/Controls/TextBox.h"
+#include "gwen/Controls/Label.h"
+#include "gwen/Utility.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 
 GWEN_CONTROL_CONSTRUCTOR( HSVColorPicker )
@@ -21,17 +21,17 @@ GWEN_CONTROL_CONSTRUCTOR( HSVColorPicker )
 	SetMouseInputEnabled( true );
 	SetSize( 256, 64 );
 	SetCacheToTexture();
-	m_LerpBox = new Gwen::Controls::ColorLerpBox( this );
+	m_LerpBox = new gwen::Controls::ColorLerpBox( this );
 	m_LerpBox->onSelectionChanged.Add( this, &HSVColorPicker::ColorBoxChanged );
 	m_LerpBox->Dock( Pos::Left );
-	m_ColorSlider = new Gwen::Controls::ColorSlider( this );
+	m_ColorSlider = new gwen::Controls::ColorSlider( this );
 	m_ColorSlider->SetPos( m_LerpBox->Width() + 15, 5 );
 	m_ColorSlider->onSelectionChanged.Add( this, &HSVColorPicker::ColorSliderChanged );
 	m_ColorSlider->Dock( Pos::Left );
-	m_After = new Gwen::ControlsInternal::ColorDisplay( this );
+	m_After = new gwen::ControlsInternal::ColorDisplay( this );
 	m_After->SetSize( 48, 24 );
 	m_After->SetPos( m_ColorSlider->X() + m_ColorSlider->Width() + 15, 5 );
-	m_Before = new Gwen::ControlsInternal::ColorDisplay( this );
+	m_Before = new gwen::ControlsInternal::ColorDisplay( this );
 	m_Before->SetSize( 48, 24 );
 	m_Before->SetPos( m_After->X(), 28 );
 	int x = m_Before->X();
@@ -76,7 +76,7 @@ GWEN_CONTROL_CONSTRUCTOR( HSVColorPicker )
 	}
 }
 
-void HSVColorPicker::NumericTyped( Gwen::Controls::Base* control )
+void HSVColorPicker::NumericTyped( gwen::Controls::Base* control )
 {
 	TextBoxNumeric* box = gwen_cast<TextBoxNumeric> ( control );
 
@@ -90,21 +90,21 @@ void HSVColorPicker::NumericTyped( Gwen::Controls::Base* control )
 
 	if ( textValue > 255 ) { textValue = 255; }
 
-	Gwen::Color newColor = GetColor();
+	gwen::Color newColor = GetColor();
 
-	if ( box->GetName().find( "Red" ) != Gwen::String::npos )
+	if ( box->GetName().find( "Red" ) != gwen::String::npos )
 	{
 		newColor.r = textValue;
 	}
-	else if ( box->GetName().find( "Green" ) != Gwen::String::npos )
+	else if ( box->GetName().find( "Green" ) != gwen::String::npos )
 	{
 		newColor.g = textValue;
 	}
-	else if ( box->GetName().find( "Blue" ) != Gwen::String::npos )
+	else if ( box->GetName().find( "Blue" ) != gwen::String::npos )
 	{
 		newColor.b = textValue;
 	}
-	else if ( box->GetName().find( "Alpha" ) != Gwen::String::npos )
+	else if ( box->GetName().find( "Alpha" ) != gwen::String::npos )
 	{
 		newColor.a = textValue;
 	}
@@ -112,24 +112,24 @@ void HSVColorPicker::NumericTyped( Gwen::Controls::Base* control )
 	SetColor( newColor );
 }
 
-void HSVColorPicker::UpdateControls( Gwen::Color color )
+void HSVColorPicker::UpdateControls( gwen::Color color )
 {
 	// What in the FUCK
 	TextBoxNumeric* redBox = gwen_cast<TextBoxNumeric> ( FindChildByName( "RedBox",   false ) );
 
-	if ( redBox )    { redBox->SetText( Gwen::Utility::ToString( ( int ) color.r ), false ); }
+	if ( redBox )    { redBox->SetText( gwen::Utility::ToString( ( int ) color.r ), false ); }
 
 	TextBoxNumeric* greenBox = gwen_cast<TextBoxNumeric> ( FindChildByName( "GreenBox",   false ) );
 
-	if ( greenBox )  { greenBox->SetText( Gwen::Utility::ToString( ( int ) color.g ), false ); }
+	if ( greenBox )  { greenBox->SetText( gwen::Utility::ToString( ( int ) color.g ), false ); }
 
 	TextBoxNumeric* blueBox = gwen_cast<TextBoxNumeric> ( FindChildByName( "BlueBox",   false ) );
 
-	if ( blueBox )   { blueBox->SetText( Gwen::Utility::ToString( ( int ) color.b ), false ); }
+	if ( blueBox )   { blueBox->SetText( gwen::Utility::ToString( ( int ) color.b ), false ); }
 
 	m_After->SetColor( color );
 }
-void HSVColorPicker::SetColor( Gwen::Color color, bool onlyHue, bool reset )
+void HSVColorPicker::SetColor( gwen::Color color, bool onlyHue, bool reset )
 {
 	UpdateControls( color );
 
@@ -141,18 +141,18 @@ void HSVColorPicker::SetColor( Gwen::Color color, bool onlyHue, bool reset )
 	m_After->SetColor( color );
 }
 
-Gwen::Color HSVColorPicker::GetColor()
+gwen::Color HSVColorPicker::GetColor()
 {
 	return m_LerpBox->GetSelectedColor();
 }
 
-void HSVColorPicker::ColorBoxChanged( Gwen::Controls::Base* /*pControl*/ )
+void HSVColorPicker::ColorBoxChanged( gwen::Controls::Base* /*pControl*/ )
 {
 	onColorChanged.Call( this );
 	UpdateControls( GetColor() );
 	Invalidate();
 }
-void HSVColorPicker::ColorSliderChanged( Gwen::Controls::Base* /*pControl*/ )
+void HSVColorPicker::ColorSliderChanged( gwen::Controls::Base* /*pControl*/ )
 {
 	if ( m_LerpBox )
 	{ m_LerpBox->SetColor( m_ColorSlider->GetSelectedColor(),  true ); }

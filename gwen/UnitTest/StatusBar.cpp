@@ -1,8 +1,8 @@
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Controls/StatusBar.h"
-#include "Gwen/Controls/Label.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Controls/StatusBar.h"
+#include "gwen/Controls/Label.h"
 
-using namespace Gwen;
+using namespace gwen;
 
 class StatusBar : public GUnit
 {
@@ -11,13 +11,13 @@ class StatusBar : public GUnit
 		GWEN_CONTROL_INLINE( StatusBar, GUnit )
 		{
 			Dock( Pos::Fill );
-			Gwen::Controls::StatusBar* pStatus = new Gwen::Controls::StatusBar( this );
-			Gwen::Controls::Label* pRight = new Gwen::Controls::Label( pStatus );
+			gwen::Controls::StatusBar* pStatus = new gwen::Controls::StatusBar( this );
+			gwen::Controls::Label* pRight = new gwen::Controls::Label( pStatus );
 			pRight->SetText( L"Label Added to Right" );
 			pStatus->AddControl( pRight, true );
 		}
 
-		void Layout( Gwen::Skin::Base* skin ) {}
+		void Layout( gwen::Skin::Base* skin ) {}
 };
 
 

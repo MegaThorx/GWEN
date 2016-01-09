@@ -5,18 +5,18 @@
 */
 
 
-#include "Gwen/Controls/ImagePanel.h"
-#include "Gwen/Controls/Label.h"
-#include "Gwen/Controls/ResizableControl.h"
+#include "gwen/Controls/ImagePanel.h"
+#include "gwen/Controls/Label.h"
+#include "gwen/Controls/ResizableControl.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
-using namespace Gwen::ControlsInternal;
+using namespace gwen;
+using namespace gwen::Controls;
+using namespace gwen::ControlsInternal;
 
 GWEN_CONTROL_CONSTRUCTOR( ResizableControl )
 {
 	m_bResizable = true;
-	m_MinimumSize = Gwen::Point( 5, 5 );
+	m_MinimumSize = gwen::Point( 5, 5 );
 	m_bClampMovement = false;
 	m_Resizer[5] = NULL;
 	m_Resizer[0] = NULL;
@@ -78,7 +78,7 @@ void ResizableControl::DisableResizing()
 
 bool ResizableControl::SetBounds( int x, int y, int w, int h )
 {
-	Gwen::Point minSize = GetMinimumSize();
+	gwen::Point minSize = GetMinimumSize();
 
 	// Clamp Minimum Size
 	if ( w < minSize.x ) { w = minSize.x; }

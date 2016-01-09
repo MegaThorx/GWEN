@@ -6,11 +6,11 @@
 
 
 #include <math.h>
-#include "Gwen/Controls/Slider.h"
+#include "gwen/Controls/Slider.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
-using namespace Gwen::ControlsInternal;
+using namespace gwen;
+using namespace gwen::Controls;
+using namespace gwen::ControlsInternal;
 
 GWEN_CONTROL_CONSTRUCTOR( SliderBar )
 {
@@ -26,7 +26,7 @@ void SliderBar::Render( Skin::Base* skin )
 
 GWEN_CONTROL_CONSTRUCTOR( Slider )
 {
-	SetBounds( Gwen::Rect( 0, 0, 32, 128 ) );
+	SetBounds( gwen::Rect( 0, 0, 32, 128 ) );
 	m_SliderBar = new SliderBar( this );
 	m_SliderBar->onDragged.Add( this, &Slider::OnMoved );
 	m_fMin = 0.0f;
@@ -92,16 +92,16 @@ void Slider::SetRange( float fMin, float fMax )
 	m_fMax = fMax;
 }
 
-void Slider::RenderFocus( Gwen::Skin::Base* skin )
+void Slider::RenderFocus( gwen::Skin::Base* skin )
 {
-	if ( Gwen::KeyboardFocus != this ) { return; }
+	if ( gwen::KeyboardFocus != this ) { return; }
 
 	if ( !IsTabable() ) { return; }
 
 	skin->DrawKeyboardHighlight( this, GetRenderBounds(), 0 );
 }
 
-void Slider::OnBoundsChanged(Gwen::Rect oldBounds)
+void Slider::OnBoundsChanged(gwen::Rect oldBounds)
 {
 	BaseClass::OnBoundsChanged( oldBounds );
 	UpdateBarFromValue();

@@ -5,25 +5,25 @@
 */
 
 
-#include "Gwen/Controls/ColorPicker.h"
-#include "Gwen/Controls/HorizontalSlider.h"
-#include "Gwen/Controls/GroupBox.h"
-#include "Gwen/Controls/TextBox.h"
-#include "Gwen/Utility.h"
+#include "gwen/Controls/ColorPicker.h"
+#include "gwen/Controls/HorizontalSlider.h"
+#include "gwen/Controls/GroupBox.h"
+#include "gwen/Controls/TextBox.h"
+#include "gwen/Utility.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
-using namespace Gwen::ControlsInternal;
+using namespace gwen;
+using namespace gwen::Controls;
+using namespace gwen::ControlsInternal;
 
 GWEN_CONTROL_CONSTRUCTOR( ColorPicker )
 {
 	SetMouseInputEnabled( true );
 	SetSize( 256, 150 );
 	CreateControls();
-	SetColor( Gwen::Color( 50, 60, 70, 255 ) );
+	SetColor( gwen::Color( 50, 60, 70, 255 ) );
 }
 
-void ColorPicker::CreateColorControl( Gwen::String name, int y )
+void ColorPicker::CreateColorControl( gwen::String name, int y )
 {
 	int colorSize = 12;
 	GroupBox* colorGroup = new GroupBox( this );
@@ -43,12 +43,12 @@ void ColorPicker::CreateColorControl( Gwen::String name, int y )
 	HorizontalSlider* slider = new HorizontalSlider( colorGroup );
 	slider->SetPos( colorSize + 5 , 1 );
 	slider->SetRange( 0, 255 );
-	slider->SetSize( 80, Gwen::Utility::Max( colorSize, 15 ) );
+	slider->SetSize( 80, gwen::Utility::Max( colorSize, 15 ) );
 	slider->SetName( name + "Slider" );
 	slider->onValueChanged.Add( this, &ColorPicker::SlidersMoved );
 }
 
-void ColorPicker::NumericTyped( Gwen::Controls::Base* control )
+void ColorPicker::NumericTyped( gwen::Controls::Base* control )
 {
 	TextBoxNumeric* box = gwen_cast<TextBoxNumeric> ( control );
 
@@ -64,22 +64,22 @@ void ColorPicker::NumericTyped( Gwen::Controls::Base* control )
 
 	if ( textValue > 255 ) { textValue = 255; }
 
-	if ( box->GetName().find( "Red" ) != Gwen::String::npos )
+	if ( box->GetName().find( "Red" ) != gwen::String::npos )
 	{ SetRed( textValue ); }
 
-	if ( box->GetName().find( "Green" ) != Gwen::String::npos )
+	if ( box->GetName().find( "Green" ) != gwen::String::npos )
 	{ SetGreen( textValue ); }
 
-	if ( box->GetName().find( "Blue" ) != Gwen::String::npos )
+	if ( box->GetName().find( "Blue" ) != gwen::String::npos )
 	{ SetBlue( textValue ); }
 
-	if ( box->GetName().find( "Alpha" ) != Gwen::String::npos )
+	if ( box->GetName().find( "Alpha" ) != gwen::String::npos )
 	{ SetAlpha( textValue ); }
 
 	UpdateControls();
 }
 
-void ColorPicker::SetColor( Gwen::Color color )
+void ColorPicker::SetColor( gwen::Color color )
 {
 	m_Color = color;
 	UpdateControls();
@@ -105,14 +105,14 @@ void ColorPicker::CreateControls()
 	//UpdateControls();
 }
 
-void ColorPicker::UpdateColorControls( Gwen::String name, Gwen::Color col, int sliderVal )
+void ColorPicker::UpdateColorControls( gwen::String name, gwen::Color col, int sliderVal )
 {
 	ColorDisplay* disp = gwen_cast<ColorDisplay> ( FindChildByName( name, true ) );
 	disp->SetColor( col );
 	HorizontalSlider* slider = gwen_cast<HorizontalSlider> ( FindChildByName( name + "Slider", true ) );
 	slider->SetFloatValue( sliderVal );
 	TextBoxNumeric* box = gwen_cast<TextBoxNumeric> ( FindChildByName( name + "Box", true ) );
-	box->SetText( Gwen::Utility::ToString( sliderVal ) );
+	box->SetText( gwen::Utility::ToString( sliderVal ) );
 }
 
 void ColorPicker::UpdateControls()
@@ -126,7 +126,7 @@ void ColorPicker::UpdateControls()
 	disp->SetColor( Color( GetColor().r, GetColor().g, GetColor().b, GetColor().a ) );
 	onColorChanged.Call( this );
 }
-void ColorPicker::SlidersMoved( Gwen::Controls::Base* control )
+void ColorPicker::SlidersMoved( gwen::Controls::Base* control )
 {
 	/*
 	HorizontalSlider* redSlider		= gwen_cast<HorizontalSlider>(	FindChildByName( "RedSlider",   true ) );
@@ -140,7 +140,7 @@ void ColorPicker::SlidersMoved( Gwen::Controls::Base* control )
 	{ SetColorByName( GetColorFromName( slider->GetName() ), slider->GetFloatValue() ); }
 
 	UpdateControls();
-	//SetColor( Gwen::Color( redSlider->GetValue(), greenSlider->GetValue(), blueSlider->GetValue(), alphaSlider->GetValue() ) );
+	//SetColor( gwen::Color( redSlider->GetValue(), greenSlider->GetValue(), blueSlider->GetValue(), alphaSlider->GetValue() ) );
 }
 
 void ColorPicker::Layout( Skin::Base* skin )
@@ -157,7 +157,7 @@ void ColorPicker::Layout( Skin::Base* skin )
 }
 
 
-int ColorPicker::GetColorByName( Gwen::String colorName )
+int ColorPicker::GetColorByName( gwen::String colorName )
 {
 	if ( colorName == "Red" )
 	{ return GetColor().r; }
@@ -171,24 +171,24 @@ int ColorPicker::GetColorByName( Gwen::String colorName )
 	{ return 0; }
 }
 
-Gwen::String ColorPicker::GetColorFromName( Gwen::String name )
+gwen::String ColorPicker::GetColorFromName( gwen::String name )
 {
-	if ( name.find( "Red" ) != Gwen::String::npos )
+	if ( name.find( "Red" ) != gwen::String::npos )
 	{ return "Red"; }
 
-	if ( name.find( "Green" ) != Gwen::String::npos )
+	if ( name.find( "Green" ) != gwen::String::npos )
 	{ return "Green"; }
 
-	if ( name.find( "Blue" ) != Gwen::String::npos )
+	if ( name.find( "Blue" ) != gwen::String::npos )
 	{ return "Blue"; }
 
-	if ( name.find( "Alpha" ) != Gwen::String::npos )
+	if ( name.find( "Alpha" ) != gwen::String::npos )
 	{ return "Alpha"; }
 	else
 	{ return ""; }
 }
 
-void ColorPicker::SetColorByName( Gwen::String colorName, int colorValue )
+void ColorPicker::SetColorByName( gwen::String colorName, int colorValue )
 {
 	if ( colorName == "Red" )
 	{ SetRed( colorValue ); }

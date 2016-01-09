@@ -5,10 +5,10 @@
 */
 
 
-#include "Gwen/Controls/RadioButton.h"
+#include "gwen/Controls/RadioButton.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 GWEN_CONTROL_CONSTRUCTOR( RadioButton )
 {

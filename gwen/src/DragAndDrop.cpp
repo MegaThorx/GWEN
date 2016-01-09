@@ -5,23 +5,23 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/DragAndDrop.h"
-#include "Gwen/Utility.h"
-#include "Gwen/Platform.h"
+#include "gwen/Gwen.h"
+#include "gwen/DragAndDrop.h"
+#include "gwen/Utility.h"
+#include "gwen/Platform.h"
 
-using namespace Gwen;
-using namespace Gwen::DragAndDrop;
+using namespace gwen;
+using namespace gwen::DragAndDrop;
 
 DragAndDrop::Package* DragAndDrop::CurrentPackage = NULL;
-Gwen::Controls::Base* DragAndDrop::HoveredControl = NULL;
-Gwen::Controls::Base* DragAndDrop::SourceControl = NULL;
+gwen::Controls::Base* DragAndDrop::HoveredControl = NULL;
+gwen::Controls::Base* DragAndDrop::SourceControl = NULL;
 
-static Gwen::Controls::Base* LastPressedControl = NULL;
-static Gwen::Controls::Base* NewHoveredControl = NULL;
-static Gwen::Point LastPressedPos;
+static gwen::Controls::Base* LastPressedControl = NULL;
+static gwen::Controls::Base* NewHoveredControl = NULL;
+static gwen::Point LastPressedPos;
 
-void DragAndDrop::ControlDeleted( Gwen::Controls::Base* pControl )
+void DragAndDrop::ControlDeleted( gwen::Controls::Base* pControl )
 {
 	if ( SourceControl == pControl )
 	{
@@ -44,7 +44,7 @@ void DragAndDrop::ControlDeleted( Gwen::Controls::Base* pControl )
 static int m_iMouseX = 0;
 static int m_iMouseY = 0;
 
-bool DragAndDrop::Start( Gwen::Controls::Base* pControl, Package* pPackage )
+bool DragAndDrop::Start( gwen::Controls::Base* pControl, Package* pPackage )
 {
 	if ( CurrentPackage )
 	{
@@ -74,7 +74,7 @@ bool OnDrop( int x, int y )
 	return true;
 }
 
-bool DragAndDrop::OnMouseButton( Gwen::Controls::Base* pHoveredControl, int x, int y, bool bDown )
+bool DragAndDrop::OnMouseButton( gwen::Controls::Base* pHoveredControl, int x, int y, bool bDown )
 {
 	if ( !bDown )
 	{
@@ -96,7 +96,7 @@ bool DragAndDrop::OnMouseButton( Gwen::Controls::Base* pHoveredControl, int x, i
 	// Store the last clicked on control. Don't do anything yet,
 	// we'll check it in OnMouseMoved, and if it moves further than
 	// x pixels with the mouse down, we'll start to drag.
-	LastPressedPos = Gwen::Point( x, y );
+	LastPressedPos = gwen::Point( x, y );
 	LastPressedControl = pHoveredControl;
 	return false;
 }
@@ -124,7 +124,7 @@ bool ShouldStartDraggingControl( int x, int y )
 
 	// Now we're dragging something!
 	DragAndDrop::SourceControl = LastPressedControl;
-	Gwen::MouseFocus = NULL;
+	gwen::MouseFocus = NULL;
 	LastPressedControl = NULL;
 	DragAndDrop::CurrentPackage->drawcontrol = NULL;
 
@@ -141,7 +141,7 @@ bool ShouldStartDraggingControl( int x, int y )
 	return true;
 }
 
-void UpdateHoveredControl( Gwen::Controls::Base* pCtrl, int x, int y )
+void UpdateHoveredControl( gwen::Controls::Base* pCtrl, int x, int y )
 {
 	//
 	// We use this global variable to represent our hovered control
@@ -192,7 +192,7 @@ void UpdateHoveredControl( Gwen::Controls::Base* pCtrl, int x, int y )
 	NewHoveredControl = NULL;
 }
 
-void DragAndDrop::OnMouseMoved( Gwen::Controls::Base* pHoveredControl, int x, int y )
+void DragAndDrop::OnMouseMoved( gwen::Controls::Base* pHoveredControl, int x, int y )
 {
 	// Always keep these up to date, they're used to draw the dragged control.
 	m_iMouseX = x;
@@ -221,14 +221,14 @@ void DragAndDrop::OnMouseMoved( Gwen::Controls::Base* pHoveredControl, int x, in
 	pHoveredControl->Redraw();
 }
 
-void DragAndDrop::RenderOverlay( Gwen::Controls::Canvas* /*pCanvas*/, Skin::Base* skin )
+void DragAndDrop::RenderOverlay( gwen::Controls::Canvas* /*pCanvas*/, Skin::Base* skin )
 {
 	if ( !CurrentPackage ) { return; }
 
 	if ( !CurrentPackage->drawcontrol ) { return; }
 
-	Gwen::Point pntOld = skin->GetRender()->GetRenderOffset();
-	skin->GetRender()->AddRenderOffset( Gwen::Rect( m_iMouseX - SourceControl->X() - CurrentPackage->holdoffset.x, m_iMouseY - SourceControl->Y() - CurrentPackage->holdoffset.y, 0, 0 ) );
+	gwen::Point pntOld = skin->GetRender()->GetRenderOffset();
+	skin->GetRender()->AddRenderOffset( gwen::Rect( m_iMouseX - SourceControl->X() - CurrentPackage->holdoffset.x, m_iMouseY - SourceControl->Y() - CurrentPackage->holdoffset.y, 0, 0 ) );
 	CurrentPackage->drawcontrol->DoRender( skin );
 	skin->GetRender()->SetRenderOffset( pntOld );
 }

@@ -1,7 +1,7 @@
-#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Controls/TreeControl.h"
+#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Controls/TreeControl.h"
 
-using namespace Gwen;
+using namespace gwen;
 
 class Window : public GUnit
 {

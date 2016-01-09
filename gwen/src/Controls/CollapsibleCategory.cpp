@@ -4,11 +4,11 @@
 	See license in Gwen.h
 */
 
-#include "Gwen/Controls/CollapsibleCategory.h"
-#include "Gwen/Controls/CollapsibleList.h"
+#include "gwen/Controls/CollapsibleCategory.h"
+#include "gwen/Controls/CollapsibleList.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 class CategoryButton : public Button
 {

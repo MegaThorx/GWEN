@@ -1,7 +1,7 @@
-﻿#include "Gwen/UnitTest/UnitTest.h"
-#include "Gwen/Controls/CollapsibleList.h"
+﻿#include "gwen/UnitTest/UnitTest.h"
+#include "gwen/Controls/CollapsibleList.h"
 
-using namespace Gwen;
+using namespace gwen;
 
 class CollapsibleList : public GUnit
 {
@@ -9,18 +9,18 @@ class CollapsibleList : public GUnit
 
 		GWEN_CONTROL_INLINE( CollapsibleList, GUnit )
 		{
-			Gwen::Controls::CollapsibleList* pControl = new Gwen::Controls::CollapsibleList( this );
+			gwen::Controls::CollapsibleList* pControl = new gwen::Controls::CollapsibleList( this );
 			pControl->SetSize( 100, 200 );
 			pControl->SetPos( 10, 10 );
 			{
-				Gwen::Controls::CollapsibleCategory* cat = pControl->Add( "Category One" );
+				gwen::Controls::CollapsibleCategory* cat = pControl->Add( "Category One" );
 				cat->Add( "Hello" );
 				cat->Add( "Two" );
 				cat->Add( "Three" );
 				cat->Add( "Four" );
 			}
 			{
-				Gwen::Controls::CollapsibleCategory* cat = pControl->Add( "Shopping" );
+				gwen::Controls::CollapsibleCategory* cat = pControl->Add( "Shopping" );
 				cat->Add( "Special" );
 				cat->Add( "Two Noses" );
 				cat->Add( "Orange ears" );
@@ -38,7 +38,7 @@ class CollapsibleList : public GUnit
 				cat->Add( "Three Eyes" );
 			}
 			{
-				Gwen::Controls::CollapsibleCategory* cat = pControl->Add( "Category One" );
+				gwen::Controls::CollapsibleCategory* cat = pControl->Add( "Category One" );
 				cat->Add( "Hello" );
 				cat->Add( "Two" );
 				cat->Add( "Three" );

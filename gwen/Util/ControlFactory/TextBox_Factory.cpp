@@ -1,26 +1,26 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		class TextBox_Factory : public Gwen::ControlFactory::Base
+		class TextBox_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
-				GWEN_CONTROL_FACTORY_CONSTRUCTOR( TextBox_Factory, Gwen::ControlFactory::Base )
+				GWEN_CONTROL_FACTORY_CONSTRUCTOR( TextBox_Factory, gwen::ControlFactory::Base )
 				{
 				}
 
-				virtual Gwen::String Name() { return "TextBox"; }
-				virtual Gwen::String BaseName() { return "Label"; }
+				virtual gwen::String Name() { return "TextBox"; }
+				virtual gwen::String BaseName() { return "Label"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::TextBox* pControl = new Gwen::Controls::TextBox( parent );
+					gwen::Controls::TextBox* pControl = new gwen::Controls::TextBox( parent );
 					pControl->SetSize( 100, 20 );
 					pControl->SetText( "" );
 					return pControl;
@@ -28,20 +28,20 @@ namespace Gwen
 		};
 
 
-		class TextBoxMultiLine_Factory : public Gwen::ControlFactory::Base
+		class TextBoxMultiLine_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
-				GWEN_CONTROL_FACTORY_CONSTRUCTOR( TextBoxMultiLine_Factory, Gwen::ControlFactory::Base )
+				GWEN_CONTROL_FACTORY_CONSTRUCTOR( TextBoxMultiLine_Factory, gwen::ControlFactory::Base )
 				{
 				}
 
-				virtual Gwen::String Name() { return "TextBoxMultiline"; }
-				virtual Gwen::String BaseName() { return "TextBox"; }
+				virtual gwen::String Name() { return "TextBoxMultiline"; }
+				virtual gwen::String BaseName() { return "TextBox"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::TextBoxMultiline* pControl = new Gwen::Controls::TextBoxMultiline( parent );
+					gwen::Controls::TextBoxMultiline* pControl = new gwen::Controls::TextBoxMultiline( parent );
 					pControl->SetSize( 100, 50 );
 					pControl->SetText( "" );
 					return pControl;

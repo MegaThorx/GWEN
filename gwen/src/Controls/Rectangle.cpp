@@ -5,15 +5,15 @@
 */
 
 
-#include "Gwen/Controls/Rectangle.h"
+#include "gwen/Controls/Rectangle.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 
 GWEN_CONTROL_CONSTRUCTOR( Rectangle )
 {
-	m_Color = Gwen::Color( 255, 255, 255, 255 );
+	m_Color = gwen::Color( 255, 255, 255, 255 );
 }
 
 void Rectangle::Render( Skin::Base* skin )

@@ -4,12 +4,12 @@
 	See license in Gwen.h
 */
 
-#include "Gwen/ToolTip.h"
-#include "Gwen/Utility.h"
+#include "gwen/ToolTip.h"
+#include "gwen/Utility.h"
 
 #include <cstdio>
 
-using namespace Gwen;
+using namespace gwen;
 
 #ifdef _MSC_VER
 #pragma warning(disable:4267)// conversion from 'size_t' to 'int', possible loss of data
@@ -27,7 +27,7 @@ using namespace Gwen;
 #define GWEN_FNULL "/dev/null"
 #endif
 
-UnicodeString Gwen::Utility::Format( const wchar_t* fmt, ... )
+UnicodeString gwen::Utility::Format( const wchar_t* fmt, ... )
 {
 	va_list s;
 	int len = 0;
@@ -64,7 +64,7 @@ UnicodeString Gwen::Utility::Format( const wchar_t* fmt, ... )
 
 
 
-void Gwen::Utility::Strings::Split( const Gwen::String & str, const Gwen::String & seperator, Strings::List & outbits, bool bLeave )
+void gwen::Utility::Strings::Split( const gwen::String & str, const gwen::String & seperator, Strings::List & outbits, bool bLeave )
 {
 	int iOffset = 0;
 	int iLength = str.length();
@@ -83,7 +83,7 @@ void Gwen::Utility::Strings::Split( const Gwen::String & str, const Gwen::String
 	outbits.push_back( str.substr( iOffset, iLength - iOffset ) );
 }
 
-void Gwen::Utility::Strings::Split( const Gwen::UnicodeString & str, const Gwen::UnicodeString & seperator, Strings::UnicodeList & outbits, bool bLeave )
+void gwen::Utility::Strings::Split( const gwen::UnicodeString & str, const gwen::UnicodeString & seperator, Strings::UnicodeList & outbits, bool bLeave )
 {
 	int iOffset = 0;
 	int iLength = str.length();
@@ -102,26 +102,26 @@ void Gwen::Utility::Strings::Split( const Gwen::UnicodeString & str, const Gwen:
 	outbits.push_back( str.substr( iOffset, iLength - iOffset ) );
 }
 
-int Gwen::Utility::Strings::To::Int( const Gwen::String & str )
+int gwen::Utility::Strings::To::Int( const gwen::String & str )
 {
 	if ( str == "" ) { return 0; }
 
 	return atoi( str.c_str() );
 }
 
-float Gwen::Utility::Strings::To::Float( const Gwen::String & str )
+float gwen::Utility::Strings::To::Float( const gwen::String & str )
 {
 	if ( str == "" ) { return 0.0f; }
 
 	return ( float ) atof( str.c_str() );
 }
 
-float Gwen::Utility::Strings::To::Float( const Gwen::UnicodeString & str )
+float gwen::Utility::Strings::To::Float( const gwen::UnicodeString & str )
 {
 	return wcstod( str.c_str(), NULL );
 }
 
-bool Gwen::Utility::Strings::To::Bool( const Gwen::String & str )
+bool gwen::Utility::Strings::To::Bool( const gwen::String & str )
 {
 	if ( str.size() == 0 ) { return false; }
 
@@ -134,7 +134,7 @@ bool Gwen::Utility::Strings::To::Bool( const Gwen::String & str )
 	return true;
 }
 
-bool Gwen::Utility::Strings::To::Floats( const Gwen::String & str, float* f, size_t iCount )
+bool gwen::Utility::Strings::To::Floats( const gwen::String & str, float* f, size_t iCount )
 {
 	Strings::List lst;
 	Strings::Split( str, " ", lst );
@@ -150,7 +150,7 @@ bool Gwen::Utility::Strings::To::Floats( const Gwen::String & str, float* f, siz
 }
 
 
-bool Gwen::Utility::Strings::Wildcard( const TextObject & strWildcard, const TextObject & strHaystack )
+bool gwen::Utility::Strings::Wildcard( const TextObject & strWildcard, const TextObject & strHaystack )
 {
 	const UnicodeString & W = strWildcard.GetUnicode();
 	const UnicodeString & H = strHaystack.GetUnicode();
@@ -179,19 +179,19 @@ bool Gwen::Utility::Strings::Wildcard( const TextObject & strWildcard, const Tex
 
 
 
-void Gwen::Utility::Strings::ToUpper( Gwen::UnicodeString & str )
+void gwen::Utility::Strings::ToUpper( gwen::UnicodeString & str )
 {
 	transform( str.begin(), str.end(), str.begin(), towupper );
 }
 
-void Gwen::Utility::Strings::Strip( Gwen::UnicodeString & str, const Gwen::UnicodeString & chars )
+void gwen::Utility::Strings::Strip( gwen::UnicodeString & str, const gwen::UnicodeString & chars )
 {
-	Gwen::UnicodeString Source = str;
+	gwen::UnicodeString Source = str;
 	str = L"";
 
 	for ( unsigned int i = 0; i < Source.length(); i++ )
 	{
-		if ( chars.find( Source[i] ) != Gwen::UnicodeString::npos )
+		if ( chars.find( Source[i] ) != gwen::UnicodeString::npos )
 		{ continue; }
 
 		str += Source[i];

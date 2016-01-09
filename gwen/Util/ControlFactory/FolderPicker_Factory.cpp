@@ -1,15 +1,15 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		using namespace Gwen;
+		using namespace gwen;
 
-		class FolderPicker_Factory : public Gwen::ControlFactory::Base
+		class FolderPicker_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
@@ -17,12 +17,12 @@ namespace Gwen
 				{
 				}
 
-				virtual Gwen::String Name()     { return "FolderPicker"; }
-				virtual Gwen::String BaseName() { return "Base"; }
+				virtual gwen::String Name()     { return "FolderPicker"; }
+				virtual gwen::String BaseName() { return "Base"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::FolderPicker* pControl = new Gwen::Controls::FolderPicker( parent );
+					gwen::Controls::FolderPicker* pControl = new gwen::Controls::FolderPicker( parent );
 					pControl->SetSize( 100, 20 );
 					return pControl;
 				}

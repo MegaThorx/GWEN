@@ -2,15 +2,15 @@
 #include <windows.h>
 #include <gdiplus.h>
 
-#include "Gwen/Renderers/GDIPlus.h"
-#include "Gwen/Utility.h"
-#include "Gwen/Font.h"
-#include "Gwen/Texture.h"
-#include "Gwen/WindowProvider.h"
+#include "gwen/Renderers/GDIPlus.h"
+#include "gwen/Utility.h"
+#include "gwen/Font.h"
+#include "gwen/Texture.h"
+#include "gwen/WindowProvider.h"
 
 #include <math.h>
 
-namespace Gwen
+namespace gwen
 {
 	namespace Renderer
 	{
@@ -51,19 +51,19 @@ namespace Gwen
 
 
 
-		void GDIPlus::DrawFilledRect( Gwen::Rect rect )
+		void GDIPlus::DrawFilledRect( gwen::Rect rect )
 		{
 			Translate( rect );
 			Gdiplus::SolidBrush solidBrush( m_Colour );
 			graphics->FillRectangle( &solidBrush, rect.x, rect.y, rect.w, rect.h );
 		}
 
-		void GDIPlus::SetDrawColor( Gwen::Color color )
+		void GDIPlus::SetDrawColor( gwen::Color color )
 		{
 			m_Colour = Gdiplus::Color( color.a, color.r, color.g, color.b );
 		}
 
-		void GDIPlus::LoadFont( Gwen::Font* font )
+		void GDIPlus::LoadFont( gwen::Font* font )
 		{
 			Gdiplus::FontStyle fs = Gdiplus::FontStyleRegular;
 			font->realsize = font->size * Scale();
@@ -71,7 +71,7 @@ namespace Gwen
 			font->data = pFont;
 		}
 
-		void GDIPlus::FreeFont( Gwen::Font* pFont )
+		void GDIPlus::FreeFont( gwen::Font* pFont )
 		{
 			if ( !pFont->data ) { return; }
 
@@ -80,7 +80,7 @@ namespace Gwen
 			pFont->data = NULL;
 		}
 
-		void GDIPlus::RenderText( Gwen::Font* pFont, Gwen::Point pos, const Gwen::UnicodeString & text )
+		void GDIPlus::RenderText( gwen::Font* pFont, gwen::Point pos, const gwen::UnicodeString & text )
 		{
 			Translate( pos.x, pos.y );
 
@@ -98,9 +98,9 @@ namespace Gwen
 			graphics->DrawString( text.c_str(), text.length() + 1, pGDIFont, r, &strFormat, &solidBrush );
 		}
 
-		Gwen::Point GDIPlus::MeasureText( Gwen::Font* pFont, const Gwen::UnicodeString & text )
+		gwen::Point GDIPlus::MeasureText( gwen::Font* pFont, const gwen::UnicodeString & text )
 		{
-			Gwen::Point p( 1, 1 );
+			gwen::Point p( 1, 1 );
 
 			if ( !pFont->data || fabs( pFont->realsize - pFont->size * Scale() ) > 2 )
 			{
@@ -114,12 +114,12 @@ namespace Gwen
 			Gdiplus::Graphics g( m_HWND );
 			Gdiplus::Font* pGDIFont = ( Gdiplus::Font* ) pFont->data;
 			g.MeasureString( text.c_str(), -1, pGDIFont, Gdiplus::SizeF( 10000, 10000 ), &strFormat, &size );
-			return Gwen::Point( size.Width + 1, size.Height + 1 );
+			return gwen::Point( size.Width + 1, size.Height + 1 );
 		}
 
 		void GDIPlus::StartClip()
 		{
-			const Gwen::Rect & rect = ClipRegion();
+			const gwen::Rect & rect = ClipRegion();
 			graphics->SetClip( Gdiplus::Rect( rect.x * Scale(), rect.y * Scale(), rect.w * Scale(), rect.h * Scale() ), Gdiplus::CombineMode::CombineModeReplace );
 		}
 
@@ -128,7 +128,7 @@ namespace Gwen
 			graphics->ResetClip();
 		}
 
-		void GDIPlus::DrawTexturedRect( Gwen::Texture* pTexture, Gwen::Rect pTargetRect, float u1, float v1, float u2, float v2 )
+		void GDIPlus::DrawTexturedRect( gwen::Texture* pTexture, gwen::Rect pTargetRect, float u1, float v1, float u2, float v2 )
 		{
 			Gdiplus::Bitmap* pImage = ( Gdiplus::Bitmap* ) pTexture->data;
 
@@ -150,7 +150,7 @@ namespace Gwen
 			graphics->DrawImage( pImage, TargetRect, u1, v1, u2, v2, Gdiplus::UnitPixel );
 		}
 
-		void GDIPlus::LoadTexture( Gwen::Texture* pTexture )
+		void GDIPlus::LoadTexture( gwen::Texture* pTexture )
 		{
 			Gdiplus::Bitmap* pImage = new Gdiplus::Bitmap( pTexture->name.GetUnicode().c_str() );
 			pTexture->data = pImage;
@@ -158,7 +158,7 @@ namespace Gwen
 			pTexture->height = pImage->GetHeight();
 		}
 
-		void GDIPlus::FreeTexture( Gwen::Texture* pTexture )
+		void GDIPlus::FreeTexture( gwen::Texture* pTexture )
 		{
 			Gdiplus::Bitmap* pImage = ( Gdiplus::Bitmap* ) pTexture->data;
 
@@ -167,7 +167,7 @@ namespace Gwen
 			delete pImage;
 		}
 
-		Gwen::Color GDIPlus::PixelColour( Gwen::Texture* pTexture, unsigned int x, unsigned int y, const Gwen::Color & col_default )
+		gwen::Color GDIPlus::PixelColour( gwen::Texture* pTexture, unsigned int x, unsigned int y, const gwen::Color & col_default )
 		{
 			Gdiplus::Bitmap* pImage = ( Gdiplus::Bitmap* ) pTexture->data;
 
@@ -175,37 +175,37 @@ namespace Gwen
 
 			Gdiplus::Color c;
 			pImage->GetPixel( x, y, &c );
-			return Gwen::Color( c.GetR(), c.GetG(), c.GetB(), c.GetA() );
+			return gwen::Color( c.GetR(), c.GetG(), c.GetB(), c.GetA() );
 		}
 
 
-		bool GDIPlus::InitializeContext( Gwen::WindowProvider* pWindow )
+		bool GDIPlus::InitializeContext( gwen::WindowProvider* pWindow )
 		{
 			m_HWND = ( HWND ) pWindow->GetWindow();
 			return true;
 		}
 
-		bool GDIPlus::ShutdownContext( Gwen::WindowProvider* pWindow )
+		bool GDIPlus::ShutdownContext( gwen::WindowProvider* pWindow )
 		{
 			return true;
 		}
 
-		bool GDIPlus::PresentContext( Gwen::WindowProvider* pWindow )
+		bool GDIPlus::PresentContext( gwen::WindowProvider* pWindow )
 		{
 			return true;
 		}
 
-		bool GDIPlus::ResizedContext( Gwen::WindowProvider* pWindow, int w, int h )
+		bool GDIPlus::ResizedContext( gwen::WindowProvider* pWindow, int w, int h )
 		{
 			return true;
 		}
 
-		bool GDIPlus::BeginContext( Gwen::WindowProvider* pWindow )
+		bool GDIPlus::BeginContext( gwen::WindowProvider* pWindow )
 		{
 			return true;
 		}
 
-		bool GDIPlus::EndContext( Gwen::WindowProvider* pWindow )
+		bool GDIPlus::EndContext( gwen::WindowProvider* pWindow )
 		{
 			return true;
 		}

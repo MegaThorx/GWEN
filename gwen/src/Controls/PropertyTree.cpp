@@ -5,11 +5,11 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Controls/PropertyTree.h"
-#include "Gwen/Skin.h"
+#include "gwen/Gwen.h"
+#include "gwen/Controls/PropertyTree.h"
+#include "gwen/Skin.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace Controls
 	{

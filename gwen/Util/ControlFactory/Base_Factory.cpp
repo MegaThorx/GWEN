@@ -1,17 +1,17 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		using namespace Gwen;
+		using namespace gwen;
 
 		namespace Properties
 		{
-			class ControlName : public Gwen::ControlFactory::Property
+			class ControlName : public gwen::ControlFactory::Property
 			{
 					GWEN_CONTROL_FACTORY_PROPERTY( ControlName, "The control's name" );
 
@@ -22,11 +22,11 @@ namespace Gwen
 
 					void SetValue( Controls::Base* ctrl, const UnicodeString & str )
 					{
-						ctrl->SetName( Gwen::Utility::UnicodeToString( str ) );
+						ctrl->SetName( gwen::Utility::UnicodeToString( str ) );
 					}
 			};
 
-			class Position : public Gwen::ControlFactory::Property
+			class Position : public gwen::ControlFactory::Property
 			{
 					GWEN_CONTROL_FACTORY_PROPERTY( Position, "Sets the position of the control" );
 
@@ -46,7 +46,7 @@ namespace Gwen
 
 					int NumCount() { return 2; };
 
-					Gwen::String NumName( int i )
+					gwen::String NumName( int i )
 					{
 						if ( i == 0 ) { return "x"; }
 
@@ -67,19 +67,19 @@ namespace Gwen
 					}
 			};
 
-			class Margin : public Gwen::ControlFactory::Property
+			class Margin : public gwen::ControlFactory::Property
 			{
 					GWEN_CONTROL_FACTORY_PROPERTY( Margin, "Sets the margin of a docked control" );
 
 					UnicodeString GetValue( Controls::Base* ctrl )
 					{
-						Gwen::Margin m = ctrl->GetMargin();
+						gwen::Margin m = ctrl->GetMargin();
 						return Utility::Format( L"%i %i %i %i", m.left, m.top, m.right, m.bottom );
 					}
 
 					void SetValue( Controls::Base* ctrl, const UnicodeString & str )
 					{
-						Gwen::Margin m;
+						gwen::Margin m;
 
 						if ( swscanf( str.c_str(), L"%i %i %i %i", &m.left, &m.top, &m.right, &m.bottom ) != 4 ) { return; }
 
@@ -88,7 +88,7 @@ namespace Gwen
 
 					int NumCount() { return 4; };
 
-					Gwen::String NumName( int i )
+					gwen::String NumName( int i )
 					{
 						if ( i == 0 ) { return "left"; }
 
@@ -101,7 +101,7 @@ namespace Gwen
 
 					float NumGet( Controls::Base* ctrl, int i )
 					{
-						Gwen::Margin m = ctrl->GetMargin();
+						gwen::Margin m = ctrl->GetMargin();
 
 						if ( i == 0 ) { return m.left; }
 
@@ -114,7 +114,7 @@ namespace Gwen
 
 					void NumSet( Controls::Base* ctrl, int i, float f )
 					{
-						Gwen::Margin m = ctrl->GetMargin();
+						gwen::Margin m = ctrl->GetMargin();
 
 						if ( i == 0 ) { m.left = f; }
 
@@ -128,7 +128,7 @@ namespace Gwen
 					}
 			};
 
-			class Size: public Gwen::ControlFactory::Property
+			class Size: public gwen::ControlFactory::Property
 			{
 					GWEN_CONTROL_FACTORY_PROPERTY( Size, "The with and height of the control" );
 
@@ -148,7 +148,7 @@ namespace Gwen
 
 					int NumCount() { return 2; };
 
-					Gwen::String NumName( int i )
+					gwen::String NumName( int i )
 					{
 						if ( i == 0 ) { return "w"; }
 
@@ -169,7 +169,7 @@ namespace Gwen
 					}
 			};
 
-			class Dock : public Gwen::ControlFactory::Property
+			class Dock : public gwen::ControlFactory::Property
 			{
 					GWEN_CONTROL_FACTORY_PROPERTY( Dock, "How the control is to be docked" );
 
@@ -213,7 +213,7 @@ namespace Gwen
 
 					int OptionNum() { return 6; }
 
-					Gwen::UnicodeString OptionGet( int i )
+					gwen::UnicodeString OptionGet( int i )
 					{
 						if ( i == 0 ) { return L"None"; }
 
@@ -232,11 +232,11 @@ namespace Gwen
 		} // namespace Properties
 
 
-		class Base_Factory : public Gwen::ControlFactory::Base
+		class Base_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
-				GWEN_CONTROL_FACTORY_CONSTRUCTOR( Base_Factory, Gwen::ControlFactory::Base )
+				GWEN_CONTROL_FACTORY_CONSTRUCTOR( Base_Factory, gwen::ControlFactory::Base )
 				{
 					AddProperty( new Properties::ControlName() );
 					AddProperty( new Properties::Dock() );
@@ -245,12 +245,12 @@ namespace Gwen
 					AddProperty( new Properties::Margin() );
 				}
 
-				virtual Gwen::String Name() { return "Base"; }
-				virtual Gwen::String BaseName() { return ""; }
+				virtual gwen::String Name() { return "Base"; }
+				virtual gwen::String BaseName() { return ""; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::Base* pControl = new Gwen::Controls::Base( parent );
+					gwen::Controls::Base* pControl = new gwen::Controls::Base( parent );
 					pControl->SetSize( 100, 100 );
 					return pControl;
 				}

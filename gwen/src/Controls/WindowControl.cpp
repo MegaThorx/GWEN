@@ -5,15 +5,15 @@
 */
 
 
-#include "Gwen/Controls/WindowControl.h"
-#include "Gwen/Controls/ImagePanel.h"
-#include "Gwen/Controls/Label.h"
-#include "Gwen/Controls/Modal.h"
+#include "gwen/Controls/WindowControl.h"
+#include "gwen/Controls/ImagePanel.h"
+#include "gwen/Controls/Label.h"
+#include "gwen/Controls/Modal.h"
 
 
-using namespace Gwen;
-using namespace Gwen::Controls;
-using namespace Gwen::ControlsInternal;
+using namespace gwen;
+using namespace gwen::Controls;
+using namespace gwen::ControlsInternal;
 
 
 GWEN_CONTROL_CONSTRUCTOR( WindowControl )
@@ -32,7 +32,7 @@ GWEN_CONTROL_CONSTRUCTOR( WindowControl )
 	m_Title->Dock( Pos::Fill );
 	m_Title->SetPadding( Padding( 8, 0, 0, 0 ) );
 	m_Title->SetTextColor( GetSkin()->Colors.Window.TitleInactive );
-	m_CloseButton = new Gwen::Controls::WindowCloseButton( m_TitleBar );
+	m_CloseButton = new gwen::Controls::WindowCloseButton( m_TitleBar );
 	m_CloseButton->SetText( "" );
 	m_CloseButton->Dock( Pos::Right );
 	m_CloseButton->onPress.Add( this, &WindowControl::CloseButtonPressed );
@@ -46,7 +46,7 @@ GWEN_CONTROL_CONSTRUCTOR( WindowControl )
 	BringToFront();
 	SetTabable( false );
 	Focus();
-	SetMinimumSize( Gwen::Point( 100, 40 ) );
+	SetMinimumSize( gwen::Point( 100, 40 ) );
 	SetClampMovement( true );
 	SetKeyboardInputEnabled( false );
 }
@@ -113,7 +113,7 @@ void WindowControl::RenderUnder( Skin::Base* skin )
 	skin->DrawShadow( this );
 }
 
-void WindowControl::SetTitle( Gwen::UnicodeString title )
+void WindowControl::SetTitle( gwen::UnicodeString title )
 {
 	m_Title->SetText( title );
 }
@@ -148,6 +148,6 @@ void WindowControl::CloseButtonPressed()
 }
 
 
-void WindowControl::RenderFocus( Gwen::Skin::Base* /*skin*/ )
+void WindowControl::RenderFocus( gwen::Skin::Base* /*skin*/ )
 {
 }

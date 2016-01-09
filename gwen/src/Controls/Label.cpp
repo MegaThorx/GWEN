@@ -5,12 +5,12 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Controls/Label.h"
-#include "Gwen/Utility.h"
+#include "gwen/Gwen.h"
+#include "gwen/Controls/Label.h"
+#include "gwen/Utility.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 GWEN_CONTROL_CONSTRUCTOR( Label )
 {
@@ -19,10 +19,10 @@ GWEN_CONTROL_CONSTRUCTOR( Label )
 	m_Text->SetFont( GetSkin()->GetDefaultFont() );
 	SetMouseInputEnabled( false );
 	SetBounds( 0, 0, 100, 10 );
-	SetAlignment( Gwen::Pos::Left | Gwen::Pos::Top );
+	SetAlignment( gwen::Pos::Left | gwen::Pos::Top );
 }
 
-void Label::PreDelete( Gwen::Skin::Base* skin )
+void Label::PreDelete( gwen::Skin::Base* skin )
 {
 	if ( m_CreatedFont )
 	{
@@ -69,15 +69,15 @@ void Label::SizeToContents()
 	SetSize( m_Text->Width() + m_Padding.left + m_Padding.right, m_Text->Height() + m_Padding.top + m_Padding.bottom );
 }
 
-Gwen::Rect Label::GetCharacterPosition( int iChar )
+gwen::Rect Label::GetCharacterPosition( int iChar )
 {
-	Gwen::Rect p = m_Text->GetCharacterPosition( iChar );
+	gwen::Rect p = m_Text->GetCharacterPosition( iChar );
 	p.x += m_Text->X();
 	p.y += m_Text->Y();
 	return p;
 }
 
-void Label::OnBoundsChanged( Gwen::Rect oldChildBounds )
+void Label::OnBoundsChanged( gwen::Rect oldChildBounds )
 {
 	BaseClass::OnBoundsChanged( oldChildBounds );
 
@@ -88,7 +88,7 @@ void Label::OnBoundsChanged( Gwen::Rect oldChildBounds )
 	}
 }
 
-void Label::SetFont( Gwen::UnicodeString strFacename, int iSize, bool bBold )
+void Label::SetFont( gwen::UnicodeString strFacename, int iSize, bool bBold )
 {
 	if ( m_CreatedFont )
 	{
@@ -98,7 +98,7 @@ void Label::SetFont( Gwen::UnicodeString strFacename, int iSize, bool bBold )
 		SetFont( NULL );
 	}
 
-	m_CreatedFont = new Gwen::Font();
+	m_CreatedFont = new gwen::Font();
 	Debug::AssertCheck( m_CreatedFont != NULL, "Couldn't Create Font!" );
 	m_CreatedFont->bold = bBold;
 	m_CreatedFont->facename = strFacename;

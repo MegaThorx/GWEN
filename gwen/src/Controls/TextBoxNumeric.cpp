@@ -5,22 +5,22 @@
 */
 
 
-#include "Gwen/Gwen.h"
-#include "Gwen/Controls/TextBox.h"
-#include "Gwen/Skin.h"
-#include "Gwen/Utility.h"
-#include "Gwen/Platform.h"
+#include "gwen/Gwen.h"
+#include "gwen/Controls/TextBox.h"
+#include "gwen/Skin.h"
+#include "gwen/Utility.h"
+#include "gwen/Platform.h"
 
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 GWEN_CONTROL_CONSTRUCTOR( TextBoxNumeric )
 {
 	SetText( L"0" );
 }
 
-bool TextBoxNumeric::IsTextAllowed( const Gwen::UnicodeString & str, int iPos )
+bool TextBoxNumeric::IsTextAllowed( const gwen::UnicodeString & str, int iPos )
 {
 	const UnicodeString & strString = GetText().GetUnicode();
 
@@ -79,6 +79,6 @@ bool TextBoxNumeric::IsTextAllowed( const Gwen::UnicodeString & str, int iPos )
 
 float TextBoxNumeric::GetFloatFromText()
 {
-	double temp = Gwen::Utility::Strings::To::Float( GetText().GetUnicode() );
+	double temp = gwen::Utility::Strings::To::Float( GetText().GetUnicode() );
 	return temp;
 }

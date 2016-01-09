@@ -5,10 +5,10 @@
 */
 
 
-#include "Gwen/Controls/GroupBox.h"
+#include "gwen/Controls/GroupBox.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 
 GWEN_CONTROL_CONSTRUCTOR( GroupBox )

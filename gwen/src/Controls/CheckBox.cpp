@@ -5,10 +5,10 @@
 */
 
 
-#include "Gwen/Controls/CheckBox.h"
+#include "gwen/Controls/CheckBox.h"
 
-using namespace Gwen;
-using namespace Gwen::Controls;
+using namespace gwen;
+using namespace gwen::Controls;
 
 
 

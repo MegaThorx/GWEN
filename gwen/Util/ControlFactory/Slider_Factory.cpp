@@ -1,14 +1,14 @@
 
-#include "Gwen/Util/ControlFactory.h"
-#include "Gwen/Controls.h"
+#include "gwen/Util/ControlFactory.h"
+#include "gwen/Controls.h"
 
 
-namespace Gwen
+namespace gwen
 {
 	namespace ControlFactory
 	{
 
-		using namespace Gwen;
+		using namespace gwen;
 
 		namespace Properties
 		{
@@ -19,7 +19,7 @@ namespace Gwen
 
 					UnicodeString GetValue( Controls::Base* ctrl )
 					{
-						return Gwen::Utility::Format( L"%f", ( int ) gwen_cast<Controls::Slider> ( ctrl )->GetMin() );
+						return gwen::Utility::Format( L"%f", ( int ) gwen_cast<Controls::Slider> ( ctrl )->GetMin() );
 					}
 
 					void SetValue( Controls::Base* ctrl, const UnicodeString & str )
@@ -41,7 +41,7 @@ namespace Gwen
 
 					UnicodeString GetValue( Controls::Base* ctrl )
 					{
-						return Gwen::Utility::Format( L"%f", ( int ) gwen_cast<Controls::Slider> ( ctrl )->GetMax() );
+						return gwen::Utility::Format( L"%f", ( int ) gwen_cast<Controls::Slider> ( ctrl )->GetMax() );
 					}
 
 					void SetValue( Controls::Base* ctrl, const UnicodeString & str )
@@ -58,22 +58,22 @@ namespace Gwen
 			};
 		}
 
-		class HorizontalSlider_Factory : public Gwen::ControlFactory::Base
+		class HorizontalSlider_Factory : public gwen::ControlFactory::Base
 		{
 			public:
 
-				GWEN_CONTROL_FACTORY_CONSTRUCTOR( HorizontalSlider_Factory, Gwen::ControlFactory::Base )
+				GWEN_CONTROL_FACTORY_CONSTRUCTOR( HorizontalSlider_Factory, gwen::ControlFactory::Base )
 				{
 					AddProperty( new Properties::Min() );
 					AddProperty( new Properties::Max() );
 				}
 
-				virtual Gwen::String Name() { return "HorizontalSlider"; }
-				virtual Gwen::String BaseName() { return "Base"; }
+				virtual gwen::String Name() { return "HorizontalSlider"; }
+				virtual gwen::String BaseName() { return "Base"; }
 
-				virtual Gwen::Controls::Base* CreateInstance( Gwen::Controls::Base* parent )
+				virtual gwen::Controls::Base* CreateInstance( gwen::Controls::Base* parent )
 				{
-					Gwen::Controls::HorizontalSlider* pControl = new Gwen::Controls::HorizontalSlider( parent );
+					gwen::Controls::HorizontalSlider* pControl = new gwen::Controls::HorizontalSlider( parent );
 					pControl->SetSize( 100, 20 );
 					pControl->SetRange( 0, 1 );
 					return pControl;
